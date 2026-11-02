@@ -1,0 +1,248 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Econometrics: Advanced Methods",
+    "section": "",
+    "text": "Preface\nThese notes accompany the course Econometrics: Advanced Methods (Research Metrics 2) in the Munich Graduate School of Economics MQE programme. They are deliberately short. Each chapter states the key definitions and results, works through one or two examples in detail, and ends with a computer tutorial in R. Proofs are sketched where the argument is instructive and otherwise referenced.\nThe notes complement the lecture slides; they do not replace the textbooks listed below.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#what-the-course-covers",
+    "href": "index.html#what-the-course-covers",
+    "title": "Econometrics: Advanced Methods",
+    "section": "What the course covers",
+    "text": "What the course covers\nThe objective is to introduce fundamental estimation methods in econometrics. We spend a fair amount of time on the theoretical properties of the estimators and also discuss practical aspects of implementation. The course is not a course on causality or identification, and it is not an R course, although both appear throughout.\n\n\n\n\n\n\n\n\nChapter\nTopic\nComputer tutorial\n\n\n\n\n1\nMaximum likelihood\nCT 1: logit by hand, PML vs. ML\n\n\n2\nMethod of moments and GMM, including IV\nCT 2: GMM estimation of an ATE\n\n\n3\nSimulation-based estimation\nCT 3: Monte Carlo integration, Halton draws, quadrature\n\n\n4\nNonparametric density and regression estimation\nCT 4: kernel density, local linear regression\n\n\n5\nIntroduction to statistical learning\nCT 5: ridge, lasso, elastic net\n\n\nA\nLarge-sample asymptotics (assumed known; for reference)\n\n\n\nB\nA short R primer\nCT 0",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#literature",
+    "href": "index.html#literature",
+    "title": "Econometrics: Advanced Methods",
+    "section": "Literature",
+    "text": "Literature\n\nHansen, B. E. (2022). Econometrics. Princeton University Press (Hansen 2022).\nCameron, A. C. and Trivedi, P. K. (2005). Microeconometrics: Methods and Applications. Cambridge University Press (Cameron and Trivedi 2005).\nWooldridge, J. M. (2010). Econometric Analysis of Cross Section and Panel Data, 2nd ed. MIT Press (Wooldridge 2010).\nJames, G., Witten, D., Hastie, T. and Tibshirani, R. (2023). An Introduction to Statistical Learning, 2nd ed. Springer (James et al. 2023).\nCasella, G. and Berger, R. L. (2002). Statistical Inference, 2nd ed. Duxbury (Casella and Berger 2002).\n\nChapter-specific readings are given at the start of each chapter.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#software",
+    "href": "index.html#software",
+    "title": "Econometrics: Advanced Methods",
+    "section": "Software",
+    "text": "Software\nAll tutorials use R. Install a recent version of R and an editor (RStudio or Positron), then install the packages used in the notes:\ninstall.packages(c(\"sandwich\", \"lmtest\", \"MASS\", \"nleqslv\",\n                   \"randtoolbox\", \"statmod\", \"glmnet\", \"haven\"))\nEvery tutorial can be run from top to bottom. Data sets are in the data/ folder of the course material on Moodle.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-the-tutorials",
+    "href": "index.html#how-to-use-the-tutorials",
+    "title": "Econometrics: Advanced Methods",
+    "section": "How to use the tutorials",
+    "text": "How to use the tutorials\nEach tutorial first states the problems. Try them yourself before opening the solution boxes. Solutions are released after the tutorial session.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#conventions",
+    "href": "index.html#conventions",
+    "title": "Econometrics: Advanced Methods",
+    "section": "Conventions",
+    "text": "Conventions\nVectors and matrices are in bold, \\(\\btheta\\) denotes a generic parameter vector and \\(\\btheta_0\\) its true value. \\(\\ln\\) is the natural logarithm. \\(\\cvp\\) and \\(\\cvd\\) denote convergence in probability and in distribution.\n\n\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\nCameron, A. Colin, and Pravin K. Trivedi. 2005. Microeconometrics: Methods and Applications. Cambridge: Cambridge University Press.\n\n\nCasella, George, and Roger L. Berger. 2002. Statistical Inference. 2nd ed. Pacific Grove, CA: Duxbury.\n\n\nHansen, Bruce E. 2022. Econometrics. Princeton: Princeton University Press.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2023. An Introduction to Statistical Learning with Applications in r. 2nd ed. New York: Springer.\n\n\nWooldridge, Jeffrey M. 2010. Econometric Analysis of Cross Section and Panel Data. 2nd ed. Cambridge, MA: MIT Press.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html",
+    "href": "chapters/01-mle.html",
+    "title": "1  Maximum Likelihood",
+    "section": "",
+    "text": "1.1 Parametric models\nMaximum likelihood (ML) is the workhorse estimator for fully specified parametric models. This chapter introduces the likelihood principle, derives the large-sample properties of the MLE, discusses what happens when the assumed density is wrong, and closes with the classical trinity of tests.\nWe first consider unconditional distributions. A parametric model for a random variable \\(Y\\) is a complete probability function \\(f(y\\mid\\btheta)\\) that depends on an unknown parameter vector \\(\\btheta\\) in a parameter space \\(\\Theta\\). We use the same notation for probability mass functions (discrete \\(Y\\)) and densities (continuous \\(Y\\)). For example, \\(Y\\sim N(\\mu,\\sigma^2)\\) has density \\(f(y\\mid\\mu,\\sigma^2)=\\sigma^{-1}\\phi\\big((y-\\mu)/\\sigma\\big)\\) with \\(\\phi(z)=(2\\pi)^{-1/2}\\exp(-z^2/2)\\), \\(\\mu\\in\\mathbb{R}\\) and \\(\\sigma^2&gt;0\\). A parametric model need not be a textbook distribution; it can be built for a specific application.\nUniqueness matters. A two-component normal mixture \\(p\\,\\phi_{\\sigma_1}(y-\\mu_1)+(1-p)\\,\\phi_{\\sigma_2}(y-\\mu_2)\\) contains the standard normal \\(\\phi(y)\\), but at many parameter values: \\((p,0,1,0,1)\\) for any \\(p\\), \\((1,0,1,\\mu_2,\\sigma_2^2)\\) for any \\((\\mu_2,\\sigma_2^2)\\), and so on. The model contains the truth, but \\(\\btheta_0\\) is not identified, so it is not correctly specified in the sense of Definition 1.2.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#parametric-models",
+    "href": "chapters/01-mle.html#parametric-models",
+    "title": "1  Maximum Likelihood",
+    "section": "",
+    "text": "Definition 1.1 (Model) A model for a random sample is the assumption that \\(Y_1,\\dots,Y_n\\) are i.i.d. with a known density (or mass) function \\(f(y\\mid\\btheta)\\) and unknown parameter \\(\\btheta\\in\\Theta\\).\n\n\nDefinition 1.2 (Correct specification) A model is correctly specified if there exists a unique \\(\\btheta_0\\in\\Theta\\) such that \\(f(y\\mid\\btheta_0)=f(y)\\), the true density. \\(\\btheta_0\\) is the true parameter value. Uniqueness means that no other \\(\\btheta\\in\\Theta\\) satisfies \\(f(y\\mid\\btheta)=f(y\\mid\\btheta_0)\\). A model is misspecified if no \\(\\btheta\\in\\Theta\\) satisfies \\(f(y\\mid\\btheta)=f(y)\\).\n\n\nExample 1.1 (Correct and incorrect models) Let the true density be \\(f(y)=2e^{-2y}\\), \\(y&gt;0\\).\n\nThe exponential model \\(f(y\\mid\\lambda)=\\lambda^{-1}e^{-y/\\lambda}\\) is correctly specified with \\(\\lambda_0=1/2\\).\nThe gamma model \\(f(y\\mid\\alpha,\\beta)=\\frac{\\beta^\\alpha}{\\Gamma(\\alpha)}y^{\\alpha-1}e^{-\\beta y}\\) is correctly specified with \\((\\alpha_0,\\beta_0)=(1,2)\\).\nThe log-normal model \\(f(y\\mid\\theta,\\nu)=(2\\pi\\nu)^{-1/2}y^{-1}\\exp\\{-(\\ln y-\\theta)^2/(2\\nu)\\}\\) is misspecified: no \\((\\theta,\\nu)\\) reproduces \\(2e^{-2y}\\).",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#the-likelihood-function-and-the-mle",
+    "href": "chapters/01-mle.html#the-likelihood-function-and-the-mle",
+    "title": "1  Maximum Likelihood",
+    "section": "1.2 The likelihood function and the MLE",
+    "text": "1.2 The likelihood function and the MLE\nThe likelihood is the joint density of the sample, evaluated at the observed data and viewed as a function of \\(\\btheta\\). Under independence it factorises, and under identical distributions all factors share the same form:\n\\[\nL_n(\\btheta)=f(y_1,\\dots,y_n\\mid\\btheta)=\\prod_{i=1}^n f(y_i\\mid\\btheta),\n\\qquad\n\\ell_n(\\btheta)\\equiv\\ln L_n(\\btheta)=\\sum_{i=1}^n \\ln f(y_i\\mid\\btheta).\n\\]\n\nDefinition 1.3 (Maximum likelihood estimator) The MLE is the parameter value that maximises the likelihood, \\[\n\\hat\\btheta_n=\\arg\\max_{\\btheta\\in\\Theta} L_n(\\btheta)=\\arg\\max_{\\btheta\\in\\Theta}\\frac1n\\sum_{i=1}^n\\ln f(y_i\\mid\\btheta).\n\\] The second equality holds because \\(\\ln(\\cdot)\\) is strictly increasing and scaling by \\(1/n\\) does not change the maximiser.\n\nThe MLE is the parameter value under which the observed sample is most likely. Working with the average log-likelihood is convenient: it is a sample mean, so laws of large numbers and central limit theorems apply directly.\n\nExample 1.2 (Bernoulli) Let \\(Y_i\\iid\\text{Bernoulli}(\\pi)\\), so \\(f(y\\mid\\pi)=\\pi^{y}(1-\\pi)^{1-y}\\) for \\(y\\in\\{0,1\\}\\). Then \\[\n\\ell_n(\\pi)=\\sum_{i=1}^n\\big[y_i\\ln\\pi+(1-y_i)\\ln(1-\\pi)\\big]=n\\big[\\bar y\\ln\\pi+(1-\\bar y)\\ln(1-\\pi)\\big].\n\\] The first-order condition \\(n\\bar y/\\pi-n(1-\\bar y)/(1-\\pi)=0\\) gives \\(\\hat\\pi=\\bar y\\). Figure 1.1 plots the likelihood for two samples of size five.\n\n\n\n\n\n\n\n\n\nFigure 1.1: Bernoulli likelihood for the samples (0,0,0,1,1) and (0,0,1,1,1). The maximum is at the sample mean.\n\n\n\n\n\nIn practice we find the MLE in one of three ways:\n\nSolve the first-order condition \\(\\partial\\ell_n(\\btheta)/\\partial\\btheta=\\bm 0\\) and check the second-order condition. The FOC is necessary but not sufficient, and it only locates interior extrema; a maximum on the boundary of \\(\\Theta\\) need not satisfy it.\nDirect argument, for instance by finding an upper bound of the likelihood that is attained at a unique point. The uniform distribution on \\([0,\\theta]\\) is the standard case (Problem Set 1).\nNumerical optimisation when no closed form exists (logit, probit, Tobit, …). We then have to worry about convergence to a local rather than a global maximum.\n\n\nExample 1.3 (Exponential) Let \\(f(y\\mid\\lambda)=\\lambda^{-1}e^{-y/\\lambda}\\), \\(y&gt;0\\). The log-likelihood and its derivatives are \\[\n\\ell_n(\\lambda)=-n\\ln\\lambda-\\frac{n\\bar y}{\\lambda},\\qquad\n\\frac{d\\ell_n}{d\\lambda}=-\\frac n\\lambda+\\frac{n\\bar y}{\\lambda^2},\\qquad\n\\frac{d^2\\ell_n}{d\\lambda^2}=\\frac{n}{\\lambda^2}-\\frac{2n\\bar y}{\\lambda^3}.\n\\] The unique root of the FOC is \\(\\hat\\lambda=\\bar y\\), and \\(d^2\\ell_n(\\hat\\lambda)/d\\lambda^2=-n/\\bar y^2&lt;0\\) confirms a maximum.\n\n\nTheorem 1.1 (Invariance) If \\(\\hat\\btheta\\) is the MLE of \\(\\btheta\\in\\mathbb{R}^m\\), then for any function \\(\\bbeta=h(\\btheta)\\in\\mathbb{R}^l\\) the MLE of \\(\\bbeta\\) is \\(\\hat\\bbeta=h(\\hat\\btheta)\\).\n\nIn Example 1.3, reparametrise with the rate \\(\\beta=1/\\lambda\\). Then \\(\\ell_n(\\beta)=n\\ln\\beta-\\beta n\\bar y\\), maximised at \\(\\hat\\beta=1/\\bar y=h(\\hat\\lambda)\\), as the theorem predicts. Most estimators do not share this property; an unbiased estimator of \\(\\lambda\\), for example, does not deliver an unbiased estimator of \\(1/\\lambda\\).",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#score-hessian-and-information",
+    "href": "chapters/01-mle.html#score-hessian-and-information",
+    "title": "1  Maximum Likelihood",
+    "section": "1.3 Score, Hessian and information",
+    "text": "1.3 Score, Hessian and information\nAssume \\(f(y\\mid\\btheta)\\) is twice differentiable in \\(\\btheta\\in\\mathbb{R}^k\\).\n\nDefinition 1.4 (Score and Hessian) The score is the \\(k\\times1\\) gradient of the log-likelihood and the Hessian is the \\(k\\times k\\) matrix of second derivatives: \\[\nS_n(\\btheta)=\\pd{\\ell_n(\\btheta)}{\\btheta}=\\sum_{i=1}^n \\underbrace{\\pd{\\ln f(y_i\\mid\\btheta)}{\\btheta}}_{S_i(\\btheta)},\n\\qquad\nH_n(\\btheta)=\\frac{\\partial^2\\ell_n(\\btheta)}{\\partial\\btheta\\,\\partial\\btheta'}=\\sum_{i=1}^n \\underbrace{\\frac{\\partial^2\\ln f(y_i\\mid\\btheta)}{\\partial\\btheta\\,\\partial\\btheta'}}_{H_i(\\btheta)}.\n\\]\n\nThe score measures how sensitive the log-likelihood is to the parameters; at an interior MLE, \\(S_n(\\hat\\btheta)=\\bm 0\\). The Hessian is symmetric and measures curvature. If \\(\\ell_n\\) is strictly concave, \\(H_n\\) is negative definite and the maximiser is unique. Both are sums over observations because the log-likelihood is.\n\nTheorem 1.2 (Properties of the likelihood) Suppose the model is correctly specified, the support of \\(Y\\) does not depend on \\(\\btheta\\), and \\(\\btheta_0\\) is in the interior of \\(\\Theta\\). Then\n\n\\(\\E\\big[S_i(\\btheta_0)\\big]=\\bm 0\\);\ninformation matrix equality: \\(\\E\\big[S_i(\\btheta_0)S_i(\\btheta_0)'\\big]=-\\E\\big[H_i(\\btheta_0)\\big]\\equiv\\mathcal I_1(\\btheta_0)\\).\n\n\n\\(\\mathcal I_1\\) is the (Fisher) information of a single observation and \\(\\mathcal I(\\btheta_0)=n\\mathcal I_1(\\btheta_0)\\) that of the sample. Because the score has mean zero, the left side of (ii) is the variance of the score. Part (i) follows from differentiating \\(\\int f(y\\mid\\btheta)\\,dy=1\\) under the integral sign; part (ii) from differentiating once more. The support condition guarantees that this exchange of differentiation and integration is allowed. The uniform \\(U[0,\\theta]\\) violates it, which is why its MLE behaves non-standardly.\n\nTheorem 1.3 (Cramér–Rao lower bound) Under the same regularity conditions, any unbiased estimator \\(\\tilde\\btheta\\) of \\(\\btheta_0\\) satisfies \\(\\Var(\\tilde\\btheta)\\succeq\\mathcal I(\\btheta_0)^{-1}\\).\n\n\nExample 1.4 (Bernoulli, continued) For one observation, \\(S_i(\\pi)=\\dfrac{y_i-\\pi}{\\pi(1-\\pi)}\\) and \\(H_i(\\pi)=-\\dfrac{y_i}{\\pi^2}-\\dfrac{1-y_i}{(1-\\pi)^2}\\). At \\(\\pi_0\\): \\(\\E[S_i]=0\\), \\(\\Var(S_i)=\\dfrac{\\pi_0(1-\\pi_0)}{\\pi_0^2(1-\\pi_0)^2}=\\dfrac{1}{\\pi_0(1-\\pi_0)}\\), and \\(-\\E[H_i]=\\dfrac1{\\pi_0}+\\dfrac1{1-\\pi_0}=\\dfrac{1}{\\pi_0(1-\\pi_0)}\\). The information equality holds and the CRLB is \\(\\pi_0(1-\\pi_0)/n\\), which \\(\\hat\\pi=\\bar y\\) attains.\n\n\n1.3.1 Conditional likelihood\nEconometric models are usually about the distribution of \\(y\\) given covariates \\(\\bx\\). Write the joint density as \\(f(y,\\bx\\mid\\bm\\delta)=f(y\\mid\\bx;\\btheta)\\,f(\\bx\\mid\\bgamma)\\) with \\(\\bm\\delta=(\\btheta',\\bgamma')'\\). If \\(\\btheta\\) and \\(\\bgamma\\) share no elements and are not linked by restrictions, \\[\n\\ell_n(\\bm\\delta)=\\sum_{i=1}^n\\ln f(y_i\\mid\\bx_i;\\btheta)+\\sum_{i=1}^n\\ln f(\\bx_i\\mid\\bgamma),\n\\] and \\(\\btheta\\) can be estimated from the conditional log-likelihood \\(\\sum_i\\ln f(y_i\\mid\\bx_i;\\btheta)\\) alone, leaving the distribution of \\(\\bx\\) unspecified. All results above carry over with expectations taken over the joint distribution of \\((y,\\bx)\\).",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#asymptotic-properties-of-the-mle",
+    "href": "chapters/01-mle.html#asymptotic-properties-of-the-mle",
+    "title": "1  Maximum Likelihood",
+    "section": "1.4 Asymptotic properties of the MLE",
+    "text": "1.4 Asymptotic properties of the MLE\n\nTheorem 1.4 (Consistency (Wooldridge 2010, Thm. 13.1)) Suppose (a) the conditional density \\(f(y\\mid\\bx;\\btheta)\\) is correctly specified; (b) \\(\\btheta_0\\) is globally identified: for every \\(\\btheta\\ne\\btheta_0\\) in \\(\\Theta\\), \\(P\\{f(y\\mid\\bx;\\btheta)\\ne f(y\\mid\\bx;\\btheta_0)\\}&gt;0\\); (c) \\(\\Theta\\) is compact and the log-likelihood is continuous in \\(\\btheta\\) with a dominance condition. Then \\(\\hat\\btheta_n\\cvp\\btheta_0\\).\n\nThe idea: \\(\\frac1n\\ell_n(\\btheta)\\cvp\\E[\\ln f(y\\mid\\bx;\\btheta)]\\) uniformly in \\(\\btheta\\), and the limit is uniquely maximised at \\(\\btheta_0\\) (this follows from the KLIC inequality in Section 1.6). The maximiser of the sample objective then converges to the maximiser of the limit.\n\nTheorem 1.5 (Asymptotic normality and efficiency) Under additional regularity conditions (interior \\(\\btheta_0\\), twice continuously differentiable log-density, nonsingular \\(\\mathcal I_1(\\btheta_0)\\)), \\[\n\\sqrt n\\,(\\hat\\btheta_n-\\btheta_0)\\cvd N\\big(\\bm 0,\\;\\mathcal I_1(\\btheta_0)^{-1}\\big).\n\\] The MLE is asymptotically efficient: its asymptotic variance attains the Cramér–Rao bound, and no consistent and asymptotically normal estimator has a smaller asymptotic variance under the same assumptions.\n\nSketch. A mean-value expansion of the FOC around \\(\\btheta_0\\) gives \\(\\bm 0=S_n(\\hat\\btheta)=S_n(\\btheta_0)+H_n(\\bar\\btheta)(\\hat\\btheta-\\btheta_0)\\), so \\[\n\\sqrt n(\\hat\\btheta-\\btheta_0)=\\Big[-\\tfrac1nH_n(\\bar\\btheta)\\Big]^{-1}\\tfrac{1}{\\sqrt n}S_n(\\btheta_0).\n\\] By the LLN and consistency, \\(-\\frac1nH_n(\\bar\\btheta)\\cvp\\mathcal I_1(\\btheta_0)\\equiv\\bm A_0\\). By the CLT and Theorem 1.2, \\(\\frac1{\\sqrt n}S_n(\\btheta_0)\\cvd N(\\bm 0,\\bm B_0)\\) with \\(\\bm B_0=\\E[S_iS_i']\\). Slutsky gives the general form \\(N(\\bm 0,\\bm A_0^{-1}\\bm B_0\\bm A_0^{-1})\\), which collapses to \\(\\mathcal I_1^{-1}\\) because \\(\\bm A_0=\\bm B_0\\) under correct specification. Keep this sandwich form in mind; it reappears in Section 1.6 and in GMM.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#estimating-the-variance-matrix",
+    "href": "chapters/01-mle.html#estimating-the-variance-matrix",
+    "title": "1  Maximum Likelihood",
+    "section": "1.5 Estimating the variance matrix",
+    "text": "1.5 Estimating the variance matrix\nIn finite samples we use \\(\\Var(\\hat\\btheta)\\approx\\frac1n\\mathcal I_1(\\btheta_0)^{-1}=\\mathcal I(\\btheta_0)^{-1}\\) and replace \\(\\mathcal I_1\\) by a consistent estimator. Three options are available, plus a fourth that does not rely on the information equality.\n\n\n\nTable 1.1: Variance estimators after ML\n\n\n\n\n\n\n\n\n\n\n\nEstimator of \\(\\Var(\\hat\\btheta)\\)\nRequires\n\n\n\n\n(i) Expected Hessian\n\\(\\Big[-\\sum_i\\E\\big(H_i(\\btheta)\\mid\\bx_i\\big)\\Big]^{-1}_{\\btheta=\\hat\\btheta}\\)\nclosed form of \\(\\E(H_i\\mid\\bx_i)\\)\n\n\n(ii) Observed Hessian\n\\(\\Big[-H_n(\\hat\\btheta)\\Big]^{-1}\\)\nsecond derivatives (analytic or numerical)\n\n\n(iii) Outer product of gradients (OPG, BHHH)\n\\(\\Big[\\sum_i S_i(\\hat\\btheta)S_i(\\hat\\btheta)'\\Big]^{-1}\\)\nfirst derivatives only\n\n\n(iv) Robust (sandwich)\n\\(\\big[-H_n(\\hat\\btheta)\\big]^{-1}\\Big[\\sum_iS_iS_i'\\Big]\\big[-H_n(\\hat\\btheta)\\big]^{-1}\\)\nboth\n\n\n\n\n\n\n(i)–(iii) are all consistent under correct specification and typically differ in finite samples. The observed Hessian (ii) is the default in most software. The OPG (iii) is the cheapest but has the poorest finite-sample behaviour. The sandwich (iv) remains valid when the density is misspecified, as we see next.\nFor the Bernoulli model, all three of (i)–(iii) coincide at \\(\\hat\\pi=\\bar y\\) and equal \\(\\bar y(1-\\bar y)/n\\). Verifying this is a short exercise: use \\(\\sum_i(y_i-\\bar y)^2=n\\bar y(1-\\bar y)\\) for binary \\(y_i\\).\n\n1.5.1 Example: the normal linear model\nLet \\(y_i=\\bx_i'\\bbeta+\\varepsilon_i\\) with \\(\\varepsilon_i\\mid\\bx_i\\iid N(0,\\sigma^2)\\). Then \\[\n\\ell_n(\\bbeta,\\sigma^2)=-\\frac n2\\ln(2\\pi)-\\frac n2\\ln\\sigma^2-\\frac1{2\\sigma^2}\\sum_{i=1}^n(y_i-\\bx_i'\\bbeta)^2 .\n\\] Setting the derivatives to zero yields \\[\n\\hat\\bbeta_{ML}=\\Big(\\sum_i\\bx_i\\bx_i'\\Big)^{-1}\\sum_i\\bx_iy_i,\\qquad\n\\hat\\sigma^2_{ML}=\\frac1n\\sum_i(y_i-\\bx_i'\\hat\\bbeta)^2 .\n\\] \\(\\hat\\bbeta_{ML}\\) is OLS. \\(\\hat\\sigma^2_{ML}\\) lacks the degrees-of-freedom correction, so it is biased downward in finite samples, but the bias vanishes as \\(n\\to\\infty\\).",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#sec-pmle",
+    "href": "chapters/01-mle.html#sec-pmle",
+    "title": "1  Maximum Likelihood",
+    "section": "1.6 Misspecification and pseudo-ML",
+    "text": "1.6 Misspecification and pseudo-ML\nWhat does the MLE estimate when the model is wrong? The answer uses a measure of distance between densities.\n\nDefinition 1.5 (Kullback–Leibler divergence) For densities \\(f\\) and \\(g\\), \\(\\KLIC(f,g)=\\displaystyle\\int f(y)\\ln\\frac{f(y)}{g(y)}\\,dy .\\)\n\nKLIC is not symmetric, \\(\\KLIC(f,g)\\neq\\KLIC(g,f)\\) in general, so it is not a distance in the metric sense. Its key properties are \\(\\KLIC(f,f)=0\\), \\(\\KLIC(f,g)\\ge0\\) (by Jensen’s inequality) and therefore \\(f=\\arg\\min_g\\KLIC(f,g)\\). Applied to a parametric family \\(f_{\\btheta}=f(\\cdot\\mid\\btheta)\\): if the model is correct, \\(\\btheta_0=\\arg\\min_{\\btheta}\\KLIC(f,f_{\\btheta})\\).\nWhen the model is misspecified, the parametric family may still be a good approximating model, for example a log-normal density for wages. The natural target is then the best-fitting member of the family.\n\nDefinition 1.6 (Pseudo-true parameter) \\(\\btheta^*=\\arg\\min_{\\btheta\\in\\Theta}\\KLIC(f,f_{\\btheta})\\).\n\nSince \\(\\KLIC(f,f_{\\btheta})=\\int f\\ln f\\,dy-\\E[\\ln f(y\\mid\\btheta)]\\) and only the second term depends on \\(\\btheta\\), \\(\\btheta^*\\) maximises \\(\\E[\\ln f(y\\mid\\btheta)]\\). The MLE maximises the sample analogue of this expectation. ML therefore has two roles: it estimates \\(\\btheta_0\\) when the model is correct and \\(\\btheta^*\\) when it is not. In the second case we call it the pseudo- or quasi-MLE (PMLE).\n\nTheorem 1.6 (Asymptotic distribution of the PMLE (Huber 1967; White 1982)) Under regularity conditions, \\(\\hat\\btheta_{PMLE}\\cvp\\btheta^*\\) and \\[\n\\sqrt n(\\hat\\btheta_{PMLE}-\\btheta^*)\\cvd N\\big(\\bm 0,\\;\\bm A^{*-1}\\bm B^*\\bm A^{*-1}\\big),\\qquad\n\\bm A^*=-\\E[H_i(\\btheta^*)],\\quad \\bm B^*=\\E[S_i(\\btheta^*)S_i(\\btheta^*)'] .\n\\]\n\nThe information equality fails, so \\(\\bm A^*\\ne\\bm B^*\\) and only the sandwich estimator (iv) in Table 1.1 is consistent. In general, \\(\\btheta^*\\neq\\btheta_0\\) and the PMLE is inconsistent for the parameter we care about. There is one important exception.\n\n1.6.1 The linear exponential family\nA density belongs to the linear exponential family (LEF) if it can be written \\[\nf(y\\mid\\mu)=\\exp\\{a(\\mu)+b(y)+c(\\mu)\\,y\\},\\qquad \\E[y]=\\mu,\\quad \\Var(y)=[c'(\\mu)]^{-1}.\n\\]\n\n\n\nTable 1.2: Leading members of the linear exponential family\n\n\n\n\n\n\n\n\n\n\n\nDistribution\n\\(a(\\mu)\\), \\(b(y)\\), \\(c(\\mu)\\)\n\\(\\E[y]\\)\n\\(\\Var(y)\\)\n\n\n\n\nNormal (\\(\\sigma^2\\) known)\n\\(-\\frac{\\mu^2}{2\\sigma^2}-\\frac12\\ln(2\\pi\\sigma^2)\\), \\(\\;-\\frac{y^2}{2\\sigma^2}\\), \\(\\;\\frac{\\mu}{\\sigma^2}\\)\n\\(\\mu\\)\n\\(\\sigma^2\\)\n\n\nBernoulli\n\\(\\ln(1-\\mu)\\), \\(\\;0\\), \\(\\;\\ln\\frac{\\mu}{1-\\mu}\\)\n\\(\\mu\\)\n\\(\\mu(1-\\mu)\\)\n\n\nExponential\n\\(-\\ln\\mu\\), \\(\\;0\\), \\(\\;-1/\\mu\\)\n\\(\\mu\\)\n\\(\\mu^2\\)\n\n\nPoisson\n\\(-\\mu\\), \\(\\;-\\ln y!\\), \\(\\;\\ln\\mu\\)\n\\(\\mu\\)\n\\(\\mu\\)\n\n\n\n\n\n\n\nTheorem 1.7 (Consistency of LEF-based PMLE (Gouriéroux, Monfort, and Trognon 1984)) If the assumed density is LEF and the conditional mean \\(\\E[y\\mid\\bx]=m(\\bx,\\btheta_0)\\) is correctly specified, the PMLE of \\(\\btheta\\) is consistent, whatever the true distribution of \\(y\\) given \\(\\bx\\).\n\nThe reason is that the LEF score is proportional to \\(y-m(\\bx,\\btheta)\\), so its expectation is zero at \\(\\btheta_0\\) as soon as the mean is right. The practical consequence is important: Poisson regression consistently estimates an exponential conditional mean for any nonnegative outcome, count or not, provided inference uses the sandwich variance. Computer tutorial 1 illustrates this with overdispersed count data.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#hypothesis-testing-the-trinity",
+    "href": "chapters/01-mle.html#hypothesis-testing-the-trinity",
+    "title": "1  Maximum Likelihood",
+    "section": "1.7 Hypothesis testing: the trinity",
+    "text": "1.7 Hypothesis testing: the trinity\nWe test \\(H_0:\\bh(\\btheta_0)=\\bm 0\\) against \\(H_1:\\bh(\\btheta_0)\\neq\\bm 0\\), where \\(\\bh:\\mathbb{R}^k\\to\\mathbb{R}^q\\) imposes \\(q\\le k\\) restrictions with full-rank Jacobian \\(\\bm R(\\btheta)=\\partial\\bh(\\btheta)/\\partial\\btheta'\\). Linear restrictions are the special case \\(\\bh(\\btheta)=\\bR\\btheta-\\br\\). For example, with \\(k=3\\), \\(H_0:\\theta_1=1,\\ \\theta_2-\\theta_3=2\\) has \\(q=2\\) and \\[\n\\bR=\\begin{pmatrix}1&0&0\\\\0&1&-1\\end{pmatrix},\\qquad \\br=\\begin{pmatrix}1\\\\2\\end{pmatrix}.\n\\]\nLet \\(\\hat\\btheta_U\\) be the unrestricted MLE and \\(\\hat\\btheta_R\\) the MLE subject to \\(\\bh(\\btheta)=\\bm 0\\). A restriction such as \\(\\beta_1=c\\beta_2\\) can often be imposed by reparametrisation: \\(x_{1}\\beta_1+x_{2}\\beta_2=(c\\,x_{1}+x_{2})\\beta_2\\), so the restricted model has a single regressor.\n\nTheorem 1.8 (LR, Wald and LM tests) Under \\(H_0\\) and correct specification, each of the following converges in distribution to \\(\\chi^2_q\\):\n\\[\n\\begin{aligned}\nLR &= 2\\big[\\ell_n(\\hat\\btheta_U)-\\ell_n(\\hat\\btheta_R)\\big],\\\\\nW &= \\bh(\\hat\\btheta_U)'\\Big[\\bm R(\\hat\\btheta_U)\\,\\widehat{\\Var}(\\hat\\btheta_U)\\,\\bm R(\\hat\\btheta_U)'\\Big]^{-1}\\bh(\\hat\\btheta_U),\\\\\nLM &= S_n(\\hat\\btheta_R)'\\,\\widehat{\\Var}\\big(S_n(\\hat\\btheta_R)\\big)^{-1}S_n(\\hat\\btheta_R),\\qquad \\widehat{\\Var}\\big(S_n(\\hat\\btheta_R)\\big)=\\mathcal I(\\hat\\btheta_R)\\text{ or } -H_n(\\hat\\btheta_R).\n\\end{aligned}\n\\] The three statistics are asymptotically equivalent under \\(H_0\\) and under local alternatives.\n\nThe intuition differs (Figure 1.2):\n\nLR: if the restriction is valid, imposing it should not reduce the maximised log-likelihood by much.\nWald: if the restriction is valid, \\(\\bh(\\hat\\btheta_U)\\) should be close to zero, because \\(\\hat\\btheta_U\\) is consistent.\nLM (score): if the restriction is valid, the slope of the log-likelihood at \\(\\hat\\btheta_R\\) should be close to zero, because \\(\\hat\\btheta_R\\) is then close to the unrestricted maximum.\n\nFor a single coefficient, \\(H_0:\\theta_j=0\\), the Wald statistic is the square of the usual \\(t\\)-ratio \\(\\hat\\theta_j/\\text{se}(\\hat\\theta_j)\\).\n\n\n\n\n\n\n\n\nFigure 1.2: The trinity for the exponential model, testing \\(H_0:\\lambda=1.2\\) with n = 50 simulated observations. LR compares heights, Wald compares horizontal distance, LM compares the slope at the restricted value.\n\n\n\n\n\nThe three statistics for this sample:\n\n# y: 50 draws from an exponential with lambda = 1.5 (set.seed(42)); H0: lambda = 1.2\ninfo &lt;- function(l) n / l^2                  # Fisher information of the sample\nLR &lt;- 2 * (ll(l_hat) - ll(l0))\nW  &lt;- (l_hat - l0)^2 * info(l_hat)           # uses Var(l_hat) = l_hat^2 / n\nLM &lt;- slope^2 / info(l0)                     # score and information at l0\nround(c(LR = LR, Wald = W, LM = LM, crit_5pct = qchisq(0.95, 1)), 3)\n\n#&gt;        LR      Wald        LM crit_5pct \n#&gt;     6.907     4.361     8.782     3.841\n\n\nThey differ in finite samples but lead to the same decision here. Which to use in practice?\n\nComputation. LR needs both models, Wald only the unrestricted one, LM only the restricted one. LM is attractive when the restricted model is much simpler, e.g. when the restriction makes a nonlinear model linear.\nInvariance. Only LR is invariant to how the model and the restriction are parametrised. The Wald statistic for \\(H_0:\\theta=1\\) and for the equivalent \\(H_0:1/\\theta=1\\) can differ substantially in small samples (Cameron and Trivedi 2005, sec. 7.2).\nRobustness. Under misspecification, LR and the information-based LM are no longer \\(\\chi^2\\). The Wald test with the sandwich variance remains valid, which is why robust Wald tests dominate applied work.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#sec-ct1",
+    "href": "chapters/01-mle.html#sec-ct1",
+    "title": "1  Maximum Likelihood",
+    "section": "1.8 Computer tutorial 1",
+    "text": "1.8 Computer tutorial 1\nLearning goals. Write a log-likelihood as an R function and maximise it with optim; compute Hessian, OPG and sandwich variance estimators by hand and check them against glm and sandwich; see in a Monte Carlo study why pseudo-ML needs robust standard errors.\nPackages. sandwich, lmtest, MASS. Data. mroz.csv (Mroz 1987), 753 married women in 1975.\n\n1.8.1 Problem 1: Logit model for labour force participation\n\n\n\nVariable\nDescription\n\n\n\n\ninlf\n= 1 if in labour force, 1975\n\n\nhours\nhours worked, 1975\n\n\nkidslt6\nnumber of kids under 6\n\n\nkidsge6\nnumber of kids aged 6–18\n\n\nage\nwoman’s age in years\n\n\neduc\nyears of schooling\n\n\nwage\nestimated hourly wage from earnings (0 if not working)\n\n\nfaminc\nfamily income, 1975\n\n\nexper\nactual labour market experience\n\n\nexpersq\nexperience squared\n\n\n\n\nCreate non-wife income in thousand dollars, \\(\\texttt{nwifeinc}=(\\texttt{faminc}-\\texttt{wage}\\times\\texttt{hours})/1000\\).\nEstimate the linear probability model (LPM) \\[\n\\texttt{inlf}=\\beta_0+\\beta_1\\texttt{nwifeinc}+\\beta_2\\texttt{educ}+\\beta_3\\texttt{exper}+\\beta_4\\texttt{expersq}+\\beta_5\\texttt{age}+\\beta_6\\texttt{kidslt6}+\\beta_7\\texttt{kidsge6}+\\varepsilon .\n\\] Why are heteroskedasticity-robust standard errors required here? How many fitted values lie outside \\([0,1]\\)?\nWrite down the logit model and its log-likelihood formally. Derive the score and the Hessian of observation \\(i\\).\nEstimate the logit model with the regressors from (b) in two ways.\n\nCode the negative log-likelihood as an R function negll(b, y, X) and minimise it with optim(..., method = \"BFGS\", hessian = TRUE), using the LPM coefficients as starting values. Supply the analytical gradient as well.\nUse glm(..., family = binomial(link = \"logit\")).\n\nCompute the variance matrix of \\(\\hat\\bbeta\\) in four ways: (i) from the Hessian returned by optim; (ii) the inverse of the negative analytical Hessian; (iii) the inverse of the OPG; (iv) the sandwich. Compare with vcov() and sandwich() applied to the glm object.\nCompute the average partial effects (APEs) of educ and kidslt6 from the logit model and compare them with the LPM coefficients.\n\n\n\n1.8.2 Problem 2: PML vs. ML, a Monte Carlo study\nThe goal is to see how ML behaves when the likelihood is misspecified but the conditional mean is right (see “Misspecification and pseudo-ML” in Chapter 1 of the lecture notes).\nCorrect density.\n\nSimulate \\(n=1000\\) observations from \\(y_i\\mid\\bx_i\\sim\\text{Poisson}(\\lambda_i)\\) with \\(\\lambda_i=\\exp(\\beta_0+\\beta_1x_{1i}+\\beta_2x_{2i})\\), \\((\\beta_0,\\beta_1,\\beta_2)=(0.2,0.1,0)\\) and \\(x_1,x_2\\) independent \\(N(0,1)\\).\nEstimate \\(\\bbeta\\) with glm(..., family = poisson).\nUsing the score and Hessian of the Poisson model from Problem Set 1, Problem 3, compute Hessian-based and sandwich standard errors by hand. Check them against glm and coeftest(..., vcov = sandwich).\n\nMisspecified density.\n\nNow draw \\(y_i\\) from a negative binomial distribution with the same mean \\(\\mu_i=\\exp(\\beta_0+\\beta_1x_{1i}+\\beta_2x_{2i})\\) and variance \\(\\Var(y_i\\mid\\bx_i)=\\mu_i+\\mu_i^2/\\theta\\) with \\(\\theta=3\\).\nEstimate the mean function by (i) Poisson PML with Hessian-based variance, (ii) Poisson PML with sandwich variance, (iii) negative binomial ML (MASS::glm.nb) with Hessian-based variance.\nRepeat (d)–(e) for 1000 Monte Carlo samples and fill in the table:\n\n\n\n\n\n\n\n\n\n\n\nPoisson PML (Hessian)\nPoisson PML (sandwich)\nNegBin ML (Hessian)\n\n\n\n\nMC mean of \\(\\hat\\beta_2\\)\n\n\n\n\n\nMC mean of s.e.\\((\\hat\\beta_2)\\)\n\n\n\n\n\nMC std. dev. of \\(\\hat\\beta_2\\)\n\n\n\n\n\nRejection rate of \\(H_0:\\beta_2=0\\) at 5%\n\n\n\n\n\n\n\nDiscuss your results.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-mle.html#exercises",
+    "href": "chapters/01-mle.html#exercises",
+    "title": "1  Maximum Likelihood",
+    "section": "1.9 Exercises",
+    "text": "1.9 Exercises\nProblem Set 1 contains the analytical exercises for this chapter:\n\nProblem 1: a regular one-parameter model from start to finish (score, information, bias and the Cramér–Rao bound, asymptotics, invariance) and the three tests, including the non-invariance of the Wald test.\nProblem 2: the uniform distribution as a non-regular case, with an \\(n\\)-rate, non-normal limit.\nProblem 3: Poisson regression, its score and Hessian, and pseudo-ML under overdispersion. Computer tutorial 1, Problem 2 builds on it.\nProblem 4: canonical links in the linear exponential family.\n\n\n\n\n\nCameron, A. Colin, and Pravin K. Trivedi. 2005. Microeconometrics: Methods and Applications. Cambridge: Cambridge University Press.\n\n\nGouriéroux, Christian, Alain Monfort, and Alain Trognon. 1984. “Pseudo Maximum Likelihood Methods: Theory.” Econometrica 52 (3): 681–700.\n\n\nHansen, Bruce E. 2022. Econometrics. Princeton: Princeton University Press.\n\n\nHuber, Peter J. 1967. “The Behavior of Maximum Likelihood Estimates Under Nonstandard Conditions.” In Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability, 1:221–33.\n\n\nMroz, Thomas A. 1987. “The Sensitivity of an Empirical Model of Married Women’s Hours of Work to Economic and Statistical Assumptions.” Econometrica 55 (4): 765–99.\n\n\nSmith, James P. 2009. “The Impact of Childhood Health on Adult Labor Market Outcomes.” Review of Economics and Statistics 91 (3): 478–89. https://doi.org/10.1162/rest.91.3.478.\n\n\nWhite, Halbert. 1982. “Maximum Likelihood Estimation of Misspecified Models.” Econometrica 50 (1): 1–25.\n\n\nWinkelmann, Rainer. 2004. “Health Care Reform and the Number of Doctor Visits: An Econometric Analysis.” Journal of Applied Econometrics 19 (4): 455–72. https://doi.org/10.1002/jae.764.\n\n\nWooldridge, Jeffrey M. 2010. Econometric Analysis of Cross Section and Panel Data. 2nd ed. Cambridge, MA: MIT Press.",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Maximum Likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-gmm.html",
+    "href": "chapters/02-gmm.html",
+    "title": "2  Method of Moments and GMM",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nMoment conditions, MM and GMM estimators\nIdentification, consistency and asymptotic normality\nOptimal weighting matrix, two-step and iterated GMM\nIV and 2SLS as GMM; overidentification (J) test\nExample: ATE by inverse probability weighting as a joint GMM problem\nComputer tutorial 2",
+    "crumbs": [
+      "Estimation principles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Method of Moments and GMM</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-simulation.html",
+    "href": "chapters/03-simulation.html",
+    "title": "3  Simulation-Based Estimation",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nMonte Carlo integration and its error\nQuasi-random (Halton) draws and Gaussian quadrature\nMaximum simulated likelihood and method of simulated moments\nBootstrap\nComputer tutorial 3",
+    "crumbs": [
+      "Computation and flexible models",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulation-Based Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-nonparametric.html",
+    "href": "chapters/04-nonparametric.html",
+    "title": "4  Nonparametric Methods",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nHistogram and kernel density estimation; bias, variance and bandwidth choice\nNadaraya-Watson and local linear regression\nRule-of-thumb and cross-validated bandwidths; confidence bands\nCurse of dimensionality and semiparametric alternatives\nComputer tutorial 4",
+    "crumbs": [
+      "Computation and flexible models",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Nonparametric Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-statlearning.html",
+    "href": "chapters/05-statlearning.html",
+    "title": "5  Introduction to Statistical Learning",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nPrediction vs. estimation; bias-variance trade-off\nCross-validation\nRidge, lasso and elastic net\nTrees and ensembles (overview)\nLasso for inference and double machine learning (outlook)\nComputer tutorial 5",
+    "crumbs": [
+      "Computation and flexible models",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Statistical Learning</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Cameron, A. Colin, and Pravin K. Trivedi. 2005. Microeconometrics:\nMethods and Applications. Cambridge: Cambridge University Press.\n\n\nCasella, George, and Roger L. Berger. 2002. Statistical\nInference. 2nd ed. Pacific Grove, CA: Duxbury.\n\n\nGouriéroux, Christian, Alain Monfort, and Alain Trognon. 1984.\n“Pseudo Maximum Likelihood Methods: Theory.”\nEconometrica 52 (3): 681–700.\n\n\nHansen, Bruce E. 2022. Econometrics. Princeton: Princeton\nUniversity Press.\n\n\nHuber, Peter J. 1967. “The Behavior of Maximum Likelihood\nEstimates Under Nonstandard Conditions.” In Proceedings of\nthe Fifth Berkeley Symposium on Mathematical Statistics and\nProbability, 1:221–33.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani.\n2023. An Introduction to Statistical Learning with Applications in\nr. 2nd ed. New York: Springer.\n\n\nMroz, Thomas A. 1987. “The Sensitivity of an Empirical Model of\nMarried Women’s Hours of Work to Economic and Statistical\nAssumptions.” Econometrica 55 (4): 765–99.\n\n\nSmith, James P. 2009. “The Impact of Childhood Health on Adult\nLabor Market Outcomes.” Review of Economics and\nStatistics 91 (3): 478–89. https://doi.org/10.1162/rest.91.3.478.\n\n\nWhite, Halbert. 1982. “Maximum Likelihood Estimation of\nMisspecified Models.” Econometrica 50 (1): 1–25.\n\n\nWinkelmann, Rainer. 2004. “Health Care Reform and the Number of\nDoctor Visits: An Econometric Analysis.” Journal of Applied\nEconometrics 19 (4): 455–72. https://doi.org/10.1002/jae.764.\n\n\nWooldridge, Jeffrey M. 2010. Econometric Analysis of Cross Section\nand Panel Data. 2nd ed. Cambridge, MA: MIT Press.",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "appendix/a-asymptotics.html",
+    "href": "appendix/a-asymptotics.html",
+    "title": "Appendix A — Large-Sample Asymptotics",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nConvergence in probability and distribution; Slutsky and continuous mapping\nWLLN, CLT; delta method\nUniform convergence and consistency of extremum estimators",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Large-Sample Asymptotics</span>"
+    ]
+  },
+  {
+    "objectID": "appendix/b-r-primer.html",
+    "href": "appendix/b-r-primer.html",
+    "title": "Appendix B — A Short R Primer",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\bm}[1]{\\boldsymbol{#1}}\n\\newcommand{\\btheta}{\\boldsymbol{\\theta}}\n\\newcommand{\\bbeta}{\\boldsymbol{\\beta}}\n\\newcommand{\\bgamma}{\\boldsymbol{\\gamma}}\n\\newcommand{\\bx}{\\boldsymbol{x}}\n\\newcommand{\\by}{\\boldsymbol{y}}\n\\newcommand{\\bX}{\\boldsymbol{X}}\n\\newcommand{\\bR}{\\boldsymbol{R}}\n\\newcommand{\\br}{\\boldsymbol{r}}\n\\newcommand{\\bh}{\\boldsymbol{h}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\AVar}{\\operatorname{Avar}}\n\\newcommand{\\cvp}{\\xrightarrow{\\;p\\;}}\n\\newcommand{\\cvd}{\\xrightarrow{\\;d\\;}}\n\\newcommand{\\iid}{\\overset{\\text{iid}}{\\sim}}\n\\newcommand{\\KLIC}{\\operatorname{KLIC}}\n\\newcommand{\\pd}[2]{\\frac{\\partial #1}{\\partial #2}}\n\\]\n\n\n\n\n\n\n\nIn preparation\n\n\n\nThis chapter will be added before the corresponding lectures. Planned content:\n\nProjects, scripts and working directories\nData import, data frames and matrices\nMatrix algebra and OLS by hand\nWriting functions; optimisation with optim\nComputer tutorial 0",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>A Short R Primer</span>"
+    ]
+  }
+]
