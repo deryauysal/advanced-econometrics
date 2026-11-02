@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,8 +281,32 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#moment-conditions" id="toc-moment-conditions" class="nav-link active" data-scroll-target="#moment-conditions"><span class="header-section-number">2.1</span> Moment conditions</a></li>
+  <li><a href="#the-method-of-moments-estimator" id="toc-the-method-of-moments-estimator" class="nav-link" data-scroll-target="#the-method-of-moments-estimator"><span class="header-section-number">2.2</span> The method of moments estimator</a></li>
+  <li><a href="#the-generalized-method-of-moments" id="toc-the-generalized-method-of-moments" class="nav-link" data-scroll-target="#the-generalized-method-of-moments"><span class="header-section-number">2.3</span> The generalized method of moments</a></li>
+  <li><a href="#asymptotic-properties-of-gmm" id="toc-asymptotic-properties-of-gmm" class="nav-link" data-scroll-target="#asymptotic-properties-of-gmm"><span class="header-section-number">2.4</span> Asymptotic properties of GMM</a></li>
+  <li><a href="#efficient-gmm" id="toc-efficient-gmm" class="nav-link" data-scroll-target="#efficient-gmm"><span class="header-section-number">2.5</span> Efficient GMM</a></li>
+  <li><a href="#testing-overidentifying-restrictions" id="toc-testing-overidentifying-restrictions" class="nav-link" data-scroll-target="#testing-overidentifying-restrictions"><span class="header-section-number">2.6</span> Testing overidentifying restrictions</a></li>
+  <li><a href="#conditional-moments-and-optimal-instruments" id="toc-conditional-moments-and-optimal-instruments" class="nav-link" data-scroll-target="#conditional-moments-and-optimal-instruments"><span class="header-section-number">2.7</span> Conditional moments and optimal instruments</a></li>
+  <li><a href="#linear-instrumental-variables-as-gmm" id="toc-linear-instrumental-variables-as-gmm" class="nav-link" data-scroll-target="#linear-instrumental-variables-as-gmm"><span class="header-section-number">2.8</span> Linear instrumental variables as GMM</a>
+  <ul class="collapse">
+  <li><a href="#illustration-2sls-versus-efficient-gmm" id="toc-illustration-2sls-versus-efficient-gmm" class="nav-link" data-scroll-target="#illustration-2sls-versus-efficient-gmm"><span class="header-section-number">2.8.1</span> Illustration: 2SLS versus efficient GMM</a></li>
+  </ul></li>
+  <li><a href="#sec-twostep" id="toc-sec-twostep" class="nav-link" data-scroll-target="#sec-twostep"><span class="header-section-number">2.9</span> Two-step estimators as joint GMM</a></li>
+  <li><a href="#further-applications" id="toc-further-applications" class="nav-link" data-scroll-target="#further-applications"><span class="header-section-number">2.10</span> Further applications</a></li>
+  <li><a href="#sec-ct2" id="toc-sec-ct2" class="nav-link" data-scroll-target="#sec-ct2"><span class="header-section-number">2.11</span> Computer tutorial 2</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm" id="toc-problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm" class="nav-link" data-scroll-target="#problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm"><span class="header-section-number">2.11.1</span> Problem 1: The effect of smoking on birth weight (IPW as joint MM)</a></li>
+  <li><a href="#problem-2-returns-to-schooling-with-college-proximity-iv-and-gmm" id="toc-problem-2-returns-to-schooling-with-college-proximity-iv-and-gmm" class="nav-link" data-scroll-target="#problem-2-returns-to-schooling-with-college-proximity-iv-and-gmm"><span class="header-section-number">2.11.2</span> Problem 2: Returns to schooling with college proximity (IV and GMM)</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.12</span> Exercises</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -264,6 +342,21 @@ window.Quarto = {
 \newcommand{\bR}{\boldsymbol{R}}
 \newcommand{\br}{\boldsymbol{r}}
 \newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bZ}{\boldsymbol{Z}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bA}{\boldsymbol{A}}
+\newcommand{\bV}{\boldsymbol{V}}
+\newcommand{\bu}{\boldsymbol{u}}
+\newcommand{\bw}{\boldsymbol{w}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\bg}{\boldsymbol{g}}
+\newcommand{\bS}{\boldsymbol{S}}
+\newcommand{\bD}{\boldsymbol{D}}
+\newcommand{\bI}{\boldsymbol{I}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\AVar}{\operatorname{Avar}}
@@ -274,29 +367,392 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-In preparation
+Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 6.1–6.5; <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 12 (instrumental variables) and Ch. 13 (GMM); <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 8 and 14. Applications: <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span>.</p>
+</div>
+</div>
+<p>Maximum likelihood requires the full distribution of the data. Many economic models deliver less: a set of expectations that should be zero at the true parameter value. The method of moments (MM) and its generalization, the generalized method of moments (GMM), turn such moment conditions directly into estimators. OLS, IV, 2SLS and ML are all special cases, and the GMM framework gives a single recipe for their asymptotic distribution and for efficient estimation when there are more conditions than parameters <span class="citation" data-cites="hansen1982">(<a href="../references.html#ref-hansen1982" role="doc-biblioref">L. P. Hansen 1982</a>)</span>.</p>
+<section id="moment-conditions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="moment-conditions"><span class="header-section-number">2.1</span> Moment conditions</h2>
+<p>Let <span class="math inline">\(\bw_i\)</span> collect all observed variables for unit <span class="math inline">\(i\)</span> (outcomes, regressors, instruments) and let <span class="math inline">\(\btheta\in\Theta\subset\mathbb{R}^k\)</span>.</p>
+<div id="def-moment" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.1 (Moment function)</strong></span> A <span class="math inline">\(q\times1\)</span> vector function <span class="math inline">\(\bpsi(\bw_i,\btheta)\)</span> with <span class="math inline">\(q\ge k\)</span> is a <strong>moment function</strong> if <span class="math display">\[
+\E\big[\bpsi(\bw_i,\btheta_0)\big]=\bm 0 .
+\]</span> This equation is a (population) <strong>moment condition</strong> or moment restriction.</p>
+</div>
+<p>A moment function depends only on the data and the parameters, it has at least as many elements as there are parameters, and its expectation is zero at the true value. Three examples recur throughout the chapter.</p>
+<div id="exm-mm-examples" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.1 (Familiar estimators as moment estimators)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><strong>Mean.</strong> <span class="math inline">\(\psi(y_i,\mu)=y_i-\mu\)</span>. The sample analogue <span class="math inline">\(\frac1n\sum_i(y_i-\hat\mu)=0\)</span> gives <span class="math inline">\(\hat\mu=\bar y\)</span>.</li>
+<li><strong>OLS.</strong> In <span class="math inline">\(y_i=\bx_i'\bbeta+u_i\)</span>, the assumption <span class="math inline">\(\E[u_i\mid\bx_i]=0\)</span> implies the <span class="math inline">\(k\)</span> conditions <span class="math inline">\(\E[\bx_i(y_i-\bx_i'\bbeta)]=\bm 0\)</span>. Solving the sample analogue gives <span class="math inline">\(\hat\bbeta=\big(\sum_i\bx_i\bx_i'\big)^{-1}\sum_i\bx_iy_i\)</span>.</li>
+<li><strong>Maximum likelihood.</strong> Under correct specification the score has mean zero (<a href="01-mle.html#thm-likelihood-properties" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>). With <span class="math inline">\(\bpsi(\bw_i,\btheta)=\partial\ln f(y_i\mid\bx_i;\btheta)/\partial\btheta\)</span>, the MM estimator is the root of the score, i.e.&nbsp;the MLE.</li>
+</ol>
+</div>
+</section>
+<section id="the-method-of-moments-estimator" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="the-method-of-moments-estimator"><span class="header-section-number">2.2</span> The method of moments estimator</h2>
+<div id="def-mm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.2 (Method of moments estimator)</strong></span> If <span class="math inline">\(q=k\)</span>, the MM estimator <span class="math inline">\(\hat\btheta\)</span> solves the <span class="math inline">\(k\)</span> sample moment conditions <span class="math display">\[
+\bar\bg_n(\hat\btheta)\equiv\frac1n\sum_{i=1}^n\bpsi(\bw_i,\hat\btheta)=\bm 0 .
+\]</span></p>
+</div>
+<p>MM estimators are consistent whenever a law of large numbers makes the sample moments converge to the population moments and <span class="math inline">\(\btheta_0\)</span> is the unique solution of <span class="math inline">\(\E[\bpsi(\bw_i,\btheta)]=\bm 0\)</span>. For OLS, <span class="math display">\[
+\hat\bbeta=\bbeta+\Big(\tfrac1n\textstyle\sum_i\bx_i\bx_i'\Big)^{-1}\tfrac1n\textstyle\sum_i\bx_iu_i\ \cvp\ \bbeta+\E[\bx_i\bx_i']^{-1}\E[\bx_iu_i]=\bbeta,
+\]</span> provided <span class="math inline">\(\E[\bx_i\bx_i']\)</span> is nonsingular.</p>
+<div id="thm-mm-asy" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.1 (Asymptotic distribution of the MM estimator)</strong></span> Under regularity conditions and i.i.d.&nbsp;sampling, <span class="math display">\[
+\sqrt n(\hat\btheta-\btheta_0)\cvd N\big(\bm 0,\ \bA_0^{-1}\bV_0\bA_0^{-1\prime}\big),\qquad
+\bA_0=\E\Big[\pd{\bpsi(\bw_i,\btheta_0)}{\btheta'}\Big],\quad
+\bV_0=\E\big[\bpsi(\bw_i,\btheta_0)\bpsi(\bw_i,\btheta_0)'\big].
+\]</span></p>
+</div>
+<p><strong>Sketch.</strong> A mean-value expansion of <span class="math inline">\(\bar\bg_n(\hat\btheta)=\bm 0\)</span> around <span class="math inline">\(\btheta_0\)</span> gives <span class="math inline">\(\bm 0=\bar\bg_n(\btheta_0)+\bA_n(\bar\btheta)(\hat\btheta-\btheta_0)\)</span> with <span class="math inline">\(\bA_n=\frac1n\sum_i\partial\bpsi_i/\partial\btheta'\)</span>. Hence <span class="math inline">\(\sqrt n(\hat\btheta-\btheta_0)=-\bA_n^{-1}\sqrt n\,\bar\bg_n(\btheta_0)\)</span>. The LLN gives <span class="math inline">\(\bA_n\cvp\bA_0\)</span>, the CLT gives <span class="math inline">\(\sqrt n\,\bar\bg_n(\btheta_0)\cvd N(\bm 0,\bV_0)\)</span>, and Slutsky does the rest. This is the same argument as for the MLE in <a href="01-mle.html" class="quarto-xref"><span>Chapter 1</span></a>; the MLE simply has <span class="math inline">\(\bA_0=-\mathcal I_1\)</span> and <span class="math inline">\(\bV_0=\mathcal I_1\)</span>.</p>
+<p>The variance is estimated by the sandwich <span class="math inline">\(\hat\bA^{-1}\hat\bV\hat\bA^{-1\prime}\)</span> with <span class="math inline">\(\hat\bA=\frac1n\sum_i\partial\bpsi_i(\hat\btheta)/\partial\btheta'\)</span> and <span class="math inline">\(\hat\bV=\frac1n\sum_i\bpsi_i(\hat\btheta)\bpsi_i(\hat\btheta)'\)</span>.</p>
+<div id="exm-white" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.2 (OLS under heteroskedasticity)</strong></span> With <span class="math inline">\(\bpsi=\bx_i(y_i-\bx_i'\bbeta)\)</span> we get <span class="math inline">\(\bA_0=-\E[\bx_i\bx_i']\)</span> and <span class="math inline">\(\bV_0=\E[u_i^2\bx_i\bx_i']\)</span>, so <span class="math display">\[
+\sqrt n(\hat\bbeta-\bbeta)\cvd N\big(\bm 0,\ \E[\bx_i\bx_i']^{-1}\E[u_i^2\bx_i\bx_i']\E[\bx_i\bx_i']^{-1}\big).
+\]</span> White’s heteroskedasticity-robust variance estimator is the MM sandwich for OLS. Likewise, the PML sandwich in <a href="01-mle.html#sec-pmle" class="quarto-xref"><span>Section 1.6</span></a> is the MM sandwich with the score as moment function.</p>
+</div>
+</section>
+<section id="the-generalized-method-of-moments" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="the-generalized-method-of-moments"><span class="header-section-number">2.3</span> The generalized method of moments</h2>
+<p>When <span class="math inline">\(q&gt;k\)</span> the model is <strong>overidentified</strong>: in general no <span class="math inline">\(\btheta\)</span> sets all <span class="math inline">\(q\)</span> sample moments to zero at once. GMM instead makes them as small as possible in a quadratic metric.</p>
+<div id="exm-overid" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.3 (Two sets of conditions for one regression)</strong></span> If, in addition to <span class="math inline">\(\E[u_i\mid\bx_i]=0\)</span>, the errors are conditionally symmetric, then <span class="math inline">\(\E[u_i^3\mid\bx_i]=0\)</span> and <span class="math display">\[
+\E\begin{pmatrix}\bx_i(y_i-\bx_i'\bbeta)\\ \bx_i(y_i-\bx_i'\bbeta)^3\end{pmatrix}=\bm 0 ,
+\]</span> which gives <span class="math inline">\(2k\)</span> conditions for <span class="math inline">\(k\)</span> parameters.</p>
+</div>
+<div id="def-gmm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.3 (GMM estimator)</strong></span> Let <span class="math inline">\(\bW_n\)</span> be a <span class="math inline">\(q\times q\)</span> symmetric positive definite weighting matrix, possibly data dependent. The GMM estimator is <span class="math display">\[
+\hat\btheta(\bW_n)=\arg\min_{\btheta\in\Theta}\ Q_n(\btheta),\qquad Q_n(\btheta)=\bar\bg_n(\btheta)'\,\bW_n\,\bar\bg_n(\btheta).
+\]</span></p>
+</div>
+<p>The first-order conditions are <span class="math display">\[
+\bA_n(\hat\btheta)'\,\bW_n\,\bar\bg_n(\hat\btheta)=\bm 0,\qquad \bA_n(\btheta)=\frac1n\sum_{i=1}^n\pd{\bpsi(\bw_i,\btheta)}{\btheta'} ,
+\]</span> i.e.&nbsp;GMM sets <span class="math inline">\(k\)</span> linear combinations of the <span class="math inline">\(q\)</span> sample moments to zero. If <span class="math inline">\(q=k\)</span>, <span class="math inline">\(\bA_n\)</span> is square and (generically) invertible, so the FOC reduce to <span class="math inline">\(\bar\bg_n(\hat\btheta)=\bm 0\)</span>: in the just-identified case GMM is MM, whatever <span class="math inline">\(\bW_n\)</span>.</p>
+</section>
+<section id="asymptotic-properties-of-gmm" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="asymptotic-properties-of-gmm"><span class="header-section-number">2.4</span> Asymptotic properties of GMM</h2>
+<div id="thm-gmm-asy" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.2 (Consistency and asymptotic normality of GMM)</strong></span> Assume i.i.d.&nbsp;data and</p>
+<ol type="i">
+<li><p><strong>identification:</strong> <span class="math inline">\(\E[\bpsi(\bw_i,\btheta)]=\bm 0\)</span> if and only if <span class="math inline">\(\btheta=\btheta_0\)</span>;</p></li>
+<li><p><span class="math inline">\(\bA_0=\E[\partial\bpsi(\bw_i,\btheta_0)/\partial\btheta']\)</span> is finite with full column rank <span class="math inline">\(k\)</span>;</p></li>
+<li><p><span class="math inline">\(\bW_n\cvp\bW_0\)</span>, symmetric positive definite;</p></li>
+<li><p><span class="math inline">\(\sqrt n\,\bar\bg_n(\btheta_0)\cvd N(\bm 0,\bV_0)\)</span>, <span class="math inline">\(\bV_0=\E[\bpsi_i\bpsi_i']\)</span> positive definite;</p></li>
+</ol>
+<p>plus standard regularity conditions (compact <span class="math inline">\(\Theta\)</span>, uniform convergence, smoothness). Then <span class="math inline">\(\hat\btheta\cvp\btheta_0\)</span> and <span class="math display">\[
+\sqrt n(\hat\btheta-\btheta_0)\cvd N\Big(\bm 0,\ (\bA_0'\bW_0\bA_0)^{-1}\bA_0'\bW_0\bV_0\bW_0\bA_0(\bA_0'\bW_0\bA_0)^{-1}\Big).
+\]</span></p>
+</div>
+<p>The proof follows the MM sketch: expand the FOC around <span class="math inline">\(\btheta_0\)</span> and solve, <span class="math inline">\(\sqrt n(\hat\btheta-\btheta_0)\approx-(\bA_0'\bW_0\bA_0)^{-1}\bA_0'\bW_0\sqrt n\,\bar\bg_n(\btheta_0)\)</span>. Two features are worth stressing. First, <strong>the weighting matrix does not affect consistency</strong>, only the asymptotic variance. Second, condition (ii) is the local version of identification: if <span class="math inline">\(\bA_0\)</span> has deficient rank, the moments do not pin down all parameters, which is the essence of weak or irrelevant instruments.</p>
+<p>The variance is estimated by replacing <span class="math inline">\(\bA_0,\bV_0,\bW_0\)</span> by <span class="math inline">\(\hat\bA=\bA_n(\hat\btheta)\)</span>, <span class="math inline">\(\hat\bV=\frac1n\sum_i\bpsi_i(\hat\btheta)\bpsi_i(\hat\btheta)'\)</span> and <span class="math inline">\(\bW_n\)</span>, and dividing by <span class="math inline">\(n\)</span>.</p>
+</section>
+<section id="efficient-gmm" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="efficient-gmm"><span class="header-section-number">2.5</span> Efficient GMM</h2>
+<div id="thm-optimal-w" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.3 (Optimal weighting matrix)</strong></span> Among all choices of <span class="math inline">\(\bW_0\)</span>, <span class="math inline">\(\bW_0^*=\bV_0^{-1}\)</span> minimizes the asymptotic variance (in the matrix sense of <a href="01-mle.html" class="quarto-xref"><span>Chapter 1</span></a>). The minimum is <span class="math display">\[
+\AVar\big(\hat\btheta(\bV_0^{-1})\big)=\big(\bA_0'\bV_0^{-1}\bA_0\big)^{-1}.
+\]</span></p>
+</div>
+<p><strong>Proof.</strong> Write <span class="math inline">\(\bm B=(\bA'\bV^{-1}\bA)^{-1}\bA'\bV^{-1}\)</span> and <span class="math inline">\(\bm C=(\bA'\bW\bA)^{-1}\bA'\bW-\bm B\)</span> (dropping subscripts). The asymptotic variance with weight <span class="math inline">\(\bW\)</span> is <span class="math inline">\((\bm B+\bm C)\bV(\bm B+\bm C)'\)</span>. The cross term vanishes because <span class="math inline">\(\bm C\bV\bm B'=\big[(\bA'\bW\bA)^{-1}\bA'\bW\bA-(\bA'\bV^{-1}\bA)^{-1}\bA'\bV^{-1}\bA\big](\bA'\bV^{-1}\bA)^{-1}=\bm 0\)</span>. Hence the variance equals <span class="math inline">\((\bA'\bV^{-1}\bA)^{-1}+\bm C\bV\bm C'\)</span>, and <span class="math inline">\(\bm C\bV\bm C'\)</span> is positive semidefinite. <span class="math inline">\(\square\)</span></p>
+<p>Intuitively, moments that are measured with more noise get less weight. “Optimal” is relative to a given set of moment conditions: poorly chosen moments remain inefficient even with the best weight. Adding valid moment conditions never increases the asymptotic variance of efficient GMM.</p>
+<p><span class="math inline">\(\bV_0\)</span> is unknown, so efficient GMM is implemented in steps:</p>
+<ol type="1">
+<li>Estimate <span class="math inline">\(\hat\btheta^{(1)}\)</span> with a convenient weight, e.g.&nbsp;<span class="math inline">\(\bW_n=\bI\)</span> or, in linear IV, <span class="math inline">\((\bZ'\bZ/n)^{-1}\)</span>. It is consistent but inefficient.</li>
+<li>Compute <span class="math inline">\(\hat\bV=\frac1n\sum_i\bpsi_i(\hat\btheta^{(1)})\bpsi_i(\hat\btheta^{(1)})'\)</span> and re-estimate with <span class="math inline">\(\bW_n=\hat\bV^{-1}\)</span>. This <strong>two-step GMM</strong> estimator is asymptotically efficient.</li>
+</ol>
+<p>Repeating step 2 until convergence gives <strong>iterated GMM</strong>; letting the weight depend on <span class="math inline">\(\btheta\)</span> inside the objective, <span class="math inline">\(Q_n(\btheta)=\bar\bg_n(\btheta)'\hat\bV(\btheta)^{-1}\bar\bg_n(\btheta)\)</span>, gives the <strong>continuously updated estimator</strong> (CUE). All three are asymptotically equivalent. In finite samples, estimating <span class="math inline">\(\bV_0\)</span> introduces bias, especially with many moment conditions <span class="citation" data-cites="altonji1996">(<a href="../references.html#ref-altonji1996" role="doc-biblioref">Altonji and Segal 1996</a>)</span>, so efficient GMM need not beat a simple one-step estimator in practice.</p>
+</section>
+<section id="testing-overidentifying-restrictions" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="testing-overidentifying-restrictions"><span class="header-section-number">2.6</span> Testing overidentifying restrictions</h2>
+<p>GMM consistency rests on <span class="math inline">\(\E[\bpsi(\bw_i,\btheta_0)]=\bm 0\)</span>. With <span class="math inline">\(q&gt;k\)</span> there is information left to check it: at the efficient estimate the sample moments should be close to zero.</p>
+<div id="thm-jtest" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.4 (Hansen’s J test <span class="citation" data-cites="hansen1982">(<a href="../references.html#ref-hansen1982" role="doc-biblioref">L. P. Hansen 1982</a>)</span>)</strong></span> Let <span class="math inline">\(\hat\btheta\)</span> be the efficient GMM estimator and <span class="math inline">\(\hat\bV\)</span> a consistent estimator of <span class="math inline">\(\bV_0\)</span>. Under <span class="math inline">\(H_0:\E[\bpsi(\bw_i,\btheta_0)]=\bm 0\)</span>, <span class="math display">\[
+J=n\,\bar\bg_n(\hat\btheta)'\,\hat\bV^{-1}\,\bar\bg_n(\hat\btheta)\ \cvd\ \chi^2_{q-k}.
+\]</span></p>
+</div>
+<p>Three remarks. The factor <span class="math inline">\(n\)</span> matters: without it the statistic converges to zero. The degrees of freedom are the number of overidentifying restrictions, <span class="math inline">\(q-k\)</span>; in a just-identified model <span class="math inline">\(J=0\)</span> by construction and nothing can be tested. Finally, the test has power only against violations that cannot be absorbed by <span class="math inline">\(\btheta\)</span>: if all instruments are invalid in the same direction, <span class="math inline">\(J\)</span> may not reject. A rejection says that <em>some</em> moment conditions fail, not which.</p>
+</section>
+<section id="conditional-moments-and-optimal-instruments" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="conditional-moments-and-optimal-instruments"><span class="header-section-number">2.7</span> Conditional moments and optimal instruments</h2>
+<p>Models are often stated as a conditional restriction <span class="math inline">\(\E[\rho(\bw_i,\btheta_0)\mid\bz_i]=0\)</span>, e.g.&nbsp;<span class="math inline">\(\rho=y_i-\bx_i'\bbeta\)</span> with exogenous <span class="math inline">\(\bz_i\)</span>. By the law of iterated expectations, <em>any</em> function <span class="math inline">\(\bm D(\bz_i)\)</span> yields valid unconditional moments <span class="math inline">\(\E[\bm D(\bz_i)\rho(\bw_i,\btheta_0)]=\bm 0\)</span>, so there are infinitely many GMM estimators. The asymptotically best choice, the <strong>optimal instrument</strong>, is <span class="math display">\[
+\bm D^*(\bz_i)=\E\Big[\pd{\rho(\bw_i,\btheta_0)}{\btheta}\,\Big|\,\bz_i\Big]\Big/\Var\big(\rho(\bw_i,\btheta_0)\mid\bz_i\big).
+\]</span> In the linear model with exogenous regressors (<span class="math inline">\(\bz_i=\bx_i\)</span>) this is <span class="math inline">\(-\bx_i/\sigma_i^2\)</span>: the efficient moment estimator is weighted least squares (GLS). With endogenous regressors it is <span class="math inline">\(-\E[\bx_i\mid\bz_i]/\sigma_i^2\)</span>, which motivates 2SLS: the first stage approximates <span class="math inline">\(\E[\bx_i\mid\bz_i]\)</span> by a linear projection.</p>
+</section>
+<section id="linear-instrumental-variables-as-gmm" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="linear-instrumental-variables-as-gmm"><span class="header-section-number">2.8</span> Linear instrumental variables as GMM</h2>
+<p>Consider <span class="math inline">\(y_i=\bx_i'\bbeta+u_i\)</span> with <span class="math inline">\(\bx_i\)</span> of dimension <span class="math inline">\(k\)</span> and some regressors correlated with <span class="math inline">\(u_i\)</span> (omitted variables, measurement error, simultaneity). OLS is inconsistent. Let <span class="math inline">\(\bz_i\)</span> be an <span class="math inline">\(l\times1\)</span> vector of instruments, containing the exogenous regressors, with</p>
 <ul>
-<li>Moment conditions, MM and GMM estimators</li>
-<li>Identification, consistency and asymptotic normality</li>
-<li>Optimal weighting matrix, two-step and iterated GMM</li>
-<li>IV and 2SLS as GMM; overidentification (J) test</li>
-<li>Example: ATE by inverse probability weighting as a joint GMM problem</li>
-<li>Computer tutorial 2</li>
+<li><strong>exogeneity:</strong> <span class="math inline">\(\E[\bz_iu_i]=\bm 0\)</span>;</li>
+<li><strong>relevance:</strong> <span class="math inline">\(\operatorname{rank}\E[\bz_i\bx_i']=k\)</span> (requires <span class="math inline">\(l\ge k\)</span>), and <span class="math inline">\(\E[\bz_i\bz_i']\)</span> nonsingular.</li>
 </ul>
+<p>The moment function is <span class="math inline">\(\bpsi(\bw_i,\bbeta)=\bz_i(y_i-\bx_i'\bbeta)\)</span>, with sample analogue <span class="math inline">\(\frac1n\bZ'(\by-\bX\bbeta)\)</span> in matrix notation. Minimizing <span class="math inline">\(\frac1{n^2}(\by-\bX\bbeta)'\bZ\bW_n\bZ'(\by-\bX\bbeta)\)</span> gives the closed form <span class="math display">\[
+\hat\bbeta(\bW_n)=\big(\bX'\bZ\bW_n\bZ'\bX\big)^{-1}\bX'\bZ\bW_n\bZ'\by .
+\]</span> Here <span class="math inline">\(\bA_0=-\E[\bz_i\bx_i']\)</span> and <span class="math inline">\(\bV_0=\E[u_i^2\bz_i\bz_i']\)</span>. The familiar estimators are special cases.</p>
+<div id="tbl-lineargmm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lineargmm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Linear GMM estimators
+</figcaption>
+<div aria-describedby="tbl-lineargmm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Case</th>
+<th style="text-align: left;">Weight <span class="math inline">\(\bW_n\)</span></th>
+<th style="text-align: left;">Estimator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Just identified, <span class="math inline">\(l=k\)</span></td>
+<td style="text-align: left;">any</td>
+<td style="text-align: left;">IV: <span class="math inline">\(\hat\bbeta_{IV}=(\bZ'\bX)^{-1}\bZ'\by\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Overidentified</td>
+<td style="text-align: left;"><span class="math inline">\((\bZ'\bZ)^{-1}\)</span></td>
+<td style="text-align: left;">2SLS: <span class="math inline">\(\big[\bX'\bZ(\bZ'\bZ)^{-1}\bZ'\bX\big]^{-1}\bX'\bZ(\bZ'\bZ)^{-1}\bZ'\by\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Overidentified, homoskedastic</td>
+<td style="text-align: left;"><span class="math inline">\((\hat\sigma^2\bZ'\bZ/n)^{-1}\)</span> (optimal)</td>
+<td style="text-align: left;">2SLS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Overidentified, heteroskedastic</td>
+<td style="text-align: left;"><span class="math inline">\(\big(\frac1n\sum_i\hat u_i^2\bz_i\bz_i'\big)^{-1}\)</span> (optimal)</td>
+<td style="text-align: left;">two-step efficient GMM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>2SLS is the GMM estimator with <span class="math inline">\(\bW_n=(\bZ'\bZ)^{-1}\)</span>; under homoskedasticity, <span class="math inline">\(\bV_0=\sigma^2\E[\bz_i\bz_i']\)</span> and this weight is optimal. Under heteroskedasticity both 2SLS and two-step GMM are consistent, GMM is more efficient, and <strong>2SLS standard errors must be heteroskedasticity robust</strong>: <span class="math display">\[
+\widehat{\Var}(\hat\bbeta)=\big(\bX'\bZ\bW_n\bZ'\bX\big)^{-1}\bX'\bZ\bW_n\Big(\sum_i\hat u_i^2\bz_i\bz_i'\Big)\bW_n\bZ'\bX\big(\bX'\bZ\bW_n\bZ'\bX\big)^{-1}.
+\]</span> For two-step GMM this simplifies to <span class="math inline">\(\big[\bX'\bZ\big(\sum_i\hat u_i^2\bz_i\bz_i'\big)^{-1}\bZ'\bX\big]^{-1}\)</span>.</p>
+<p><strong>Weak instruments.</strong> If the instruments are only weakly correlated with the endogenous regressors, <span class="math inline">\(\bA_0\)</span> is close to rank deficient. IV and 2SLS are then biased towards OLS and their normal approximation is poor, even in large samples <span class="citation" data-cites="staiger1997">(<a href="../references.html#ref-staiger1997" role="doc-biblioref">Staiger and Stock 1997</a>)</span>. Always report the first-stage regression and the <span class="math inline">\(F\)</span> statistic for the excluded instruments; a common rule of thumb flags <span class="math inline">\(F&lt;10\)</span> as weak.</p>
+<section id="illustration-2sls-versus-efficient-gmm" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="illustration-2sls-versus-efficient-gmm"><span class="header-section-number">2.8.1</span> Illustration: 2SLS versus efficient GMM</h3>
+<p>The simulation below has one endogenous regressor, three instruments and errors whose variance depends on the first instrument. Both estimators are consistent, but efficient GMM puts less weight on the noisy moment <span class="math inline">\(\E[z_{1i}u_i]=0\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2027</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>one_sample <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">500</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span> <span class="sc">*</span> n), n))              <span class="co"># constant + 3 instruments</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">drop</span>(Z[, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%*%</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)) <span class="sc">+</span> v</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> (<span class="fl">0.5</span> <span class="sc">*</span> v <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="fl">0.75</span>) <span class="sc">*</span> <span class="fu">rnorm</span>(n)) <span class="sc">*</span> <span class="fu">exp</span>(Z[, <span class="dv">2</span>]) <span class="co"># endogenous, heteroskedastic</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> x <span class="sc">+</span> u</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, x)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  gmm <span class="ot">&lt;-</span> <span class="cf">function</span>(W) <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> Z <span class="sc">%*%</span> W <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> X, <span class="fu">t</span>(X) <span class="sc">%*%</span> Z <span class="sc">%*%</span> W <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> y)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  b_2sls <span class="ot">&lt;-</span> <span class="fu">gmm</span>(<span class="fu">solve</span>(<span class="fu">crossprod</span>(Z)))                   <span class="co"># step 1: 2SLS</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  S      <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(Z <span class="sc">*</span> <span class="fu">drop</span>(y <span class="sc">-</span> X <span class="sc">%*%</span> b_2sls)) <span class="sc">/</span> n</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  b_gmm  <span class="ot">&lt;-</span> <span class="fu">gmm</span>(<span class="fu">solve</span>(S))                              <span class="co"># step 2: efficient GMM</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  e      <span class="ot">&lt;-</span> <span class="fu">drop</span>(y <span class="sc">-</span> X <span class="sc">%*%</span> b_gmm)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  gbar   <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(Z <span class="sc">*</span> e)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  J      <span class="ot">&lt;-</span> n <span class="sc">*</span> <span class="fu">drop</span>(<span class="fu">t</span>(gbar) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Z <span class="sc">*</span> e) <span class="sc">/</span> n) <span class="sc">%*%</span> gbar)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">b_2sls =</span> b_2sls[<span class="dv">2</span>], <span class="at">b_gmm =</span> b_gmm[<span class="dv">2</span>], <span class="at">J_reject =</span> J <span class="sc">&gt;</span> <span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">2</span>))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">one_sample</span>()))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">mean_2sls =</span> <span class="fu">mean</span>(mc[, <span class="dv">1</span>]), <span class="at">mean_gmm =</span> <span class="fu">mean</span>(mc[, <span class="dv">2</span>]),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd_2sls =</span> <span class="fu">sd</span>(mc[, <span class="dv">1</span>]), <span class="at">sd_gmm =</span> <span class="fu">sd</span>(mc[, <span class="dv">2</span>]),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">J_rejection_rate =</span> <span class="fu">mean</span>(mc[, <span class="dv">3</span>])), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;        mean_2sls         mean_gmm          sd_2sls           sd_gmm 
+#&gt;            1.016            1.002            0.273            0.199 
+#&gt; J_rejection_rate 
+#&gt;            0.039</code></pre>
 </div>
 </div>
+<p>Both estimators are centred on the true slope of one. The standard deviation of efficient GMM is about a quarter smaller than that of 2SLS. The J test, with <span class="math inline">\(q-k=4-2=2\)</span> degrees of freedom, rejects the true moment conditions at roughly the nominal 5% rate.</p>
+</section>
+</section>
+<section id="sec-twostep" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-twostep"><span class="header-section-number">2.9</span> Two-step estimators as joint GMM</h2>
+<p>Many estimators proceed in two steps: a first step estimates a nuisance parameter <span class="math inline">\(\balpha\)</span> (a propensity score, a first-stage regression, a selection equation), and a second step estimates the parameter of interest <span class="math inline">\(\tau\)</span> given <span class="math inline">\(\hat\balpha\)</span>. Treating <span class="math inline">\(\hat\balpha\)</span> as known in the second step gives wrong standard errors. Stacking both steps into one MM problem gives the correct ones automatically.</p>
+<p>Let <span class="math inline">\(\bpsi_1(\bw_i,\balpha)\)</span> (<span class="math inline">\(k_1\)</span> conditions) define the first step and <span class="math inline">\(\psi_2(\bw_i,\balpha,\tau)\)</span> the second. The stacked moment function <span class="math display">\[
+\bpsi(\bw_i,\btheta)=\begin{pmatrix}\bpsi_1(\bw_i,\balpha)\\ \psi_2(\bw_i,\balpha,\tau)\end{pmatrix},\qquad \btheta=(\balpha',\tau)',
+\]</span> is just identified, and <span class="math inline">\(\bA_0\)</span> is block lower triangular: <span class="math display">\[
+\bA_0=\begin{pmatrix}\bA_{11}&amp;\bm 0\\ \bA_{21}&amp;A_{22}\end{pmatrix},\quad
+\bA_{11}=\E\Big[\pd{\bpsi_1}{\balpha'}\Big],\ \bA_{21}=\E\Big[\pd{\psi_2}{\balpha'}\Big],\ A_{22}=\E\Big[\pd{\psi_2}{\tau}\Big].
+\]</span> Applying <a href="#thm-mm-asy" class="quarto-xref">Theorem&nbsp;<span>2.1</span></a> and reading off the last row gives the influence representation <span class="math display">\[
+\sqrt n(\hat\tau-\tau_0)=-\frac{1}{A_{22}}\frac1{\sqrt n}\sum_{i=1}^n\Big[\psi_{2i}-\bA_{21}\bA_{11}^{-1}\bpsi_{1i}\Big]+o_p(1).
+\]</span> The term <span class="math inline">\(\bA_{21}\bA_{11}^{-1}\bpsi_{1i}\)</span> is the <strong>correction for the estimated first step</strong>. It vanishes only if <span class="math inline">\(\bA_{21}=\bm 0\)</span>, i.e.&nbsp;if the second-step moment does not depend on <span class="math inline">\(\balpha\)</span> in expectation. A surprising but general feature: when the first step is efficient ML, the correction can <em>reduce</em> the variance, so that using an estimated nuisance parameter is better than using the true one <span class="citation" data-cites="hirano2003">(<a href="../references.html#ref-hirano2003" role="doc-biblioref">Hirano, Imbens, and Ridder 2003</a>)</span>.</p>
+<p>The leading application in this course is the inverse probability weighting (IPW) estimator of an average treatment effect, where <span class="math inline">\(\balpha\)</span> indexes a logit propensity score. Problem Set 2 derives the moment functions, and Computer Tutorial 2 estimates the model jointly, computes the stacked sandwich variance and compares it with the bootstrap.</p>
+</section>
+<section id="further-applications" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="further-applications"><span class="header-section-number">2.10</span> Further applications</h2>
+<p>GMM is the natural framework whenever theory delivers orthogonality conditions rather than a full likelihood. Two examples from the slides:</p>
+<ul>
+<li><strong>Dynamic panel data.</strong> In <span class="math inline">\(y_{it}=\gamma y_{i,t-1}+\bx_{it}'\bbeta+\eta_i+\varepsilon_{it}\)</span>, first differencing removes <span class="math inline">\(\eta_i\)</span> but makes <span class="math inline">\(\Delta y_{i,t-1}\)</span> correlated with <span class="math inline">\(\Delta\varepsilon_{it}\)</span>. Lags <span class="math inline">\(y_{i,t-2},y_{i,t-3},\ldots\)</span> are valid instruments, and their number grows with <span class="math inline">\(t\)</span>. <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> use all of them in an efficient GMM estimator.</li>
+<li><strong>Covariate balancing propensity score.</strong> <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span> estimate the propensity score by GMM, combining the logit score with moment conditions that require the weighted covariate means to balance between treated and controls. The overidentified version allows a J test of the propensity score model.</li>
+</ul>
+</section>
+<section id="sec-ct2" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="sec-ct2"><span class="header-section-number">2.11</span> Computer tutorial 2</h2>
+<p><strong>Learning goals.</strong> Estimate a two-step estimator as one joint MM problem with <code>nleqslv</code>; compute its sandwich variance by hand and compare with the bootstrap; implement 2SLS, efficient two-step GMM and the J test in matrix form and check them against <code>AER::ivreg</code>.</p>
+<p><strong>Packages.</strong> <code>nleqslv</code>, <code>boot</code>, <code>sandwich</code>, <code>lmtest</code>, <code>AER</code>. <strong>Data.</strong> <code>cattaneo2.csv</code> <span class="citation" data-cites="cattaneo2010">(<a href="../references.html#ref-cattaneo2010" role="doc-biblioref">Cattaneo 2010</a>)</span>, 4642 births; <code>card1995.csv</code> <span class="citation" data-cites="card1995">(<a href="../references.html#ref-card1995" role="doc-biblioref">Card 1995</a>)</span>, 3613 young men from the NLS 1976 cross-section.</p>
+<section id="problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm" class="level3" data-number="2.11.1">
+<h3 data-number="2.11.1" class="anchored" data-anchor-id="problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm"><span class="header-section-number">2.11.1</span> Problem 1: The effect of smoking on birth weight (IPW as joint MM)</h3>
+<p>This problem uses the results of Problem Set 2, Problem 4.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>bweight</code></td>
+<td style="text-align: left;">infant birth weight (grams)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mbsmoke</code></td>
+<td style="text-align: left;">= 1 if the mother smoked during pregnancy</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mmarried</code></td>
+<td style="text-align: left;">= 1 if the mother is married</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mage</code></td>
+<td style="text-align: left;">mother’s age (years)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>medu</code></td>
+<td style="text-align: left;">mother’s education (years)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>fbaby</code></td>
+<td style="text-align: left;">= 1 if first baby</td>
+</tr>
+</tbody>
+</table>
+<p>We want the average treatment effect <span class="math inline">\(\tau\)</span> of <code>mbsmoke</code> on <code>bweight</code>. The propensity score is modelled as a logit, <span class="math display">\[
+P(\texttt{mbsmoke}=1\mid X_i)=\Lambda\big(\alpha_0+\alpha_1\texttt{mmarried}+\alpha_2\texttt{mage}+\alpha_3\texttt{mage}^2+\alpha_4\texttt{fbaby}+\alpha_5\texttt{medu}\big).
+\]</span></p>
+<ol type="a">
+<li><p>Compute the raw difference in mean birth weight between smokers and non-smokers. Why is it unlikely to be the ATE?</p></li>
+<li><p>Write the stacked moment function for <span class="math inline">\(\btheta=(\balpha',\tau)'\)</span> from Problem Set 2 as an R function that returns the <span class="math inline">\(k+1\)</span> sample moments, and solve the system with <code>nleqslv</code>. Compare <span class="math inline">\(\hat\balpha\)</span> with <code>glm</code> and <span class="math inline">\(\hat\tau\)</span> with the IPW formula evaluated at the <code>glm</code> propensity score. Why do they coincide?</p></li>
+<li><p>Estimate the asymptotic variance of <span class="math inline">\(\hat\btheta\)</span> with the MM sandwich <span class="math inline">\(\hat\bA^{-1}\hat\bV\hat\bA^{-1\prime}/n\)</span>, computing <span class="math inline">\(\hat\bA\)</span> analytically. Report the standard error of <span class="math inline">\(\hat\tau\)</span> and compare it with the “naive” standard error that treats the propensity score as known.</p></li>
+<li><p>Compute the ATE with normalized weights (weights that sum to one within each treatment group).</p></li>
+<li><p>Estimate the standard errors of both ATE estimators by the nonparametric bootstrap (500 replications). Remember that each bootstrap replication has to re-estimate the propensity score.</p></li>
+</ol>
+</section>
+<section id="problem-2-returns-to-schooling-with-college-proximity-iv-and-gmm" class="level3" data-number="2.11.2">
+<h3 data-number="2.11.2" class="anchored" data-anchor-id="problem-2-returns-to-schooling-with-college-proximity-iv-and-gmm"><span class="header-section-number">2.11.2</span> Problem 2: Returns to schooling with college proximity (IV and GMM)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>lwage76</code></td>
+<td style="text-align: left;">log hourly wage, 1976</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ed76</code></td>
+<td style="text-align: left;">years of education, 1976</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>age76</code></td>
+<td style="text-align: left;">age in 1976</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>black</code>, <code>reg76r</code>, <code>smsa76r</code></td>
+<td style="text-align: left;">= 1 if black; lives in the South; lives in an urban area (1976)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>nearc4a</code>, <code>nearc4b</code></td>
+<td style="text-align: left;">= 1 if grew up near a 4-year public / private college</td>
+</tr>
+</tbody>
+</table>
+<p>Following <span class="citation" data-cites="card1995">Card (<a href="../references.html#ref-card1995" role="doc-biblioref">1995</a>)</span> and <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>, Ch. 12)</span>, consider <span class="math display">\[
+\log w_i=\beta_0+\beta_1\,\texttt{educ}_i+\beta_2\,\texttt{exper}_i+\beta_3\,\texttt{exper}_i^2/100+\beta_4\texttt{black}_i+\beta_5\texttt{south}_i+\beta_6\texttt{urban}_i+u_i ,
+\]</span> with potential experience <span class="math inline">\(\texttt{exper}=\texttt{age}-\texttt{educ}-6\)</span>. Education is endogenous (ability is omitted), and so is experience, because it is a function of education. The excluded instruments are <code>nearc4a</code>, <code>nearc4b</code>, <code>age76</code> and <code>age76^2/100</code>.</p>
+<ol type="a">
+<li><p>Construct <code>exper</code> and <code>exper2</code>, drop observations with missing values and estimate the equation by OLS.</p></li>
+<li><p>Estimate the first stage for <code>ed76</code>. Test the joint significance of <code>nearc4a</code> and <code>nearc4b</code> with a heteroskedasticity-robust <span class="math inline">\(F\)</span> test. Are the instruments strong?</p></li>
+<li><p>Count the moment conditions <span class="math inline">\(q\)</span> and parameters <span class="math inline">\(k\)</span>. Compute 2SLS with the GMM formula and <span class="math inline">\(\bW_n=(\bZ'\bZ)^{-1}\)</span>, with heteroskedasticity-robust standard errors. Check your results with <code>AER::ivreg</code> and <code>sandwich</code>.</p></li>
+<li><p>Compute the two-step efficient GMM estimator and its standard errors.</p></li>
+<li><p>Compute Hansen’s J statistic and its p-value. What does it test here?</p></li>
+<li><p>Compare the estimated returns to schooling across OLS, 2SLS and GMM.</p></li>
+</ol>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.12</span> Exercises</h2>
+<p>Problem Set 2 contains the analytical exercises for this chapter:</p>
+<ul>
+<li><strong>Problem 1</strong>: two MM estimators of the Poisson mean, their asymptotic distributions, and efficient GMM combining both moments.</li>
+<li><strong>Problem 2</strong>: ML, MM and GMM for the gamma distribution.</li>
+<li><strong>Problem 3</strong>: linear IV as GMM: IV, 2SLS, the optimal weighting matrix and the J test.</li>
+<li><strong>Problem 4</strong>: identification of the average treatment effect by inverse probability weighting and its estimation as a joint MM problem. Computer tutorial 2, Problem 1 builds on it.</li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-altonji1996" class="csl-entry" role="listitem">
+Altonji, Joseph G., and Lewis M. Segal. 1996. <span>“Small-Sample Bias in GMM Estimation of Covariance Structures.”</span> <em>Journal of Business &amp; Economic Statistics</em> 14 (3): 353–66.
+</div>
+<div id="ref-arellano1991" class="csl-entry" role="listitem">
+Arellano, Manuel, and Stephen Bond. 1991. <span>“Some Tests of Specification for Panel Data: Monte Carlo Evidence and an Application to Employment Equations.”</span> <em>Review of Economic Studies</em> 58 (2): 277–97.
+</div>
+<div id="ref-cameron2005" class="csl-entry" role="listitem">
+Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods and Applications</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-card1995" class="csl-entry" role="listitem">
+Card, David. 1995. <span>“Using Geographic Variation in College Proximity to Estimate the Return to Schooling.”</span> In <em>Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp</em>, edited by Louis N. Christofides, E. Kenneth Grant, and Robert Swidinsky. Toronto: University of Toronto Press.
+</div>
+<div id="ref-cattaneo2010" class="csl-entry" role="listitem">
+Cattaneo, Matias D. 2010. <span>“Efficient Semiparametric Estimation of Multi-Valued Treatment Effects Under Ignorability.”</span> <em>Journal of Econometrics</em> 155 (2): 138–54.
+</div>
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-hansen1982" class="csl-entry" role="listitem">
+Hansen, Lars Peter. 1982. <span>“Large Sample Properties of Generalized Method of Moments Estimators.”</span> <em>Econometrica</em> 50 (4): 1029–54.
+</div>
+<div id="ref-hirano2003" class="csl-entry" role="listitem">
+Hirano, Keisuke, Guido W. Imbens, and Geert Ridder. 2003. <span>“Efficient Estimation of Average Treatment Effects Using the Estimated Propensity Score.”</span> <em>Econometrica</em> 71 (4): 1161–89.
+</div>
+<div id="ref-imai2014" class="csl-entry" role="listitem">
+Imai, Kosuke, and Marc Ratkovic. 2014. <span>“Covariate Balancing Propensity Score.”</span> <em>Journal of the Royal Statistical Society, Series B</em> 76 (1): 243–63.
+</div>
+<div id="ref-staiger1997" class="csl-entry" role="listitem">
+Staiger, Douglas, and James H. Stock. 1997. <span>“Instrumental Variables Regression with Weak Instruments.”</span> <em>Econometrica</em> 65 (3): 557–86.
+</div>
+<div id="ref-wooldridge2010" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2010. <em>Econometric Analysis of Cross Section and Panel Data</em>. 2nd ed. Cambridge, MA: MIT Press.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
