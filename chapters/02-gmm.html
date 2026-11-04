@@ -297,7 +297,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#illustration-2sls-versus-efficient-gmm" id="toc-illustration-2sls-versus-efficient-gmm" class="nav-link" data-scroll-target="#illustration-2sls-versus-efficient-gmm"><span class="header-section-number">2.8.1</span> Illustration: 2SLS versus efficient GMM</a></li>
   </ul></li>
-  <li><a href="#sec-twostep" id="toc-sec-twostep" class="nav-link" data-scroll-target="#sec-twostep"><span class="header-section-number">2.9</span> Two-step estimators as joint GMM</a></li>
+  <li><a href="#sec-twostep" id="toc-sec-twostep" class="nav-link" data-scroll-target="#sec-twostep"><span class="header-section-number">2.9</span> Two-step estimators as joint GMM</a>
+  <ul class="collapse">
+  <li><a href="#sec-po" id="toc-sec-po" class="nav-link" data-scroll-target="#sec-po"><span class="header-section-number">2.9.1</span> Background: potential outcomes and the average treatment effect</a></li>
+  <li><a href="#stacking-the-two-steps" id="toc-stacking-the-two-steps" class="nav-link" data-scroll-target="#stacking-the-two-steps"><span class="header-section-number">2.9.2</span> Stacking the two steps</a></li>
+  </ul></li>
   <li><a href="#further-applications" id="toc-further-applications" class="nav-link" data-scroll-target="#further-applications"><span class="header-section-number">2.10</span> Further applications</a></li>
   <li><a href="#sec-ct2" id="toc-sec-ct2" class="nav-link" data-scroll-target="#sec-ct2"><span class="header-section-number">2.11</span> Computer tutorial 2</a>
   <ul class="collapse">
@@ -377,7 +381,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 6.1–6.5; <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 12 (instrumental variables) and Ch. 13 (GMM); <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 8 and 14. Applications: <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span>.</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 6.1–6.5; <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 12 (instrumental variables) and Ch. 13 (GMM); <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 8 and 14. Potential outcomes and weighting (Section 2.9): <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span>, Sections 1–5; <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 21.1–21.3. Applications: <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span>.</p>
 </div>
 </div>
 <p>Maximum likelihood requires the full distribution of the data. Many economic models deliver less: a set of expectations that should be zero at the true parameter value. The method of moments (MM) and its generalization, the generalized method of moments (GMM), turn such moment conditions directly into estimators. OLS, IV, 2SLS and ML are all special cases, and the GMM framework gives a single recipe for their asymptotic distribution and for efficient estimation when there are more conditions than parameters <span class="citation" data-cites="hansen1982">(<a href="../references.html#ref-hansen1982" role="doc-biblioref">L. P. Hansen 1982</a>)</span>.</p>
@@ -586,7 +590,40 @@ Table&nbsp;2.1: Linear GMM estimators
 </section>
 <section id="sec-twostep" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="sec-twostep"><span class="header-section-number">2.9</span> Two-step estimators as joint GMM</h2>
-<p>Many estimators proceed in two steps: a first step estimates a nuisance parameter <span class="math inline">\(\balpha\)</span> (a propensity score, a first-stage regression, a selection equation), and a second step estimates the parameter of interest <span class="math inline">\(\tau\)</span> given <span class="math inline">\(\hat\balpha\)</span>. Treating <span class="math inline">\(\hat\balpha\)</span> as known in the second step gives wrong standard errors. Stacking both steps into one MM problem gives the correct ones automatically.</p>
+<p>Many estimators proceed in two steps: a first step estimates a nuisance parameter <span class="math inline">\(\balpha\)</span> (a propensity score, a first-stage regression, a selection equation), and a second step estimates the parameter of interest <span class="math inline">\(\tau\)</span> given <span class="math inline">\(\hat\balpha\)</span>. Treating <span class="math inline">\(\hat\balpha\)</span> as known in the second step gives wrong standard errors. Stacking both steps into one MM problem gives the correct ones automatically. We first introduce the leading example of this course, the average treatment effect estimated by inverse probability weighting, and then derive the general result.</p>
+<section id="sec-po" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="sec-po"><span class="header-section-number">2.9.1</span> Background: potential outcomes and the average treatment effect</h3>
+<p><strong>Potential outcomes.</strong> Let <span class="math inline">\(D_i\in\{0,1\}\)</span> indicate whether unit <span class="math inline">\(i\)</span> receives a treatment (a training programme, smoking during pregnancy, a policy). Each unit has two <em>potential outcomes</em>: <span class="math inline">\(Y_{1i}\)</span> if treated and <span class="math inline">\(Y_{0i}\)</span> if not <span class="citation" data-cites="rubin1974">(<a href="../references.html#ref-rubin1974" role="doc-biblioref">Rubin 1974</a>)</span>. The individual effect is <span class="math inline">\(Y_{1i}-Y_{0i}\)</span>. We observe only one of the two, <span class="math display">\[
+Y_i=D_iY_{1i}+(1-D_i)Y_{0i},
+\]</span> so individual effects are never observed. We therefore target averages, most often the <strong>average treatment effect</strong> <span class="math display">\[
+\tau=\E[Y_{1i}-Y_{0i}]=\mu_1-\mu_0,\qquad \mu_d=\E[Y_{di}],
+\]</span> or the average treatment effect on the treated, <span class="math inline">\(\tau_{T}=\E[Y_{1i}-Y_{0i}\mid D_i=1]\)</span>. The notation implicitly assumes that a unit’s outcome does not depend on the treatment of other units.</p>
+<p><strong>Why a simple comparison fails.</strong> The difference in observed means decomposes as <span class="math display">\[
+\E[Y_i\mid D_i=1]-\E[Y_i\mid D_i=0]=\underbrace{\E[Y_{1i}-Y_{0i}\mid D_i=1]}_{\tau_T}+\underbrace{\E[Y_{0i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]}_{\text{selection bias}} .
+\]</span> If treated and untreated units differ in their untreated outcomes, e.g.&nbsp;mothers who smoke also differ in age, education and marital status, the comparison is biased. Under random assignment <span class="math inline">\(D_i\)</span> is independent of <span class="math inline">\((Y_{0i},Y_{1i})\)</span>, the selection bias is zero and <span class="math inline">\(\tau_T=\tau\)</span>.</p>
+<p><strong>Selection on observables.</strong> Without randomization, suppose we observe covariates <span class="math inline">\(\bx_i\)</span> that capture all differences between the groups that are relevant for the potential outcomes:</p>
+<ul>
+<li><em>Unconfoundedness:</em> <span class="math inline">\((Y_{0i},Y_{1i})\perp D_i\mid\bx_i\)</span>. Within cells of <span class="math inline">\(\bx_i\)</span>, treatment is as good as random.</li>
+<li><em>Overlap:</em> <span class="math inline">\(0&lt;p(\bx)&lt;1\)</span> for all <span class="math inline">\(\bx\)</span> in the support, where <span class="math inline">\(p(\bx_i)=P(D_i=1\mid\bx_i)\)</span> is the <strong>propensity score</strong>.</li>
+</ul>
+<p>Unconfoundedness is an identifying assumption and cannot be tested with the data; overlap can be checked by comparing the estimated propensity scores of treated and controls.</p>
+<p><strong>Identification by weighting.</strong> Under these two assumptions <span id="eq-ipw"><span class="math display">\[
+\mu_1=\E\Big[\frac{D_iY_i}{p(\bx_i)}\Big],\qquad
+\mu_0=\E\Big[\frac{(1-D_i)Y_i}{1-p(\bx_i)}\Big],\qquad
+\tau=\E\Big[\frac{D_iY_i}{p(\bx_i)}-\frac{(1-D_i)Y_i}{1-p(\bx_i)}\Big].
+\tag{2.1}\]</span></span> The proof uses <span class="math inline">\(D_iY_i=D_iY_{1i}\)</span>, the law of iterated expectations and unconfoundedness; it is Problem Set 2, Problem 4(a). The intuition: a treated unit with propensity score <span class="math inline">\(0.2\)</span> represents five units in the population, of which only one was treated. Weighting each treated unit by <span class="math inline">\(1/p(\bx_i)\)</span> and each control by <span class="math inline">\(1/(1-p(\bx_i))\)</span> creates a pseudo-population in which treatment no longer depends on <span class="math inline">\(\bx_i\)</span>. This idea goes back to survey sampling <span class="citation" data-cites="horvitz1952">(<a href="../references.html#ref-horvitz1952" role="doc-biblioref">Horvitz and Thompson 1952</a>)</span>; <span class="citation" data-cites="rosenbaum1983">Rosenbaum and Rubin (<a href="../references.html#ref-rosenbaum1983" role="doc-biblioref">1983</a>)</span> showed that the propensity score is the key balancing score.</p>
+<p><strong>Estimation.</strong> Replacing expectations by sample means gives the <strong>inverse probability weighting (IPW)</strong> estimator <span class="math display">\[
+\hat\tau_{IPW}=\frac1n\sum_{i=1}^n\Big[\frac{D_iY_i}{\hat p(\bx_i)}-\frac{(1-D_i)Y_i}{1-\hat p(\bx_i)}\Big].
+\]</span> In finite samples the weights <span class="math inline">\(D_i/\hat p(\bx_i)\)</span> need not average to one. The <strong>normalized</strong> version divides by the sum of the weights within each group, <span class="math display">\[
+\hat\tau_{norm}=\frac{\sum_iD_iY_i/\hat p(\bx_i)}{\sum_iD_i/\hat p(\bx_i)}-\frac{\sum_i(1-D_i)Y_i/\big(1-\hat p(\bx_i)\big)}{\sum_i(1-D_i)/\big(1-\hat p(\bx_i)\big)},
+\]</span> and is usually more stable. With limited overlap some <span class="math inline">\(\hat p(\bx_i)\)</span> are close to 0 or 1, a few observations get very large weights, and both estimators become imprecise. Regression adjustment, <span class="math inline">\(\tau=\E[\E(Y_i\mid D_i=1,\bx_i)-\E(Y_i\mid D_i=0,\bx_i)]\)</span>, and doubly robust estimators that combine both models are the main alternatives; <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span> survey them.</p>
+<p><strong>Why this is a two-step problem.</strong> The propensity score is unknown. In practice it is modelled parametrically, typically as a logit <span class="math inline">\(p(\bx_i;\balpha)=\Lambda(\bx_i'\balpha)\)</span>, and <span class="math inline">\(\balpha\)</span> is estimated by ML in a first step. The ML first-order condition is a moment condition (<a href="#exm-mm-examples" class="quarto-xref">Example&nbsp;<span>2.1</span></a>), so both steps are MM problems: <span class="math display">\[
+\bpsi_1(\bw_i,\balpha)=\big(D_i-\Lambda(\bx_i'\balpha)\big)\bx_i,\qquad
+\psi_2(\bw_i,\balpha,\tau)=\frac{D_iY_i}{\Lambda(\bx_i'\balpha)}-\frac{(1-D_i)Y_i}{1-\Lambda(\bx_i'\balpha)}-\tau .
+\]</span> The question is how the estimation error in <span class="math inline">\(\hat\balpha\)</span> affects the distribution of <span class="math inline">\(\hat\tau\)</span>.</p>
+</section>
+<section id="stacking-the-two-steps" class="level3" data-number="2.9.2">
+<h3 data-number="2.9.2" class="anchored" data-anchor-id="stacking-the-two-steps"><span class="header-section-number">2.9.2</span> Stacking the two steps</h3>
 <p>Let <span class="math inline">\(\bpsi_1(\bw_i,\balpha)\)</span> (<span class="math inline">\(k_1\)</span> conditions) define the first step and <span class="math inline">\(\psi_2(\bw_i,\balpha,\tau)\)</span> the second. The stacked moment function <span class="math display">\[
 \bpsi(\bw_i,\btheta)=\begin{pmatrix}\bpsi_1(\bw_i,\balpha)\\ \psi_2(\bw_i,\balpha,\tau)\end{pmatrix},\qquad \btheta=(\balpha',\tau)',
 \]</span> is just identified, and <span class="math inline">\(\bA_0\)</span> is block lower triangular: <span class="math display">\[
@@ -594,8 +631,33 @@ Table&nbsp;2.1: Linear GMM estimators
 \bA_{11}=\E\Big[\pd{\bpsi_1}{\balpha'}\Big],\ \bA_{21}=\E\Big[\pd{\psi_2}{\balpha'}\Big],\ A_{22}=\E\Big[\pd{\psi_2}{\tau}\Big].
 \]</span> Applying <a href="#thm-mm-asy" class="quarto-xref">Theorem&nbsp;<span>2.1</span></a> and reading off the last row gives the influence representation <span class="math display">\[
 \sqrt n(\hat\tau-\tau_0)=-\frac{1}{A_{22}}\frac1{\sqrt n}\sum_{i=1}^n\Big[\psi_{2i}-\bA_{21}\bA_{11}^{-1}\bpsi_{1i}\Big]+o_p(1).
-\]</span> The term <span class="math inline">\(\bA_{21}\bA_{11}^{-1}\bpsi_{1i}\)</span> is the <strong>correction for the estimated first step</strong>. It vanishes only if <span class="math inline">\(\bA_{21}=\bm 0\)</span>, i.e.&nbsp;if the second-step moment does not depend on <span class="math inline">\(\balpha\)</span> in expectation. A surprising but general feature: when the first step is efficient ML, the correction can <em>reduce</em> the variance, so that using an estimated nuisance parameter is better than using the true one <span class="citation" data-cites="hirano2003">(<a href="../references.html#ref-hirano2003" role="doc-biblioref">Hirano, Imbens, and Ridder 2003</a>)</span>.</p>
-<p>The leading application in this course is the inverse probability weighting (IPW) estimator of an average treatment effect, where <span class="math inline">\(\balpha\)</span> indexes a logit propensity score. Problem Set 2 derives the moment functions, and Computer Tutorial 2 estimates the model jointly, computes the stacked sandwich variance and compares it with the bootstrap.</p>
+\]</span> The term <span class="math inline">\(\bA_{21}\bA_{11}^{-1}\bpsi_{1i}\)</span> is the <strong>correction for the estimated first step</strong>. It vanishes only if <span class="math inline">\(\bA_{21}=\bm 0\)</span>, i.e.&nbsp;if the second-step moment does not depend on <span class="math inline">\(\balpha\)</span> in expectation. Solving the stacked system jointly gives the same point estimates as the sequential procedure, because the first block does not involve <span class="math inline">\(\tau\)</span>; only the standard errors change.</p>
+<p>For IPW, <span class="math inline">\(A_{22}=-1\)</span> and <span class="math inline">\(\bA_{21}\neq\bm 0\)</span>. A surprising but general feature: when the first step is efficient ML of a correctly specified propensity score model, the correction <em>reduces</em> the variance, so using the estimated propensity score is more efficient than using the true one <span class="citation" data-cites="hirano2003">(<a href="../references.html#ref-hirano2003" role="doc-biblioref">Hirano, Imbens, and Ridder 2003</a>)</span>. The naive standard error that treats <span class="math inline">\(\hat p(\bx_i)\)</span> as known is therefore conservative for IPW, but in other two-step problems it can be too small.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Simulation: IPW with the true and the estimated propensity score</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2027</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>one_draw <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1000</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  x  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  p  <span class="ot">&lt;-</span> <span class="fu">plogis</span>(<span class="sc">-</span><span class="fl">0.3</span> <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> x)            <span class="co"># true propensity score</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  d  <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, p)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  y  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> d <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n)       <span class="co"># true ATE = 1</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ph <span class="ot">&lt;-</span> <span class="fu">fitted</span>(<span class="fu">glm</span>(d <span class="sc">~</span> x, <span class="at">family =</span> binomial))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  ipw <span class="ot">&lt;-</span> <span class="cf">function</span>(p) <span class="fu">mean</span>(d <span class="sc">*</span> y <span class="sc">/</span> p <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> d) <span class="sc">*</span> y <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">true_p =</span> <span class="fu">ipw</span>(p), <span class="at">estimated_p =</span> <span class="fu">ipw</span>(ph))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">2000</span>, <span class="fu">one_draw</span>())</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">mean =</span> <span class="fu">rowMeans</span>(sim), <span class="at">sd =</span> <span class="fu">apply</span>(sim, <span class="dv">1</span>, sd)), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;      true_p estimated_p
+#&gt; mean  1.000       1.002
+#&gt; sd    0.183       0.086</code></pre>
+</div>
+</div>
+<p>Both versions are centred on the true ATE of one, and the estimator with the <em>estimated</em> propensity score has the clearly smaller standard deviation.</p>
+<p>Problem Set 2, Problem 4 derives the moment functions and the blocks of <span class="math inline">\(\bA_0\)</span> for IPW, and Computer Tutorial 2 estimates the model jointly, computes the stacked sandwich variance and compares it with the bootstrap.</p>
+</section>
 </section>
 <section id="further-applications" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="further-applications"><span class="header-section-number">2.10</span> Further applications</h2>
@@ -742,8 +804,20 @@ Hansen, Lars Peter. 1982. <span>“Large Sample Properties of Generalized Method
 <div id="ref-hirano2003" class="csl-entry" role="listitem">
 Hirano, Keisuke, Guido W. Imbens, and Geert Ridder. 2003. <span>“Efficient Estimation of Average Treatment Effects Using the Estimated Propensity Score.”</span> <em>Econometrica</em> 71 (4): 1161–89.
 </div>
+<div id="ref-horvitz1952" class="csl-entry" role="listitem">
+Horvitz, Daniel G., and Donovan J. Thompson. 1952. <span>“A Generalization of Sampling Without Replacement from a Finite Universe.”</span> <em>Journal of the American Statistical Association</em> 47 (260): 663–85.
+</div>
 <div id="ref-imai2014" class="csl-entry" role="listitem">
 Imai, Kosuke, and Marc Ratkovic. 2014. <span>“Covariate Balancing Propensity Score.”</span> <em>Journal of the Royal Statistical Society, Series B</em> 76 (1): 243–63.
+</div>
+<div id="ref-imbens2009" class="csl-entry" role="listitem">
+Imbens, Guido W., and Jeffrey M. Wooldridge. 2009. <span>“Recent Developments in the Econometrics of Program Evaluation.”</span> <em>Journal of Economic Literature</em> 47 (1): 5–86.
+</div>
+<div id="ref-rosenbaum1983" class="csl-entry" role="listitem">
+Rosenbaum, Paul R., and Donald B. Rubin. 1983. <span>“The Central Role of the Propensity Score in Observational Studies for Causal Effects.”</span> <em>Biometrika</em> 70 (1): 41–55.
+</div>
+<div id="ref-rubin1974" class="csl-entry" role="listitem">
+Rubin, Donald B. 1974. <span>“Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies.”</span> <em>Journal of Educational Psychology</em> 66 (5): 688–701.
 </div>
 <div id="ref-staiger1997" class="csl-entry" role="listitem">
 Staiger, Douglas, and James H. Stock. 1997. <span>“Instrumental Variables Regression with Weak Instruments.”</span> <em>Econometrica</em> 65 (3): 557–86.
