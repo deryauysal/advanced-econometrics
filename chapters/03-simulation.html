@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,8 +281,30 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#integrals-in-econometric-models" id="toc-integrals-in-econometric-models" class="nav-link active" data-scroll-target="#integrals-in-econometric-models"><span class="header-section-number">3.1</span> Integrals in econometric models</a></li>
+  <li><a href="#deterministic-integration-quadrature" id="toc-deterministic-integration-quadrature" class="nav-link" data-scroll-target="#deterministic-integration-quadrature"><span class="header-section-number">3.2</span> Deterministic integration: quadrature</a></li>
+  <li><a href="#monte-carlo-integration" id="toc-monte-carlo-integration" class="nav-link" data-scroll-target="#monte-carlo-integration"><span class="header-section-number">3.3</span> Monte Carlo integration</a>
+  <ul class="collapse">
+  <li><a href="#variance-reduction" id="toc-variance-reduction" class="nav-link" data-scroll-target="#variance-reduction"><span class="header-section-number">3.3.1</span> Variance reduction</a></li>
+  <li><a href="#sec-qmc" id="toc-sec-qmc" class="nav-link" data-scroll-target="#sec-qmc"><span class="header-section-number">3.3.2</span> Quasi-random draws</a></li>
+  </ul></li>
+  <li><a href="#sec-msl" id="toc-sec-msl" class="nav-link" data-scroll-target="#sec-msl"><span class="header-section-number">3.4</span> Maximum simulated likelihood</a></li>
+  <li><a href="#sec-msm" id="toc-sec-msm" class="nav-link" data-scroll-target="#sec-msm"><span class="header-section-number">3.5</span> Method of simulated moments</a></li>
+  <li><a href="#sec-bootstrap" id="toc-sec-bootstrap" class="nav-link" data-scroll-target="#sec-bootstrap"><span class="header-section-number">3.6</span> The bootstrap</a></li>
+  <li><a href="#sec-ct3" id="toc-sec-ct3" class="nav-link" data-scroll-target="#sec-ct3"><span class="header-section-number">3.7</span> Computer tutorial 3</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-three-ways-to-compute-an-integral" id="toc-problem-1-three-ways-to-compute-an-integral" class="nav-link" data-scroll-target="#problem-1-three-ways-to-compute-an-integral"><span class="header-section-number">3.7.1</span> Problem 1: Three ways to compute an integral</a></li>
+  <li><a href="#problem-2-msl-and-msm-with-unobserved-heterogeneity" id="toc-problem-2-msl-and-msm-with-unobserved-heterogeneity" class="nav-link" data-scroll-target="#problem-2-msl-and-msm-with-unobserved-heterogeneity"><span class="header-section-number">3.7.2</span> Problem 2: MSL and MSM with unobserved heterogeneity</a></li>
+  <li><a href="#problem-3-bootstrap-standard-errors-and-confidence-intervals" id="toc-problem-3-bootstrap-standard-errors-and-confidence-intervals" class="nav-link" data-scroll-target="#problem-3-bootstrap-standard-errors-and-confidence-intervals"><span class="header-section-number">3.7.3</span> Problem 3: Bootstrap standard errors and confidence intervals</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.8</span> Exercises</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -289,28 +365,456 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-In preparation
+Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 12 (simulation-based methods) and Ch. 11 (bootstrap); <span class="citation" data-cites="train2009">Train (<a href="../references.html#ref-train2009" role="doc-biblioref">2009</a>)</span>, Ch. 9 and 10.</p>
+</div>
+</div>
+<p>Many likelihood functions and moment conditions contain integrals without a closed form: random effects in nonlinear panel models, random coefficients, unobserved heterogeneity, multinomial probit choice probabilities. This chapter shows how to approximate such integrals, deterministically by quadrature or stochastically by simulation, and what happens to the statistical properties of an estimator when the exact integral is replaced by an approximation. The last section uses the same simulation idea for inference: the bootstrap.</p>
+<section id="integrals-in-econometric-models" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="integrals-in-econometric-models"><span class="header-section-number">3.1</span> Integrals in econometric models</h2>
+<p>Two examples recur.</p>
+<p><strong>Random effects.</strong> In a panel with individual effect <span class="math inline">\(c_i\sim g(c\mid\boldsymbol\eta)\)</span>, the likelihood contribution of individual <span class="math inline">\(i\)</span> is <span class="math display">\[
+f(\bm y_i\mid\bX_i;\bbeta,\boldsymbol\eta)=\int f(\bm y_i\mid\bX_i,\bbeta,c)\,g(c\mid\boldsymbol\eta)\,dc ,
+\]</span> a one-dimensional integral for every <span class="math inline">\(i\)</span> and every trial value of the parameters.</p>
+<p><strong>Discrete choice.</strong> In a multinomial probit with <span class="math inline">\(m\)</span> alternatives the choice probability is an <span class="math inline">\((m-1)\)</span>-dimensional integral of a multivariate normal density over a rectangle.</p>
+<p>In both cases the object we need is an <strong>expectation</strong>, <span id="eq-integral"><span class="math display">\[
+I=\E[h(X)]=\int h(x)\,g(x)\,dx,\qquad X\sim g ,
+\tag{3.1}\]</span></span> where <span class="math inline">\(h\)</span> and <span class="math inline">\(g\)</span> are known for given parameter values. A plain integral <span class="math inline">\(\int_a^b f(x)\,dx\)</span> is the special case <span class="math inline">\(h=(b-a)f\)</span> and <span class="math inline">\(g\)</span> the uniform density on <span class="math inline">\([a,b]\)</span>.</p>
+</section>
+<section id="deterministic-integration-quadrature" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="deterministic-integration-quadrature"><span class="header-section-number">3.2</span> Deterministic integration: quadrature</h2>
+<p>Quadrature approximates an integral by a weighted sum of function values at chosen <strong>nodes</strong> <span class="math inline">\(x_j\)</span> with <strong>weights</strong> <span class="math inline">\(\omega_j\)</span>, <span class="math display">\[
+\hat I=\sum_{j=1}^m\omega_j\,f(x_j).
+\]</span></p>
+<p><strong>Newton–Cotes rules</strong> use equally spaced nodes on <span class="math inline">\([a,b]\)</span>. The midpoint rule evaluates <span class="math inline">\(f\)</span> at the midpoints of <span class="math inline">\(n\)</span> intervals with weights <span class="math inline">\((b-a)/n\)</span>; the trapezoidal rule averages the function values at the two ends of each interval; Simpson’s rule fits a quadratic through three neighbouring points. Their error shrinks at a polynomial rate in <span class="math inline">\(n\)</span> (e.g.&nbsp;<span class="math inline">\(n^{-2}\)</span> for the midpoint rule if <span class="math inline">\(f''\)</span> is bounded).</p>
+<p><strong>Gaussian quadrature</strong> chooses nodes and weights optimally for a given weight function <span class="math inline">\(w(x)\)</span>: <span class="math display">\[
+\int_c^d w(x)\,r(x)\,dx\approx\sum_{j=1}^m\omega_j\,r(x_j).
+\]</span> With <span class="math inline">\(m\)</span> nodes the rule is <strong>exact if <span class="math inline">\(r\)</span> is a polynomial of degree <span class="math inline">\(2m-1\)</span> or less</strong>. Nodes and weights are tabulated and available in software (<code>statmod::gauss.quad</code> in R). The common cases are Gauss–Legendre (<span class="math inline">\(w=1\)</span> on <span class="math inline">\([-1,1]\)</span>), Gauss–Laguerre (<span class="math inline">\(w=e^{-x}\)</span> on <span class="math inline">\((0,\infty)\)</span>) and <strong>Gauss–Hermite</strong> (<span class="math inline">\(w=e^{-x^2}\)</span> on <span class="math inline">\(\mathbb R\)</span>).</p>
+<div id="exm-gh" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.1 (Gauss–Hermite for a normal expectation)</strong></span> Let <span class="math inline">\(X\sim N(\mu,\sigma^2)\)</span>. The substitution <span class="math inline">\(x=\mu+\sqrt2\sigma z\)</span> gives <span class="math display">\[
+\E[h(X)]=\int h(x)\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx=\frac{1}{\sqrt\pi}\int e^{-z^2}h(\mu+\sqrt2\sigma z)\,dz\approx\frac{1}{\sqrt\pi}\sum_{j=1}^m\omega_j\,h(\mu+\sqrt2\sigma z_j).
+\]</span> In the random effects probit with <span class="math inline">\(c_i\sim N(0,\sigma_c^2)\)</span> this gives the likelihood contribution <span class="math inline">\(\ell_i\approx\pi^{-1/2}\sum_j\omega_jf(\bm y_i\mid\bX_i,\bbeta,\sqrt2\sigma_cz_j)\)</span>, which is how <code>xtprobit</code> in Stata computes it.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-gh" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Gauss&lt;U+2013&gt;Hermite nodes and weights for <span class="math inline">\(w(z)=e^{-z^2}\)</span> (only <span class="math inline">\(z_j\ge0\)</span>; the rule is symmetric).
+</figcaption>
+<div aria-describedby="tbl-gh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">m</th>
+<th style="text-align: right;">node</th>
+<th style="text-align: right;">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.707107</td>
+<td style="text-align: right;">0.886227</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">1.181636</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.224745</td>
+<td style="text-align: right;">0.295409</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.524648</td>
+<td style="text-align: right;">0.804914</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.650680</td>
+<td style="text-align: right;">0.081313</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">0.945309</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.958572</td>
+<td style="text-align: right;">0.393619</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2.020183</td>
+<td style="text-align: right;">0.019953</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>Choosing <span class="math inline">\(m\)</span>.</strong> There is a trade-off between speed and accuracy. In practice one re-estimates with more nodes and checks that the results do not change (Stata’s <code>quadchk</code>).</p>
+<p><strong>Many dimensions.</strong> A <span class="math inline">\(d\)</span>-dimensional integral can be handled by a product rule, applying a one-dimensional rule in each coordinate. This needs <span class="math inline">\(m^d\)</span> function evaluations: with <span class="math inline">\(m=10\)</span> nodes and <span class="math inline">\(d=5\)</span> dimensions already <span class="math inline">\(10^5\)</span> per observation. This <strong>curse of dimensionality</strong> is the main reason to simulate.</p>
+</section>
+<section id="monte-carlo-integration" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="monte-carlo-integration"><span class="header-section-number">3.3</span> Monte Carlo integration</h2>
+<p>The integral in <a href="#eq-integral" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> is a population mean. Draw <span class="math inline">\(x_1,\dots,x_S\)</span> independently from <span class="math inline">\(g\)</span> and use the sample mean: <span class="math display">\[
+\hat I_S=\frac1S\sum_{s=1}^Sh(x_s).
+\]</span></p>
+<div id="thm-mc" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.1 (Direct Monte Carlo integration)</strong></span> If <span class="math inline">\(\E|h(X)|&lt;\infty\)</span>, then <span class="math inline">\(\hat I_S\)</span> is unbiased, <span class="math inline">\(\E[\hat I_S]=I\)</span>, and <span class="math inline">\(\hat I_S\cvp I\)</span> as <span class="math inline">\(S\to\infty\)</span>. If moreover <span class="math inline">\(\sigma_h^2=\Var(h(X))&lt;\infty\)</span>, <span class="math display">\[
+\Var(\hat I_S)=\frac{\sigma_h^2}{S},\qquad \sqrt S(\hat I_S-I)\cvd N(0,\sigma_h^2).
+\]</span></p>
+</div>
+<p>These are the WLLN and the CLT applied to the draws. Three consequences:</p>
 <ul>
-<li>Monte Carlo integration and its error</li>
-<li>Quasi-random (Halton) draws and Gaussian quadrature</li>
-<li>Maximum simulated likelihood and method of simulated moments</li>
-<li>Bootstrap</li>
-<li>Computer tutorial 3</li>
+<li>The <strong>simulation standard error</strong> <span class="math inline">\(\hat\sigma_h/\sqrt S\)</span>, with <span class="math inline">\(\hat\sigma_h\)</span> the standard deviation of the <span class="math inline">\(h(x_s)\)</span>, is computed from the same draws. Report it.</li>
+<li>The error shrinks at rate <span class="math inline">\(S^{-1/2}\)</span> <strong>whatever the dimension of <span class="math inline">\(X\)</span></strong>. This is why simulation wins in high dimensions, and loses to quadrature in one or two smooth dimensions.</li>
+<li>Halving the error requires four times as many draws.</li>
 </ul>
+<p>Draws from <span class="math inline">\(g\)</span> are usually generated from uniforms by the <strong>inverse transform</strong>: if <span class="math inline">\(U\sim U(0,1)\)</span> and <span class="math inline">\(G\)</span> is the cdf of <span class="math inline">\(X\)</span>, then <span class="math inline">\(G^{-1}(U)\sim G\)</span>.</p>
+<div id="exm-phi" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.2 (A normal expectation with a known answer)</strong></span> Let <span class="math inline">\(X\sim N(0,1)\)</span> and <span class="math inline">\(I=\E[\Phi(0.5+X)]\)</span>. Since <span class="math inline">\(\Phi(0.5+X)=P(Z\le0.5+X\mid X)\)</span> for an independent <span class="math inline">\(Z\sim N(0,1)\)</span>, <span class="math inline">\(I=P(Z-X\le0.5)=\Phi(0.5/\sqrt2)=0.638163\)</span>. <a href="#fig-mc-error" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> compares Monte Carlo, Halton draws (<a href="#sec-qmc" class="quarto-xref"><span>Section 3.3.2</span></a>) and Gauss–Hermite quadrature. Computer Tutorial 3 asks you to reproduce it.</p>
+</div>
+<section id="variance-reduction" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="variance-reduction"><span class="header-section-number">3.3.1</span> Variance reduction</h3>
+<p>The variance <span class="math inline">\(\sigma_h^2/S\)</span> can be reduced without more draws by using draws that are not independent or not from <span class="math inline">\(g\)</span>.</p>
+<p><strong>Importance sampling.</strong> Rewrite the integral with a proposal density <span class="math inline">\(p\)</span> that is positive wherever <span class="math inline">\(h g\neq0\)</span>: <span class="math display">\[
+I=\int\frac{h(x)g(x)}{p(x)}\,p(x)\,dx=\E_p[w(X)h(X)],\qquad w(x)=\frac{g(x)}{p(x)},\qquad \hat I_{IS}=\frac1S\sum_{s=1}^Sw(x_s)h(x_s),\quad x_s\sim p .
+\]</span> <span class="math inline">\(\hat I_{IS}\)</span> is unbiased for any valid <span class="math inline">\(p\)</span>, but its variance depends on <span class="math inline">\(p\)</span>. A good proposal puts its mass where <span class="math inline">\(|h(x)|g(x)\)</span> is large and avoids huge weights. If <span class="math inline">\(h\ge0\)</span>, the choice <span class="math inline">\(p\propto hg\)</span> would give zero variance; it is infeasible, because its normalizing constant is <span class="math inline">\(I\)</span>, but it shows the direction. Importance sampling is the natural tool for small probabilities and for densities that are hard to draw from.</p>
+<div id="exm-is" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.3 (A tail probability)</strong></span> For <span class="math inline">\(Y\sim N(0,1)\)</span>, <span class="math inline">\(p_0=P(Y\ge3)=0.00135\)</span>. With <span class="math inline">\(S=100\)</span> direct draws, the estimate is zero in <span class="math inline">\((1-p_0)^{100}\approx0.874\)</span> of all samples. With the proposal <span class="math inline">\(N(\mu,1)\)</span> the weight is <span class="math inline">\(w(y)=\phi(y)/\phi(y-\mu)=e^{-\mu y+\mu^2/2}\)</span> and <span class="math display">\[
+\E_p\big[w(Y)^2\mathbf 1\{Y\ge3\}\big]=e^{\mu^2}\big(1-\Phi(3+\mu)\big),
+\]</span> so the simulation standard deviation with <span class="math inline">\(S=100\)</span> falls from 0.00367 (<span class="math inline">\(\mu=0\)</span>) to 3.09^{-4} (<span class="math inline">\(\mu=4\)</span>) and 2.48^{-4} (<span class="math inline">\(\mu=3\)</span>). Problem Set 3 derives this.</p>
+</div>
+<p><strong>Antithetic draws.</strong> If <span class="math inline">\(g\)</span> is symmetric around zero, pair each draw <span class="math inline">\(x_s\)</span> with <span class="math inline">\(-x_s\)</span> (for uniforms: <span class="math inline">\(u_s\)</span> with <span class="math inline">\(1-u_s\)</span>) and average <span class="math inline">\(\frac12[h(x_s)+h(-x_s)]\)</span>. With <span class="math inline">\(S\)</span> pairs, i.e.&nbsp;<span class="math inline">\(2S\)</span> function evaluations, <span class="math display">\[
+\Var(\hat I_{anti})=\frac{1}{2S}\Big[\sigma_h^2+\operatorname{Cov}\big(h(X),h(-X)\big)\Big],
+\]</span> compared with <span class="math inline">\(\sigma_h^2/(2S)\)</span> for <span class="math inline">\(2S\)</span> independent draws. Antithetic draws help if the covariance is negative, which is the case for monotone <span class="math inline">\(h\)</span>.</p>
+</section>
+<section id="sec-qmc" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="sec-qmc"><span class="header-section-number">3.3.2</span> Quasi-random draws</h3>
+<p>Pseudo-random draws cluster by chance and leave gaps. <strong>Quasi-random</strong> (low-discrepancy) sequences are deterministic and fill <span class="math inline">\([0,1]\)</span> evenly; they are transformed to the target distribution by the inverse cdf. The leading example is the <strong>Halton sequence</strong>. For a prime base <span class="math inline">\(b\)</span>, write <span class="math inline">\(i=\sum_k a_kb^k\)</span> in base <span class="math inline">\(b\)</span> and reflect the digits about the decimal point: <span class="math inline">\(\varphi_b(i)=\sum_k a_kb^{-k-1}\)</span>. For <span class="math inline">\(b=3\)</span> the sequence starts <span class="math display">\[
+\tfrac13,\ \tfrac23,\ \tfrac19,\ \tfrac49,\ \tfrac79,\ \tfrac29,\ \tfrac59,\ \tfrac89,\ \dots
+\]</span> Each new block of points falls into the gaps left by the previous ones.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Halton sequence in base b (equivalent to randtoolbox::halton for dim = 1, b = 2)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>halton_seq <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">base =</span> <span class="dv">2</span>, <span class="at">skip =</span> <span class="dv">0</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n) <span class="sc">+</span> skip, <span class="cf">function</span>(i) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    f <span class="ot">&lt;-</span> <span class="dv">1</span>; r <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) { f <span class="ot">&lt;-</span> f <span class="sc">/</span> base; r <span class="ot">&lt;-</span> r <span class="sc">+</span> f <span class="sc">*</span> (i <span class="sc">%%</span> base); i <span class="ot">&lt;-</span> i <span class="sc">%/%</span> base }</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    r</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">halton_seq</span>(<span class="dv">8</span>, <span class="at">base =</span> <span class="dv">3</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 0.333 0.667 0.111 0.444 0.778 0.222 0.556 0.889</code></pre>
 </div>
 </div>
+<p>For smooth integrands in low dimensions the error of quasi-Monte Carlo is close to <span class="math inline">\(1/S\)</span> instead of <span class="math inline">\(1/\sqrt S\)</span>. In <span class="math inline">\(d\)</span> dimensions one uses a different prime for each coordinate; with many dimensions the coordinates of the early points become correlated, and scrambled or randomized versions are preferred. In estimation, one long sequence is generated and consecutive blocks are used for different observations; the first points are often discarded.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-mc-error" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mc-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-simulation_files/figure-html/fig-mc-error-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mc-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Absolute error in approximating <span class="math inline">\(\E[\Phi(0.5+X)]\)</span>, <span class="math inline">\(X\sim N(0,1)\)</span>: Monte Carlo (average over 200 replications), Halton draws and Gauss–Hermite quadrature. Log scales.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure shows the three rates: the Monte Carlo error falls by about one decimal for a hundredfold increase in <span class="math inline">\(S\)</span>, Halton draws roughly ten times faster, and Gauss–Hermite reaches machine precision with about a dozen nodes, because the integrand is smooth and one-dimensional.</p>
+</section>
+</section>
+<section id="sec-msl" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-msl"><span class="header-section-number">3.4</span> Maximum simulated likelihood</h2>
+<p>Suppose the density of <span class="math inline">\(\bm y_i\)</span> given <span class="math inline">\(\bx_i\)</span> is an integral over unobservables <span class="math inline">\(\bm u\)</span> with known density <span class="math inline">\(g\)</span>, <span class="math display">\[
+f(\bm y_i\mid\bx_i;\btheta)=\int\tilde f(\bm y_i\mid\bx_i,\bm u;\btheta)\,g(\bm u)\,d\bm u .
+\]</span> Draw <span class="math inline">\(\bm u_{i1},\dots,\bm u_{iS}\)</span> from <span class="math inline">\(g\)</span> for each <span class="math inline">\(i\)</span> and replace <span class="math inline">\(f\)</span> by the unbiased simulator <span class="math inline">\(\hat f_i(\btheta)=S^{-1}\sum_s\tilde f(\bm y_i\mid\bx_i,\bm u_{is};\btheta)\)</span>.</p>
+<div id="def-msl" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.1 (Maximum simulated likelihood estimator)</strong></span> <span class="math display">\[
+\hat\btheta_{MSL}=\arg\max_{\btheta}\ \frac1n\sum_{i=1}^n\ln\hat f_i(\btheta),\qquad \hat f_i(\btheta)=\frac1S\sum_{s=1}^S\tilde f(\bm y_i\mid\bx_i,\bm u_{is};\btheta).
+\]</span></p>
+</div>
+<p>If the distribution of <span class="math inline">\(\bm u\)</span> depends on parameters (e.g.&nbsp;<span class="math inline">\(c_i\sim N(0,\sigma_c^2)\)</span>), write <span class="math inline">\(\bm u=\bm u(\bm\varepsilon;\btheta)\)</span> with draws <span class="math inline">\(\bm\varepsilon\)</span> from a fixed distribution (<span class="math inline">\(c_{is}=\sigma_c\varepsilon_{is}\)</span> with <span class="math inline">\(\varepsilon_{is}\sim N(0,1)\)</span>).</p>
+<p><strong>Keep the draws fixed.</strong> The draws are generated once, before the optimization, and reused for every evaluation of the objective and its derivatives. New draws at every iteration would make the simulated likelihood jump between iterations and the optimizer fail to converge.</p>
+<p><strong>Simulation bias.</strong> <span class="math inline">\(\hat f_i\)</span> is unbiased for <span class="math inline">\(f_i\)</span>, but the log is concave, so by Jensen’s inequality <span class="math inline">\(\E[\ln\hat f_i]&lt;\ln f_i\)</span>. A second-order expansion gives <span class="math display">\[
+\E\big[\ln\hat f_i(\btheta)\big]\approx\ln f_i(\btheta)-\frac{1}{2S}\frac{\Var\big(\tilde f(\bm y_i\mid\bx_i,\bm u;\btheta)\big)}{f_i(\btheta)^2}.
+\]</span> The bias term depends on <span class="math inline">\(\btheta\)</span>, so it shifts the maximizer: <strong>with fixed <span class="math inline">\(S\)</span>, MSL is inconsistent.</strong></p>
+<div id="thm-msl" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.2 (Asymptotics of MSL <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005</a>, Ch. 12)</span>)</strong></span> Under the regularity conditions for ML and with independent draws across observations:</p>
+<ol type="1">
+<li>If <span class="math inline">\(S\to\infty\)</span> as <span class="math inline">\(n\to\infty\)</span>, <span class="math inline">\(\hat\btheta_{MSL}\)</span> is consistent.</li>
+<li>If <span class="math inline">\(\sqrt n/S\to0\)</span>, <span class="math inline">\(\hat\btheta_{MSL}\)</span> is asymptotically equivalent to the (infeasible) MLE: <span class="math inline">\(\sqrt n(\hat\btheta_{MSL}-\btheta_0)\cvd N(\bm0,\mathcal I(\btheta_0)^{-1})\)</span>.</li>
+</ol>
+</div>
+<p>In practice <span class="math inline">\(S\)</span> is chosen by experimentation: increase <span class="math inline">\(S\)</span> (and use Halton draws) until the estimates stop changing. Standard errors are computed as for ML, from the Hessian or the sandwich of the simulated log-likelihood; with <span class="math inline">\(S\)</span> large enough the simulation adds nothing to first order.</p>
+</section>
+<section id="sec-msm" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-msm"><span class="header-section-number">3.5</span> Method of simulated moments</h2>
+<p>If the moment function contains an integral, <span class="math inline">\(\bpsi(\bw_i,\btheta)=\int\tilde\bpsi(\bw_i,\bm u;\btheta)g(\bm u)\,d\bm u\)</span>, replace it by the simulator <span class="math inline">\(\hat\bpsi_i(\btheta)=S^{-1}\sum_s\tilde\bpsi(\bw_i,\bm u_{is};\btheta)\)</span> and apply (G)MM to <span class="math inline">\(\frac1n\sum_i\hat\bpsi_i(\btheta)\)</span> <span class="citation" data-cites="mcfadden1989 pakes1989">(<a href="../references.html#ref-mcfadden1989" role="doc-biblioref">McFadden 1989</a>; <a href="../references.html#ref-pakes1989" role="doc-biblioref">Pakes and Pollard 1989</a>)</span>.</p>
+<p>The key difference to MSL: the simulator enters the objective <strong>linearly</strong>. Since <span class="math inline">\(\E[\hat\bpsi_i(\btheta_0)]=\E[\bpsi(\bw_i,\btheta_0)]=\bm0\)</span>, the simulated moment condition still holds at <span class="math inline">\(\btheta_0\)</span>.</p>
+<div id="thm-msm" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.3 (Properties of MSM)</strong></span> If the GMM estimator based on <span class="math inline">\(\bpsi\)</span> is consistent and asymptotically normal and the draws are independent across <span class="math inline">\(i\)</span> and of the data, then for <strong>fixed <span class="math inline">\(S\)</span></strong> the MSM estimator is consistent and asymptotically normal. Its asymptotic variance is that of GMM plus a term due to simulation noise, which vanishes as <span class="math inline">\(S\to\infty\)</span>. With <span class="math inline">\(S\)</span> independent draws per observation, simulation adds <span class="math inline">\(\E\big[\Var(\tilde\bpsi\mid\bw_i)\big]/S\)</span> to the variance <span class="math inline">\(\bV_0\)</span> of the moment function.</p>
+</div>
+<div id="tbl-msl-msm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-msl-msm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.2: MSL and MSM compared
+</figcaption>
+<div aria-describedby="tbl-msl-msm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">MSL</th>
+<th style="text-align: left;">MSM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Consistent with fixed <span class="math inline">\(S\)</span></td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Efficient as <span class="math inline">\(S\to\infty\)</span></td>
+<td style="text-align: left;">yes, if <span class="math inline">\(\sqrt n/S\to0\)</span></td>
+<td style="text-align: left;">only if the moments are the efficient ones</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cost of small <span class="math inline">\(S\)</span></td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">variance</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="exm-heterogeneity" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.4 (Unobserved heterogeneity <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005</a>, Ch. 12)</span>)</strong></span> Let <span class="math inline">\(y_i=\theta+u_i+\varepsilon_i\)</span> with <span class="math inline">\(\varepsilon_i\sim N(0,1)\)</span> and <span class="math inline">\(u_i\)</span> standard Gumbel (extreme value type I), <span class="math inline">\(g(u)=e^{-u}\exp(-e^{-u})\)</span>, independent. The density of <span class="math inline">\(y_i\)</span>, <span class="math display">\[
+f(y_i;\theta)=\int\phi(y_i-\theta-u)\,g(u)\,du,
+\]</span> has no closed form. With draws <span class="math inline">\(u_{is}\)</span> from <span class="math inline">\(g\)</span>:</p>
+<ul>
+<li><strong>MSL</strong> maximizes <span class="math inline">\(\frac1n\sum_i\ln\big[\frac1S\sum_s\phi(y_i-\theta-u_{is})\big]\)</span>.</li>
+<li><strong>MSM</strong> uses <span class="math inline">\(\E[y_i-\theta-u_i]=0\)</span> with <span class="math inline">\(\E[u_i]\)</span> replaced by the simulated mean, <span class="math inline">\(\hat\theta_{MSM}=\bar y-\frac{1}{nS}\sum_i\sum_su_{is}\)</span>.</li>
+</ul>
+<p>(Here <span class="math inline">\(\E[u_i]\)</span> is in fact known, Euler’s constant <span class="math inline">\(\gamma\approx0.5772\)</span>, so MM is feasible; the example is chosen so that we can compare.)</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rgumbel <span class="ot">&lt;-</span> <span class="cf">function</span>(n) <span class="sc">-</span><span class="fu">log</span>(<span class="sc">-</span><span class="fu">log</span>(<span class="fu">runif</span>(n)))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>msl <span class="ot">&lt;-</span> <span class="cf">function</span>(y, u) {                    <span class="co"># u: n x S matrix of draws</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">mean</span>(<span class="fu">log</span>(<span class="fu">rowMeans</span>(<span class="fu">dnorm</span>(y <span class="sc">-</span> th <span class="sc">-</span> u))))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">optimize</span>(obj, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>maximum</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>msm <span class="ot">&lt;-</span> <span class="cf">function</span>(y, u) <span class="fu">mean</span>(y) <span class="sc">-</span> <span class="fu">mean</span>(u)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2027</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>one_sample <span class="ot">&lt;-</span> <span class="cf">function</span>(S, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">theta =</span> <span class="dv">1</span>) {</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> theta <span class="sc">+</span> <span class="fu">rgumbel</span>(n) <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rgumbel</span>(n <span class="sc">*</span> S), n, S)        <span class="co"># draws fixed before optimizing</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">msl =</span> <span class="fu">msl</span>(y, u), <span class="at">msm =</span> <span class="fu">msm</span>(y, u))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">1000</span>), <span class="cf">function</span>(S) {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">one_sample</span>(S))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">S =</span> S, <span class="at">bias_MSL =</span> <span class="fu">mean</span>(r[<span class="st">"msl"</span>, ]) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">sd_MSL =</span> <span class="fu">sd</span>(r[<span class="st">"msl"</span>, ]),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias_MSM =</span> <span class="fu">mean</span>(r[<span class="st">"msm"</span>, ]) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">sd_MSM =</span> <span class="fu">sd</span>(r[<span class="st">"msm"</span>, ]))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">round</span>(tab, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-msl-sim" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-msl-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.3: MSL and MSM in the unobserved-heterogeneity model: bias and standard deviation over 1000 samples (<span class="math inline">\(n=100\)</span>, <span class="math inline">\(\theta_0=1\)</span>).
+</figcaption>
+<div aria-describedby="tbl-msl-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">S</th>
+<th style="text-align: right;">bias_MSL</th>
+<th style="text-align: right;">sd_MSL</th>
+<th style="text-align: right;">bias_MSM</th>
+<th style="text-align: right;">sd_MSM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.005</td>
+<td style="text-align: right;">0.205</td>
+<td style="text-align: right;">-0.005</td>
+<td style="text-align: right;">0.205</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.145</td>
+<td style="text-align: right;">0.191</td>
+<td style="text-align: right;">-0.006</td>
+<td style="text-align: right;">0.180</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.134</td>
+<td style="text-align: right;">0.183</td>
+<td style="text-align: right;">-0.006</td>
+<td style="text-align: right;">0.170</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.165</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">0.162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.166</td>
+<td style="text-align: right;">-0.007</td>
+<td style="text-align: right;">0.173</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.154</td>
+<td style="text-align: right;">-0.001</td>
+<td style="text-align: right;">0.162</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The table illustrates <a href="#thm-msl" class="quarto-xref">Theorem&nbsp;<span>3.2</span></a> and <a href="#thm-msm" class="quarto-xref">Theorem&nbsp;<span>3.3</span></a>:</p>
+<ul>
+<li>MSM is unbiased for every <span class="math inline">\(S\)</span>; its standard deviation falls towards the MM value <span class="math inline">\(\sqrt{(1+\pi^2/6)/n}=0.163\)</span>. With independent draws, <span class="math inline">\(\Var(\hat\theta_{MSM})=[1+\pi^2/6+\pi^2/(6S)]/n\)</span> (Problem Set 3).</li>
+<li>MSL has a sizeable bias for small <span class="math inline">\(S\)</span> that disappears only as <span class="math inline">\(S\)</span> grows. With many draws it is slightly more precise than MSM, because it uses the whole likelihood.</li>
+<li>With <span class="math inline">\(S=1\)</span> MSL and MSM coincide here: <span class="math inline">\(\ln\phi\)</span> is quadratic, so the first-order condition is linear in <span class="math inline">\(\theta\)</span>. This is special to the example.</li>
+</ul>
+</section>
+<section id="sec-bootstrap" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-bootstrap"><span class="header-section-number">3.6</span> The bootstrap</h2>
+<p>Simulation is also useful for inference. The asymptotic variance of many estimators is tedious to derive (two-step estimators, sample quantiles, functions of several estimates). The <strong>nonparametric bootstrap</strong> <span class="citation" data-cites="efron1979">(<a href="../references.html#ref-efron1979" role="doc-biblioref">Efron 1979</a>)</span> approximates the sampling distribution of an estimator <span class="math inline">\(\hat\theta=T(\bw_1,\dots,\bw_n)\)</span> by resampling the data:</p>
+<ol type="1">
+<li>Draw a bootstrap sample <span class="math inline">\(\bw_1^*,\dots,\bw_n^*\)</span> of size <span class="math inline">\(n\)</span> <strong>with replacement</strong> from the observed data (in a regression: resample whole observations <span class="math inline">\((y_i,\bx_i)\)</span>, the <em>pairs</em> bootstrap).</li>
+<li>Compute <span class="math inline">\(\hat\theta^*_b=T(\bw_1^*,\dots,\bw_n^*)\)</span>, using exactly the same procedure as for <span class="math inline">\(\hat\theta\)</span>, including all estimation steps.</li>
+<li>Repeat for <span class="math inline">\(b=1,\dots,B\)</span>.</li>
+</ol>
+<p>The <strong>bootstrap standard error</strong> is the standard deviation of <span class="math inline">\(\hat\theta^*_1,\dots,\hat\theta^*_B\)</span>. The <strong>percentile confidence interval</strong> uses the <span class="math inline">\(\alpha/2\)</span> and <span class="math inline">\(1-\alpha/2\)</span> quantiles of the <span class="math inline">\(\hat\theta_b^*\)</span>. <span class="math inline">\(B\)</span> of a few hundred suffices for standard errors; percentile intervals need more (<span class="math inline">\(B\ge999\)</span>).</p>
+<p>The logic: the empirical distribution of the data is to the sample what the population is to the data. If <span class="math inline">\(\hat\theta\)</span> is asymptotically normal and smooth in the empirical distribution, the bootstrap distribution of <span class="math inline">\(\sqrt n(\hat\theta^*-\hat\theta)\)</span> approximates that of <span class="math inline">\(\sqrt n(\hat\theta-\theta_0)\)</span> <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005</a>, Ch. 11)</span>.</p>
+<div id="exm-boot-median" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.5 (Standard error of a sample median)</strong></span> For a sample of <span class="math inline">\(n=200\)</span> from a lognormal distribution, the asymptotic variance of the median <span class="math inline">\(m\)</span> is <span class="math inline">\(1/(4f(m)^2n)\)</span>, which needs an estimate of the density at the median. The bootstrap avoids this:</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2027</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y  <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">rnorm</span>(<span class="dv">200</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>bt <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">999</span>, <span class="fu">median</span>(<span class="fu">sample</span>(y, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">median =</span> <span class="fu">median</span>(y), <span class="at">se_boot =</span> <span class="fu">sd</span>(bt),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">se_asymptotic =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">dlnorm</span>(<span class="dv">1</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">200</span>)))   <span class="co"># uses the true density</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;        median       se_boot se_asymptotic 
+#&gt;    0.99025928    0.09515879    0.08862269</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(bt, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))                        <span class="co"># percentile 95% CI</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     2.5%    97.5% 
+#&gt; 0.853481 1.197444</code></pre>
+</div>
+</div>
+<p>The bootstrap standard error is close to the asymptotic one, which here uses the true density at the true median and would not be available in practice.</p>
+<p><strong>When it fails.</strong> The bootstrap is not a cure-all. It fails or needs modification for non-smooth or boundary problems (the maximum of a sample, parameters on the boundary of the parameter space), with weak instruments, and with dependent data, where whole blocks or clusters have to be resampled. In Computer Tutorial 2 we already used it for the two-step IPW estimator: there the bootstrap must re-estimate the propensity score in every replication.</p>
+</section>
+<section id="sec-ct3" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-ct3"><span class="header-section-number">3.7</span> Computer tutorial 3</h2>
+<p><strong>Learning goals.</strong> Approximate an integral by Monte Carlo, quasi-random draws and Gaussian quadrature and compare their accuracy; implement maximum simulated likelihood and the method of simulated moments and see the simulation bias of MSL; compute bootstrap standard errors and confidence intervals and check their coverage.</p>
+<p><strong>Packages.</strong> <code>statmod</code> (Gaussian quadrature); optionally <code>randtoolbox</code> (Halton sequences). No data set: all data are simulated.</p>
+<section id="problem-1-three-ways-to-compute-an-integral" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="problem-1-three-ways-to-compute-an-integral"><span class="header-section-number">3.7.1</span> Problem 1: Three ways to compute an integral</h3>
+<p>Let <span class="math inline">\(X\sim N(0,1)\)</span> and <span class="math inline">\(I=\E[\Phi(0.5+X)]\)</span>, where <span class="math inline">\(\Phi\)</span> is the standard normal cdf.</p>
+<ol type="a">
+<li><p>Show that <span class="math inline">\(I=\Phi(0.5/\sqrt2)\)</span>. <em>Hint:</em> write <span class="math inline">\(\Phi(0.5+X)=P(Z\le0.5+X\mid X)\)</span> for <span class="math inline">\(Z\sim N(0,1)\)</span> independent of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Write a function <code>mc_int(S)</code> that approximates <span class="math inline">\(I\)</span> by direct Monte Carlo integration with <span class="math inline">\(S\)</span> draws and returns the estimate together with its simulation standard error. Evaluate it for <span class="math inline">\(S=10,100,1000,10000\)</span>.</p></li>
+<li><p>Approximate <span class="math inline">\(I\)</span> with <span class="math inline">\(S\)</span> Halton draws (base 2), transformed to <span class="math inline">\(N(0,1)\)</span> by the inverse cdf. Use the function <code>halton_seq()</code> from Section 3.3.2 of the lecture notes or <code>randtoolbox::halton()</code>. Compare the errors with (b).</p></li>
+<li><p>Approximate <span class="math inline">\(I\)</span> by Gauss–Hermite quadrature with <span class="math inline">\(m=2,3,5,10,20\)</span> nodes (<code>statmod::gauss.quad(m, kind = "hermite")</code>). Mind the change of variables in Example 3.1 of the lecture notes.</p></li>
+<li><p>Use antithetic pairs <span class="math inline">\((x_s,-x_s)\)</span> with <span class="math inline">\(S/2\)</span> pairs. Is the variance smaller than with <span class="math inline">\(S\)</span> independent draws? Why?</p></li>
+</ol>
+</section>
+<section id="problem-2-msl-and-msm-with-unobserved-heterogeneity" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="problem-2-msl-and-msm-with-unobserved-heterogeneity"><span class="header-section-number">3.7.2</span> Problem 2: MSL and MSM with unobserved heterogeneity</h3>
+<p>Consider the model of Example 3.4 of the lecture notes: <span class="math inline">\(y_i=\theta+u_i+\varepsilon_i\)</span> with <span class="math inline">\(\varepsilon_i\sim N(0,1)\)</span> and <span class="math inline">\(u_i\)</span> standard Gumbel, independent, <span class="math inline">\(\theta_0=1\)</span>.</p>
+<ol type="a">
+<li><p>Generate a sample of <span class="math inline">\(n=100\)</span>. Draw Gumbel variables by the inverse transform <span class="math inline">\(u=-\ln(-\ln U)\)</span>, <span class="math inline">\(U\sim U(0,1)\)</span>.</p></li>
+<li><p>Write the simulated log-likelihood as a function of <span class="math inline">\(\theta\)</span> and of an <span class="math inline">\(n\times S\)</span> matrix of draws. Compute <span class="math inline">\(\hat\theta_{MSL}\)</span> for <span class="math inline">\(S=1,10,100,1000\)</span>. Why must the draws be generated before the optimization?</p></li>
+<li><p>Compute <span class="math inline">\(\hat\theta_{MSM}\)</span> for the same <span class="math inline">\(S\)</span>, and the infeasible-in-general MM estimator <span class="math inline">\(\bar y-\gamma\)</span> with <span class="math inline">\(\gamma=0.5772\)</span>.</p></li>
+<li><p>Repeat (b) with Halton draws: take one long Halton sequence, discard the first 10 points, and use consecutive blocks of <span class="math inline">\(S\)</span> points for the observations.</p></li>
+<li><p>Monte Carlo: for <span class="math inline">\(S=2\)</span> and <span class="math inline">\(S=50\)</span>, repeat (a)–(c) 300 times and report the mean and standard deviation of <span class="math inline">\(\hat\theta_{MSL}\)</span> and <span class="math inline">\(\hat\theta_{MSM}\)</span>. Relate the results to Theorems 3.2 and 3.3 of the lecture notes.</p></li>
+</ol>
+</section>
+<section id="problem-3-bootstrap-standard-errors-and-confidence-intervals" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="problem-3-bootstrap-standard-errors-and-confidence-intervals"><span class="header-section-number">3.7.3</span> Problem 3: Bootstrap standard errors and confidence intervals</h3>
+<ol type="a">
+<li><p>Draw a sample of <span class="math inline">\(n=200\)</span> from a lognormal distribution, <span class="math inline">\(y_i=e^{z_i}\)</span> with <span class="math inline">\(z_i\sim N(0,1)\)</span>. The population median is <span class="math inline">\(1\)</span>.</p></li>
+<li><p>Compute the bootstrap standard error of the sample median with <span class="math inline">\(B=999\)</span> and the 95% percentile confidence interval.</p></li>
+<li><p>Check the coverage of the percentile interval: repeat (a)–(b) 300 times with <span class="math inline">\(B=299\)</span> and count how often the interval contains 1.</p></li>
+<li><p>Do the same for the sample <strong>maximum</strong> as an estimator of the upper end of the support of a <span class="math inline">\(U(0,1)\)</span> distribution. What goes wrong?</p></li>
+</ol>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.8</span> Exercises</h2>
+<p>Problem Set 3 contains the analytical exercises for this chapter:</p>
+<ul>
+<li><strong>Problem 1</strong>: Monte Carlo integration of <span class="math inline">\(\int_0^1e^x\,dx\)</span>, the number of draws needed for a given precision, and antithetic draws.</li>
+<li><strong>Problem 2</strong>: importance sampling for a normal tail probability.</li>
+<li><strong>Problem 3</strong>: Gauss–Hermite quadrature and exactness for polynomials.</li>
+<li><strong>Problem 4</strong>: MSL and MSM in the unobserved-heterogeneity model of <a href="#exm-heterogeneity" class="quarto-xref">Example&nbsp;<span>3.4</span></a>.</li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cameron2005" class="csl-entry" role="listitem">
+Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods and Applications</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-efron1979" class="csl-entry" role="listitem">
+Efron, Bradley. 1979. <span>“Bootstrap Methods: Another Look at the Jackknife.”</span> <em>The Annals of Statistics</em> 7 (1): 1–26.
+</div>
+<div id="ref-mcfadden1989" class="csl-entry" role="listitem">
+McFadden, Daniel. 1989. <span>“A Method of Simulated Moments for Estimation of Discrete Response Models Without Numerical Integration.”</span> <em>Econometrica</em> 57 (5): 995–1026.
+</div>
+<div id="ref-pakes1989" class="csl-entry" role="listitem">
+Pakes, Ariel, and David Pollard. 1989. <span>“Simulation and the Asymptotics of Optimization Estimators.”</span> <em>Econometrica</em> 57 (5): 1027–57.
+</div>
+<div id="ref-train2009" class="csl-entry" role="listitem">
+Train, Kenneth E. 2009. <em>Discrete Choice Methods with Simulation</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
