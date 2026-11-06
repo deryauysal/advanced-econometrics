@@ -319,7 +319,7 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<p>This appendix collects the asymptotic tools used throughout the notes. They are assumed known from Research Metrics 1; the summary is for reference. <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 3, gives proofs.</p>
+<p>This appendix collects the asymptotic tools used throughout the notes. They are assumed known from Research Metrics 1; the summary is for reference. <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 3, <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 6 and <span class="citation" data-cites="hansen2022b">Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 7–8 give proofs.</p>
 <section id="modes-of-convergence" class="level2" data-number="A.1">
 <h2 data-number="A.1" class="anchored" data-anchor-id="modes-of-convergence"><span class="header-section-number">A.1</span> Modes of convergence</h2>
 <p>Let <span class="math inline">\(\bm z_n\)</span> be a sequence of random vectors.</p>
@@ -383,10 +383,16 @@ window.Quarto = {
 <li><strong>Uniform convergence:</strong> <span class="math inline">\(\sup_{\btheta\in\Theta}|Q_n(\btheta)-Q_0(\btheta)|\cvp0\)</span>, which holds under compactness of <span class="math inline">\(\Theta\)</span>, continuity and a dominance condition (a uniform law of large numbers).</li>
 <li><strong>Continuity</strong> of <span class="math inline">\(Q_0\)</span>.</li>
 </ol>
-<p>Then <span class="math inline">\(\hat\btheta_n\cvp\btheta_0\)</span> <span class="citation" data-cites="wooldridge2010">(<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">Wooldridge 2010</a>, Thm. 12.2)</span>. Pointwise convergence of <span class="math inline">\(Q_n\)</span> is not enough: the maximizer of <span class="math inline">\(Q_n\)</span> could drift away from <span class="math inline">\(\btheta_0\)</span>.</p>
+<p>Then <span class="math inline">\(\hat\btheta_n\cvp\btheta_0\)</span> <span class="citation" data-cites="wooldridge2010 hansen2022">(<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">Wooldridge 2010</a>, Thm. 12.2; <a href="../references.html#ref-hansen2022" role="doc-biblioref">Hansen 2022a</a>, Ch. 22.4)</span>. Pointwise convergence of <span class="math inline">\(Q_n\)</span> is not enough: the maximizer of <span class="math inline">\(Q_n\)</span> could drift away from <span class="math inline">\(\btheta_0\)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022a. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-hansen2022b" class="csl-entry" role="listitem">
+———. 2022b. <em>Probability and Statistics for Economists</em>. Princeton: Princeton University Press.
+</div>
 <div id="ref-wooldridge2010" class="csl-entry" role="listitem">
 Wooldridge, Jeffrey M. 2010. <em>Econometric Analysis of Cross Section and Panel Data</em>. 2nd ed. Cambridge, MA: MIT Press.
 </div>

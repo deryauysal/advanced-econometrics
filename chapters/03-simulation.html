@@ -375,7 +375,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 12 (simulation-based methods) and Ch. 11 (bootstrap); <span class="citation" data-cites="train2009">Train (<a href="../references.html#ref-train2009" role="doc-biblioref">2009</a>)</span>, Ch. 9 and 10.</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 12 (simulation-based methods) and Ch. 11 (bootstrap); <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 10 (resampling); <span class="citation" data-cites="train2009">Train (<a href="../references.html#ref-train2009" role="doc-biblioref">2009</a>)</span>, Ch. 9 and 10.</p>
 </div>
 </div>
 <p>Many likelihood functions and moment conditions contain integrals without a closed form: random effects in nonlinear panel models, random coefficients, unobserved heterogeneity, multinomial probit choice probabilities. This chapter shows how to approximate such integrals, deterministically by quadrature or stochastically by simulation, and what happens to the statistical properties of an estimator when the exact integral is replaced by an approximation. The last section uses the same simulation idea for inference: the bootstrap.</p>
@@ -713,7 +713,7 @@ Table&nbsp;3.3: MSL and MSM in the unobserved-heterogeneity model: bias and stan
 </div>
 <p>The table illustrates <a href="#thm-msl" class="quarto-xref">Theorem&nbsp;<span>3.2</span></a> and <a href="#thm-msm" class="quarto-xref">Theorem&nbsp;<span>3.3</span></a>:</p>
 <ul>
-<li>MSM is unbiased for every <span class="math inline">\(S\)</span>; its standard deviation falls towards the MM value <span class="math inline">\(\sqrt{(1+\pi^2/6)/n}=0.163\)</span>. With independent draws, <span class="math inline">\(\Var(\hat\theta_{MSM})=[1+\pi^2/6+\pi^2/(6S)]/n\)</span> (Problem Set 3).</li>
+<li>MSM is unbiased for every <span class="math inline">\(S\)</span>; its standard deviation falls towards the MM value <span class="math inline">\(\sqrt{(1+\pi^2/6)/n}=0.163\)</span>. With independent draws, <span class="math inline">\(\Var(\hat\theta_{MSM})=[1+\pi^2/6+\pi^2/(6S)]/n\)</span> (Problem Set 3, Problem 4, derives the analogous result for an exponential shock).</li>
 <li>MSL has a sizeable bias for small <span class="math inline">\(S\)</span> that disappears only as <span class="math inline">\(S\)</span> grows. With many draws it is slightly more precise than MSM, because it uses the whole likelihood.</li>
 <li>With <span class="math inline">\(S=1\)</span> MSL and MSM coincide here: <span class="math inline">\(\ln\phi\)</span> is quadratic, so the first-order condition is linear in <span class="math inline">\(\theta\)</span>. This is special to the example.</li>
 </ul>
@@ -771,7 +771,7 @@ Table&nbsp;3.3: MSL and MSM in the unobserved-heterogeneity model: bias and stan
 <ol type="a">
 <li><p>Generate a sample of <span class="math inline">\(n=100\)</span>. Draw Gumbel variables by the inverse transform <span class="math inline">\(u=-\ln(-\ln U)\)</span>, <span class="math inline">\(U\sim U(0,1)\)</span>.</p></li>
 <li><p>Write the simulated log-likelihood as a function of <span class="math inline">\(\theta\)</span> and of an <span class="math inline">\(n\times S\)</span> matrix of draws. Compute <span class="math inline">\(\hat\theta_{MSL}\)</span> for <span class="math inline">\(S=1,10,100,1000\)</span>. Why must the draws be generated before the optimization?</p></li>
-<li><p>Compute <span class="math inline">\(\hat\theta_{MSM}\)</span> for the same <span class="math inline">\(S\)</span>, and the infeasible-in-general MM estimator <span class="math inline">\(\bar y-\gamma\)</span> with <span class="math inline">\(\gamma=0.5772\)</span>.</p></li>
+<li><p>Compute <span class="math inline">\(\hat\theta_{MSM}\)</span> for the same <span class="math inline">\(S\)</span>, and the MM estimator <span class="math inline">\(\bar y-\gamma\)</span>, which uses the known mean <span class="math inline">\(\gamma=0.5772\)</span> of the Gumbel distribution.</p></li>
 <li><p>Repeat (b) with Halton draws: take one long Halton sequence, discard the first 10 points, and use consecutive blocks of <span class="math inline">\(S\)</span> points for the observations.</p></li>
 <li><p>Monte Carlo: for <span class="math inline">\(S=2\)</span> and <span class="math inline">\(S=50\)</span>, repeat (a)–(c) 300 times and report the mean and standard deviation of <span class="math inline">\(\hat\theta_{MSL}\)</span> and <span class="math inline">\(\hat\theta_{MSM}\)</span>. Relate the results to Theorems 3.2 and 3.3 of the lecture notes.</p></li>
 </ol>
@@ -790,10 +790,10 @@ Table&nbsp;3.3: MSL and MSM in the unobserved-heterogeneity model: bias and stan
 <h2 data-number="3.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.8</span> Exercises</h2>
 <p>Problem Set 3 contains the analytical exercises for this chapter:</p>
 <ul>
-<li><strong>Problem 1</strong>: Monte Carlo integration of <span class="math inline">\(\int_0^1e^x\,dx\)</span>, the number of draws needed for a given precision, and antithetic draws.</li>
+<li><strong>Problem 1</strong>: Monte Carlo integration of <span class="math inline">\(\int_0^1xe^x\,dx\)</span>, the number of draws needed for a given precision, and antithetic draws.</li>
 <li><strong>Problem 2</strong>: importance sampling for a normal tail probability.</li>
 <li><strong>Problem 3</strong>: Gauss–Hermite quadrature and exactness for polynomials.</li>
-<li><strong>Problem 4</strong>: MSL and MSM in the unobserved-heterogeneity model of <a href="#exm-heterogeneity" class="quarto-xref">Example&nbsp;<span>3.4</span></a>.</li>
+<li><strong>Problem 4</strong>: MSL and MSM in the unobserved-heterogeneity model of <a href="#exm-heterogeneity" class="quarto-xref">Example&nbsp;<span>3.4</span></a>, with an exponential instead of a Gumbel shock, for which the exact likelihood is available as a benchmark.</li>
 </ul>
 
 
@@ -803,6 +803,9 @@ Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods a
 </div>
 <div id="ref-efron1979" class="csl-entry" role="listitem">
 Efron, Bradley. 1979. <span>“Bootstrap Methods: Another Look at the Jackknife.”</span> <em>The Annals of Statistics</em> 7 (1): 1–26.
+</div>
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022. <em>Econometrics</em>. Princeton: Princeton University Press.
 </div>
 <div id="ref-mcfadden1989" class="csl-entry" role="listitem">
 McFadden, Daniel. 1989. <span>“A Method of Simulated Moments for Estimation of Discrete Response Models Without Numerical Integration.”</span> <em>Econometrica</em> 57 (5): 995–1026.

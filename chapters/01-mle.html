@@ -380,7 +380,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7. Applications: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>.</p>
+<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7; <span class="citation" data-cites="hansen2022b">Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 10; <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 22, 25 and 26.10. Applications: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>.</p>
 </div>
 </div>
 <p>Maximum likelihood (ML) is the workhorse estimator for fully specified parametric models. This chapter introduces the likelihood principle, derives the large-sample properties of the MLE, discusses what happens when the assumed density is wrong, and closes with the classical trinity of tests.</p>
@@ -439,7 +439,7 @@ Figure&nbsp;1.1: Bernoulli likelihood for the samples (0,0,0,1,1) and (0,0,1,1,1
 <p>In practice we find the MLE in one of three ways:</p>
 <ol type="1">
 <li><strong>Solve the first-order condition</strong> <span class="math inline">\(\partial\ell_n(\btheta)/\partial\btheta=\bm 0\)</span> and check the second-order condition. The FOC is necessary but not sufficient, and it only locates interior extrema; a maximum on the boundary of <span class="math inline">\(\Theta\)</span> need not satisfy it.</li>
-<li><strong>Direct argument</strong>, for instance by finding an upper bound of the likelihood that is attained at a unique point. The uniform distribution on <span class="math inline">\([0,\theta]\)</span> is the standard case (Problem Set 1).</li>
+<li><strong>Direct argument</strong>, for instance by finding an upper bound of the likelihood that is attained at a unique point. The uniform distribution on <span class="math inline">\([0,\theta]\)</span> is the standard case: the likelihood <span class="math inline">\(\theta^{-n}\mathbf 1\{\theta\ge\max_ix_i\}\)</span> is maximised at the largest observation. Problem Set 1 treats a shifted exponential distribution, where the same argument applies.</li>
 <li><strong>Numerical optimisation</strong> when no closed form exists (logit, probit, Tobit, …). We then have to worry about convergence to a local rather than a global maximum.</li>
 </ol>
 <div id="exm-exponential" class="theorem example">
@@ -885,8 +885,8 @@ Figure&nbsp;1.2: The trinity for the exponential model, testing <span class="mat
 <p>Problem Set 1 contains the analytical exercises for this chapter:</p>
 <ul>
 <li><strong>Problem 1</strong>: a regular one-parameter model from start to finish (score, information, bias and the Cramér–Rao bound, asymptotics, invariance) and the three tests, including the non-invariance of the Wald test.</li>
-<li><strong>Problem 2</strong>: the uniform distribution as a non-regular case, with an <span class="math inline">\(n\)</span>-rate, non-normal limit.</li>
-<li><strong>Problem 3</strong>: Poisson regression, its score and Hessian, and pseudo-ML under overdispersion. Computer tutorial 1, Problem 2 builds on it.</li>
+<li><strong>Problem 2</strong>: the shifted exponential distribution as a non-regular case, with an <span class="math inline">\(n\)</span>-rate, non-normal limit.</li>
+<li><strong>Problem 3</strong>: Poisson regression, its score and Hessian; with a binary regressor in closed form, with Poisson-based and robust standard errors under overdispersion. Computer tutorial 1, Problem 2 builds on it.</li>
 <li><strong>Problem 4</strong>: canonical links in the linear exponential family.</li>
 </ul>
 
@@ -897,6 +897,12 @@ Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods a
 </div>
 <div id="ref-gourieroux1984" class="csl-entry" role="listitem">
 Gouriéroux, Christian, Alain Monfort, and Alain Trognon. 1984. <span>“Pseudo Maximum Likelihood Methods: Theory.”</span> <em>Econometrica</em> 52 (3): 681–700.
+</div>
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022a. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-hansen2022b" class="csl-entry" role="listitem">
+———. 2022b. <em>Probability and Statistics for Economists</em>. Princeton: Princeton University Press.
 </div>
 <div id="ref-huber1967" class="csl-entry" role="listitem">
 Huber, Peter J. 1967. <span>“The Behavior of Maximum Likelihood Estimates Under Nonstandard Conditions.”</span> In <em>Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, 1:221–33.

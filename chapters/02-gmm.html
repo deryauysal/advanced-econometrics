@@ -381,7 +381,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 6.1–6.5; <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 12 (instrumental variables) and Ch. 13 (GMM); <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 8 and 14. Potential outcomes and weighting (Section 2.9): <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span>, Sections 1–5; <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 21.1–21.3. Applications: <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span>.</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 6.1–6.5; <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 12 (instrumental variables) and Ch. 13 (GMM) and 17.36–17.42 (dynamic panels); <span class="citation" data-cites="hansen2022b">B. E. Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 11 (method of moments); <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 8 and 14. Potential outcomes and weighting (Section 2.9): <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span>, Sections 1–5; <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 21.1–21.3. Applications: <span class="citation" data-cites="arellano1991">Arellano and Bond (<a href="../references.html#ref-arellano1991" role="doc-biblioref">1991</a>)</span> and <span class="citation" data-cites="imai2014">Imai and Ratkovic (<a href="../references.html#ref-imai2014" role="doc-biblioref">2014</a>)</span>.</p>
 </div>
 </div>
 <p>Maximum likelihood requires the full distribution of the data. Many economic models deliver less: a set of expectations that should be zero at the true parameter value. The method of moments (MM) and its generalization, the generalized method of moments (GMM), turn such moment conditions directly into estimators. OLS, IV, 2SLS and ML are all special cases, and the GMM framework gives a single recipe for their asymptotic distribution and for efficient estimation when there are more conditions than parameters <span class="citation" data-cites="hansen1982">(<a href="../references.html#ref-hansen1982" role="doc-biblioref">L. P. Hansen 1982</a>)</span>.</p>
@@ -657,7 +657,7 @@ Y_i=D_iY_{1i}+(1-D_i)Y_{0i},
 </div>
 </div>
 <p>Both versions are centred on the true ATE of one, and the estimator with the <em>estimated</em> propensity score has the clearly smaller standard deviation.</p>
-<p>Problem Set 2, Problem 4 derives the moment functions and the blocks of <span class="math inline">\(\bA_0\)</span> for IPW, and Computer Tutorial 2 estimates the model jointly, computes the stacked sandwich variance and compares it with the bootstrap.</p>
+<p>Problem Set 2, Problem 4 derives the moment functions and the blocks of <span class="math inline">\(\bA_0\)</span> for the average treatment effect on the treated, and Computer Tutorial 2 estimates the model jointly, computes the stacked sandwich variance and compares it with the bootstrap.</p>
 </section>
 </section>
 <section id="further-applications" class="level2" data-number="2.10">
@@ -674,7 +674,7 @@ Y_i=D_iY_{1i}+(1-D_i)Y_{0i},
 <p><strong>Packages.</strong> <code>nleqslv</code>, <code>boot</code>, <code>sandwich</code>, <code>lmtest</code>, <code>AER</code>. <strong>Data.</strong> <code>cattaneo2.csv</code> <span class="citation" data-cites="cattaneo2010">(<a href="../references.html#ref-cattaneo2010" role="doc-biblioref">Cattaneo 2010</a>)</span>, 4642 births; <code>card1995.csv</code> <span class="citation" data-cites="card1995">(<a href="../references.html#ref-card1995" role="doc-biblioref">Card 1995</a>)</span>, 3613 young men from the NLS 1976 cross-section.</p>
 <section id="problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm" class="level3" data-number="2.11.1">
 <h3 data-number="2.11.1" class="anchored" data-anchor-id="problem-1-the-effect-of-smoking-on-birth-weight-ipw-as-joint-mm"><span class="header-section-number">2.11.1</span> Problem 1: The effect of smoking on birth weight (IPW as joint MM)</h3>
-<p>This problem uses the results of Problem Set 2, Problem 4.</p>
+<p>This problem uses the IPW results of Section 2.9 of the lecture notes and Problem Set 2, Problem 4(a).</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -714,7 +714,7 @@ P(\texttt{mbsmoke}=1\mid X_i)=\Lambda\big(\alpha_0+\alpha_1\texttt{mmarried}+\al
 \]</span></p>
 <ol type="a">
 <li><p>Compute the raw difference in mean birth weight between smokers and non-smokers. Why is it unlikely to be the ATE?</p></li>
-<li><p>Write the stacked moment function for <span class="math inline">\(\btheta=(\balpha',\tau)'\)</span> from Problem Set 2 as an R function that returns the <span class="math inline">\(k+1\)</span> sample moments, and solve the system with <code>nleqslv</code>. Compare <span class="math inline">\(\hat\balpha\)</span> with <code>glm</code> and <span class="math inline">\(\hat\tau\)</span> with the IPW formula evaluated at the <code>glm</code> propensity score. Why do they coincide?</p></li>
+<li><p>Write the stacked moment function for <span class="math inline">\(\btheta=(\balpha',\tau)'\)</span> from Section 2.9.2 of the lecture notes as an R function that returns the <span class="math inline">\(k+1\)</span> sample moments, and solve the system with <code>nleqslv</code>. Compare <span class="math inline">\(\hat\balpha\)</span> with <code>glm</code> and <span class="math inline">\(\hat\tau\)</span> with the IPW formula evaluated at the <code>glm</code> propensity score. Why do they coincide?</p></li>
 <li><p>Estimate the asymptotic variance of <span class="math inline">\(\hat\btheta\)</span> with the MM sandwich <span class="math inline">\(\hat\bA^{-1}\hat\bV\hat\bA^{-1\prime}/n\)</span>, computing <span class="math inline">\(\hat\bA\)</span> analytically. Report the standard error of <span class="math inline">\(\hat\tau\)</span> and compare it with the “naive” standard error that treats the propensity score as known.</p></li>
 <li><p>Compute the ATE with normalized weights (weights that sum to one within each treatment group).</p></li>
 <li><p>Estimate the standard errors of both ATE estimators by the nonparametric bootstrap (500 replications). Remember that each bootstrap replication has to re-estimate the propensity score.</p></li>
@@ -756,7 +756,7 @@ P(\texttt{mbsmoke}=1\mid X_i)=\Lambda\big(\alpha_0+\alpha_1\texttt{mmarried}+\al
 </tr>
 </tbody>
 </table>
-<p>Following <span class="citation" data-cites="card1995">Card (<a href="../references.html#ref-card1995" role="doc-biblioref">1995</a>)</span> and <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>, Ch. 12)</span>, consider <span class="math display">\[
+<p>Following <span class="citation" data-cites="card1995">Card (<a href="../references.html#ref-card1995" role="doc-biblioref">1995</a>)</span> and <span class="citation" data-cites="hansen2022">B. E. Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>, Ch. 12)</span>, consider <span class="math display">\[
 \log w_i=\beta_0+\beta_1\,\texttt{educ}_i+\beta_2\,\texttt{exper}_i+\beta_3\,\texttt{exper}_i^2/100+\beta_4\texttt{black}_i+\beta_5\texttt{south}_i+\beta_6\texttt{urban}_i+u_i ,
 \]</span> with potential experience <span class="math inline">\(\texttt{exper}=\texttt{age}-\texttt{educ}-6\)</span>. Education is endogenous (ability is omitted), and so is experience, because it is a function of education. The excluded instruments are <code>nearc4a</code>, <code>nearc4b</code>, <code>age76</code> and <code>age76^2/100</code>.</p>
 <ol type="a">
@@ -773,10 +773,10 @@ P(\texttt{mbsmoke}=1\mid X_i)=\Lambda\big(\alpha_0+\alpha_1\texttt{mmarried}+\al
 <h2 data-number="2.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.12</span> Exercises</h2>
 <p>Problem Set 2 contains the analytical exercises for this chapter:</p>
 <ul>
-<li><strong>Problem 1</strong>: two MM estimators of the Poisson mean, their asymptotic distributions, and efficient GMM combining both moments.</li>
-<li><strong>Problem 2</strong>: ML, MM and GMM for the gamma distribution.</li>
-<li><strong>Problem 3</strong>: linear IV as GMM: IV, 2SLS, the optimal weighting matrix and the J test.</li>
-<li><strong>Problem 4</strong>: identification of the average treatment effect by inverse probability weighting and its estimation as a joint MM problem. Computer tutorial 2, Problem 1 builds on it.</li>
+<li><strong>Problem 1</strong>: two MM estimators of an exponential mean, their asymptotic distributions, efficient GMM combining both moments, and why the identity weighting matrix depends on the units of measurement.</li>
+<li><strong>Problem 2</strong>: ML, MM and GMM for the beta distribution.</li>
+<li><strong>Problem 3</strong>: one endogenous regressor and two instruments, by hand: IV, GMM as a weighted average of the IV estimators, 2SLS, efficient GMM, robust standard errors and the J test.</li>
+<li><strong>Problem 4</strong>: identification of the ATE and the ATT by inverse probability weighting, the ATT as a joint MM problem, and covariate balancing. Computer tutorial 2, Problem 1 implements the ATE version.</li>
 </ul>
 
 
@@ -797,7 +797,10 @@ Card, David. 1995. <span>“Using Geographic Variation in College Proximity to E
 Cattaneo, Matias D. 2010. <span>“Efficient Semiparametric Estimation of Multi-Valued Treatment Effects Under Ignorability.”</span> <em>Journal of Econometrics</em> 155 (2): 138–54.
 </div>
 <div id="ref-hansen2022" class="csl-entry" role="listitem">
-Hansen, Bruce E. 2022. <em>Econometrics</em>. Princeton: Princeton University Press.
+Hansen, Bruce E. 2022a. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-hansen2022b" class="csl-entry" role="listitem">
+———. 2022b. <em>Probability and Statistics for Economists</em>. Princeton: Princeton University Press.
 </div>
 <div id="ref-hansen1982" class="csl-entry" role="listitem">
 Hansen, Lars Peter. 1982. <span>“Large Sample Properties of Generalized Method of Moments Estimators.”</span> <em>Econometrica</em> 50 (4): 1029–54.
