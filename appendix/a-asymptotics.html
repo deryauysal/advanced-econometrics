@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,8 +247,18 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#modes-of-convergence" id="toc-modes-of-convergence" class="nav-link active" data-scroll-target="#modes-of-convergence"><span class="header-section-number">A.1</span> Modes of convergence</a></li>
+  <li><a href="#laws-of-large-numbers-and-central-limit-theorems" id="toc-laws-of-large-numbers-and-central-limit-theorems" class="nav-link" data-scroll-target="#laws-of-large-numbers-and-central-limit-theorems"><span class="header-section-number">A.2</span> Laws of large numbers and central limit theorems</a></li>
+  <li><a href="#continuous-mapping-slutsky-and-the-delta-method" id="toc-continuous-mapping-slutsky-and-the-delta-method" class="nav-link" data-scroll-target="#continuous-mapping-slutsky-and-the-delta-method"><span class="header-section-number">A.3</span> Continuous mapping, Slutsky and the delta method</a></li>
+  <li><a href="#mean-value-expansions" id="toc-mean-value-expansions" class="nav-link" data-scroll-target="#mean-value-expansions"><span class="header-section-number">A.4</span> Mean value expansions</a></li>
+  <li><a href="#consistency-of-extremum-estimators" id="toc-consistency-of-extremum-estimators" class="nav-link" data-scroll-target="#consistency-of-extremum-estimators"><span class="header-section-number">A.5</span> Consistency of extremum estimators</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -289,26 +319,79 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This appendix collects the asymptotic tools used throughout the notes. They are assumed known from Research Metrics 1; the summary is for reference. <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 3, gives proofs.</p>
+<section id="modes-of-convergence" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="modes-of-convergence"><span class="header-section-number">A.1</span> Modes of convergence</h2>
+<p>Let <span class="math inline">\(\bm z_n\)</span> be a sequence of random vectors.</p>
+<div id="def-cvp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.1 (Convergence in probability)</strong></span> <span class="math inline">\(\bm z_n\cvp\bm c\)</span> if for every <span class="math inline">\(\varepsilon&gt;0\)</span>, <span class="math inline">\(P(\|\bm z_n-\bm c\|&gt;\varepsilon)\to0\)</span> as <span class="math inline">\(n\to\infty\)</span>. We also write <span class="math inline">\(\operatorname{plim}\bm z_n=\bm c\)</span>. An estimator <span class="math inline">\(\hat\btheta_n\)</span> is <strong>consistent</strong> if <span class="math inline">\(\hat\btheta_n\cvp\btheta_0\)</span>.</p>
 </div>
-<div class="callout-title-container flex-fill">
-In preparation
+<div id="def-cvd" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.2 (Convergence in distribution)</strong></span> <span class="math inline">\(\bm z_n\cvd\bm z\)</span> if <span class="math inline">\(P(\bm z_n\le\bm t)\to P(\bm z\le\bm t)\)</span> at every continuity point <span class="math inline">\(\bm t\)</span> of the cdf of <span class="math inline">\(\bm z\)</span>. The distribution of <span class="math inline">\(\bm z\)</span> is the <strong>limiting distribution</strong>.</p>
 </div>
+<p>Convergence in probability implies convergence in distribution; the converse holds only if the limit is a constant.</p>
+<p><strong>Order notation.</strong> <span class="math inline">\(\bm z_n=o_p(1)\)</span> means <span class="math inline">\(\bm z_n\cvp\bm 0\)</span>; <span class="math inline">\(\bm z_n=O_p(1)\)</span> means <span class="math inline">\(\bm z_n\)</span> is bounded in probability (for every <span class="math inline">\(\varepsilon\)</span> there is an <span class="math inline">\(M\)</span> with <span class="math inline">\(P(\|\bm z_n\|&gt;M)&lt;\varepsilon\)</span> for all <span class="math inline">\(n\)</span>). Any <span class="math inline">\(\bm z_n\)</span> that converges in distribution is <span class="math inline">\(O_p(1)\)</span>, and <span class="math inline">\(o_p(1)\cdot O_p(1)=o_p(1)\)</span>.</p>
+</section>
+<section id="laws-of-large-numbers-and-central-limit-theorems" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="laws-of-large-numbers-and-central-limit-theorems"><span class="header-section-number">A.2</span> Laws of large numbers and central limit theorems</h2>
+<div id="thm-wlln" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.1 (Weak law of large numbers)</strong></span> If <span class="math inline">\(\bm y_1,\dots,\bm y_n\)</span> are i.i.d. with <span class="math inline">\(\E\|\bm y_i\|&lt;\infty\)</span>, then <span class="math inline">\(\bar{\bm y}_n=\frac1n\sum_i\bm y_i\cvp\E[\bm y_i]\)</span>.</p>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
-<ul>
-<li>Convergence in probability and distribution; Slutsky and continuous mapping</li>
-<li>WLLN, CLT; delta method</li>
-<li>Uniform convergence and consistency of extremum estimators</li>
-</ul>
+<div id="thm-clt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.2 (Central limit theorem (Lindeberg–Lévy))</strong></span> If <span class="math inline">\(\bm y_1,\dots,\bm y_n\)</span> are i.i.d. with mean <span class="math inline">\(\bm\mu\)</span> and finite variance matrix <span class="math inline">\(\bm\Sigma\)</span>, then <span class="math display">\[
+\sqrt n\,(\bar{\bm y}_n-\bm\mu)=\frac1{\sqrt n}\sum_{i=1}^n(\bm y_i-\bm\mu)\cvd N(\bm 0,\bm\Sigma).
+\]</span></p>
 </div>
+<p>Both apply to functions of the data: in the notes <span class="math inline">\(\bm y_i\)</span> is replaced by a score <span class="math inline">\(S_i(\btheta_0)\)</span>, a moment function <span class="math inline">\(\bpsi(\bw_i,\btheta_0)\)</span> or a simulated quantity <span class="math inline">\(h(x_s)\)</span>.</p>
+</section>
+<section id="continuous-mapping-slutsky-and-the-delta-method" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="continuous-mapping-slutsky-and-the-delta-method"><span class="header-section-number">A.3</span> Continuous mapping, Slutsky and the delta method</h2>
+<div id="thm-cmt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.3 (Continuous mapping theorem)</strong></span> Let <span class="math inline">\(g\)</span> be continuous.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\bm z_n\cvp\bm c\)</span>, then <span class="math inline">\(g(\bm z_n)\cvp g(\bm c)\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\bm z_n\cvd\bm z\)</span>, then <span class="math inline">\(g(\bm z_n)\cvd g(\bm z)\)</span>.</p></li>
+</ol>
+<p>For (i), continuity at <span class="math inline">\(\bm c\)</span> suffices.</p>
 </div>
+<div id="thm-slutsky" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.4 (Slutsky’s theorem)</strong></span> If <span class="math inline">\(z_n\cvd z\)</span> and <span class="math inline">\(c_n\cvp c\)</span> (a constant), then <span class="math inline">\(z_n+c_n\cvd z+c\)</span>, <span class="math inline">\(c_nz_n\cvd cz\)</span>, and <span class="math inline">\(z_n/c_n\cvd z/c\)</span> if <span class="math inline">\(c\neq0\)</span>.</p>
+<p>In matrix form: if <span class="math inline">\(\bm H_n\cvp\bm H\)</span> and <span class="math inline">\(\bm b_n\cvd N(\bm\mu,\bm B)\)</span>, then <span class="math inline">\(\bm H_n\bm b_n\cvd N(\bm H\bm\mu,\bm H\bm B\bm H')\)</span>.</p>
+</div>
+<p>The matrix form is the workhorse of the notes. Every asymptotic normality proof writes <span class="math inline">\(\sqrt n(\hat\btheta-\btheta_0)=\bm H_n\bm b_n\)</span>, where <span class="math inline">\(\bm H_n\)</span> is an (inverse) average of derivatives that converges in probability by the WLLN, and <span class="math inline">\(\bm b_n\)</span> is <span class="math inline">\(\sqrt n\)</span> times an average of mean-zero terms that is asymptotically normal by the CLT.</p>
+<div id="thm-delta" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.5 (Delta method)</strong></span> If <span class="math inline">\(\sqrt n(\hat\bbeta_n-\bbeta)\cvd N(\bm 0,\bV)\)</span> and <span class="math inline">\(\bm g:\mathbb R^k\to\mathbb R^q\)</span> is continuously differentiable at <span class="math inline">\(\bbeta\)</span> with Jacobian <span class="math inline">\(\bm G=\partial\bm g(\bbeta)/\partial\bbeta'\)</span>, then <span class="math display">\[
+\sqrt n\big(\bm g(\hat\bbeta_n)-\bm g(\bbeta)\big)\cvd N\big(\bm 0,\ \bm G\bV\bm G'\big).
+\]</span></p>
+</div>
+<p><em>Why:</em> by the mean value theorem, <span class="math inline">\(\bm g(\hat\bbeta_n)=\bm g(\bbeta)+\bm G(\bbeta^*)(\hat\bbeta_n-\bbeta)\)</span> with <span class="math inline">\(\bbeta^*\)</span> between <span class="math inline">\(\hat\bbeta_n\)</span> and <span class="math inline">\(\bbeta\)</span>. Since <span class="math inline">\(\bbeta^*\cvp\bbeta\)</span>, <span class="math inline">\(\bm G(\bbeta^*)\cvp\bm G\)</span>, and Slutsky gives the result.</p>
+<div id="exm-delta" class="theorem example">
+<p><span class="theorem-title"><strong>Example A.1 (Delta method)</strong></span> Let <span class="math inline">\(y_i\)</span> be i.i.d. with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(g(\mu)=e^\mu\)</span>. Then <span class="math inline">\(\sqrt n(e^{\bar y}-e^\mu)\cvd N(0,e^{2\mu}\sigma^2)\)</span>, and a standard error of <span class="math inline">\(e^{\bar y}\)</span> is <span class="math inline">\(e^{\bar y}\hat\sigma/\sqrt n\)</span>.</p>
+</div>
+</section>
+<section id="mean-value-expansions" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="mean-value-expansions"><span class="header-section-number">A.4</span> Mean value expansions</h2>
+<p>Most proofs expand a first-order condition around the true value. For a differentiable vector function <span class="math inline">\(\bar\bg_n(\btheta)\)</span>, <span class="math display">\[
+\bar\bg_n(\hat\btheta)=\bar\bg_n(\btheta_0)+\pd{\bar\bg_n(\btheta^*)}{\btheta'}\,(\hat\btheta-\btheta_0),
+\]</span> where <span class="math inline">\(\btheta^*=\btheta_0+\lambda(\hat\btheta-\btheta_0)\)</span>, <span class="math inline">\(0\le\lambda\le1\)</span>, lies on the segment between <span class="math inline">\(\hat\btheta\)</span> and <span class="math inline">\(\btheta_0\)</span> (strictly, a different <span class="math inline">\(\btheta^*\)</span> for each row). If <span class="math inline">\(\hat\btheta\)</span> is consistent, so is <span class="math inline">\(\btheta^*\)</span>. If <span class="math inline">\(\bar\bg_n(\hat\btheta)=\bm 0\)</span> by definition of the estimator, solving for <span class="math inline">\(\hat\btheta-\btheta_0\)</span> gives the representation used for the MLE (<a href="../chapters/01-mle.html#thm-asy-normal" class="quarto-xref">Theorem&nbsp;<span>1.5</span></a>), MM (<a href="../chapters/02-gmm.html#thm-mm-asy" class="quarto-xref">Theorem&nbsp;<span>2.1</span></a>) and GMM (<a href="../chapters/02-gmm.html#thm-gmm-asy" class="quarto-xref">Theorem&nbsp;<span>2.2</span></a>).</p>
+</section>
+<section id="consistency-of-extremum-estimators" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="consistency-of-extremum-estimators"><span class="header-section-number">A.5</span> Consistency of extremum estimators</h2>
+<p>ML, GMM and MSL estimators maximize or minimize a sample objective <span class="math inline">\(Q_n(\btheta)\)</span>. The standard argument has three ingredients:</p>
+<ol type="1">
+<li><strong>Identification:</strong> the limit objective <span class="math inline">\(Q_0(\btheta)=\operatorname{plim}Q_n(\btheta)\)</span> has a unique maximum at <span class="math inline">\(\btheta_0\)</span> (for ML this follows from the KLIC inequality; for GMM from <span class="math inline">\(\E[\bpsi(\bw_i,\btheta)]=\bm 0\)</span> only at <span class="math inline">\(\btheta_0\)</span>).</li>
+<li><strong>Uniform convergence:</strong> <span class="math inline">\(\sup_{\btheta\in\Theta}|Q_n(\btheta)-Q_0(\btheta)|\cvp0\)</span>, which holds under compactness of <span class="math inline">\(\Theta\)</span>, continuity and a dominance condition (a uniform law of large numbers).</li>
+<li><strong>Continuity</strong> of <span class="math inline">\(Q_0\)</span>.</li>
+</ol>
+<p>Then <span class="math inline">\(\hat\btheta_n\cvp\btheta_0\)</span> <span class="citation" data-cites="wooldridge2010">(<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">Wooldridge 2010</a>, Thm. 12.2)</span>. Pointwise convergence of <span class="math inline">\(Q_n\)</span> is not enough: the maximizer of <span class="math inline">\(Q_n\)</span> could drift away from <span class="math inline">\(\btheta_0\)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-wooldridge2010" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2010. <em>Econometric Analysis of Cross Section and Panel Data</em>. 2nd ed. Cambridge, MA: MIT Press.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
