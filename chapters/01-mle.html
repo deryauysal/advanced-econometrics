@@ -380,7 +380,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7; <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 10. Applications: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>.</p>
+<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7. Applications: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>.</p>
 </div>
 </div>
 <p>Maximum likelihood (ML) is the workhorse estimator for fully specified parametric models. This chapter introduces the likelihood principle, derives the large-sample properties of the MLE, discusses what happens when the assumed density is wrong, and closes with the classical trinity of tests.</p>
@@ -464,7 +464,7 @@ S_n(\btheta)=\pd{\ell_n(\btheta)}{\btheta}=\sum_{i=1}^n \underbrace{\pd{\ln f(y_
 H_n(\btheta)=\frac{\partial^2\ell_n(\btheta)}{\partial\btheta\,\partial\btheta'}=\sum_{i=1}^n \underbrace{\frac{\partial^2\ln f(y_i\mid\btheta)}{\partial\btheta\,\partial\btheta'}}_{H_i(\btheta)}.
 \]</span></p>
 </div>
-<p>The score measures how sensitive the log-likelihood is to the parameters; at an interior MLE, <span class="math inline">\(S_n(\hat\btheta)=\bm 0\)</span>. The Hessian is symmetric and measures curvature. If <span class="math inline">\(\ell_n\)</span> is strictly concave, <span class="math inline">\(H_n\)</span> is negative definite and the maximiser is unique. Both are sums over observations because the log-likelihood is.</p>
+<p>The score measures how sensitive the log-likelihood is to the parameters; at an interior MLE, <span class="math inline">\(S_n(\hat\btheta)=\bm 0\)</span>. The Hessian is symmetric and measures curvature. If <span class="math inline">\(H_n(\btheta)\)</span> is negative definite for all <span class="math inline">\(\btheta\)</span>, <span class="math inline">\(\ell_n\)</span> is strictly concave and a maximiser, if it exists, is unique. (The converse does not hold: a strictly concave function can have a singular Hessian at some points.) Both are sums over observations because the log-likelihood is.</p>
 <div id="thm-likelihood-properties" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.2 (Properties of the likelihood)</strong></span> Suppose the model is correctly specified, the support of <span class="math inline">\(Y\)</span> does not depend on <span class="math inline">\(\btheta\)</span>, and <span class="math inline">\(\btheta_0\)</span> is in the interior of <span class="math inline">\(\Theta\)</span>. Then</p>
 <ol type="i">
@@ -743,7 +743,7 @@ Figure&nbsp;1.2: The trinity for the exponential model, testing <span class="mat
 <p>They differ in finite samples but lead to the same decision here. Which to use in practice?</p>
 <ol type="1">
 <li><strong>Computation.</strong> LR needs both models, Wald only the unrestricted one, LM only the restricted one. LM is attractive when the restricted model is much simpler, e.g.&nbsp;when the restriction makes a nonlinear model linear.</li>
-<li><strong>Invariance.</strong> Only LR is invariant to how the model and the restriction are parametrised. The Wald statistic for <span class="math inline">\(H_0:\theta=1\)</span> and for the equivalent <span class="math inline">\(H_0:1/\theta=1\)</span> can differ substantially in small samples <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005, sec. 7.2</a>)</span>.</li>
+<li><strong>Invariance.</strong> Only LR is invariant to how the model and the restriction are parametrised. The Wald statistic for <span class="math inline">\(H_0:\theta=1\)</span> and for the equivalent <span class="math inline">\(H_0:1/\theta=1\)</span> can differ substantially in small samples <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005</a>, Ch. 7)</span>.</li>
 <li><strong>Robustness.</strong> Under misspecification, LR and the information-based LM are no longer <span class="math inline">\(\chi^2\)</span>. The Wald test with the sandwich variance remains valid, which is why robust Wald tests dominate applied work.</li>
 </ol>
 </section>
@@ -897,9 +897,6 @@ Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods a
 </div>
 <div id="ref-gourieroux1984" class="csl-entry" role="listitem">
 Gouriéroux, Christian, Alain Monfort, and Alain Trognon. 1984. <span>“Pseudo Maximum Likelihood Methods: Theory.”</span> <em>Econometrica</em> 52 (3): 681–700.
-</div>
-<div id="ref-hansen2022" class="csl-entry" role="listitem">
-Hansen, Bruce E. 2022. <em>Econometrics</em>. Princeton: Princeton University Press.
 </div>
 <div id="ref-huber1967" class="csl-entry" role="listitem">
 Huber, Peter J. 1967. <span>“The Behavior of Maximum Likelihood Estimates Under Nonstandard Conditions.”</span> In <em>Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, 1:221–33.
