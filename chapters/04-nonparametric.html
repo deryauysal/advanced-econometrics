@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,8 +247,38 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#parametric-nonparametric-and-semiparametric-models" id="toc-parametric-nonparametric-and-semiparametric-models" class="nav-link active" data-scroll-target="#parametric-nonparametric-and-semiparametric-models"><span class="header-section-number">4.1</span> Parametric, nonparametric and semiparametric models</a></li>
+  <li><a href="#sec-density" id="toc-sec-density" class="nav-link" data-scroll-target="#sec-density"><span class="header-section-number">4.2</span> Density estimation</a>
+  <ul class="collapse">
+  <li><a href="#the-histogram" id="toc-the-histogram" class="nav-link" data-scroll-target="#the-histogram"><span class="header-section-number">4.2.1</span> The histogram</a></li>
+  <li><a href="#kernel-density-estimation" id="toc-kernel-density-estimation" class="nav-link" data-scroll-target="#kernel-density-estimation"><span class="header-section-number">4.2.2</span> Kernel density estimation</a></li>
+  </ul></li>
+  <li><a href="#sec-npreg" id="toc-sec-npreg" class="nav-link" data-scroll-target="#sec-npreg"><span class="header-section-number">4.3</span> Nonparametric regression</a>
+  <ul class="collapse">
+  <li><a href="#the-nadarayawatson-estimator" id="toc-the-nadarayawatson-estimator" class="nav-link" data-scroll-target="#the-nadarayawatson-estimator"><span class="header-section-number">4.3.1</span> The Nadaraya–Watson estimator</a></li>
+  <li><a href="#local-polynomial-regression" id="toc-local-polynomial-regression" class="nav-link" data-scroll-target="#local-polynomial-regression"><span class="header-section-number">4.3.2</span> Local polynomial regression</a></li>
+  <li><a href="#bandwidth-choice-and-inference" id="toc-bandwidth-choice-and-inference" class="nav-link" data-scroll-target="#bandwidth-choice-and-inference"><span class="header-section-number">4.3.3</span> Bandwidth choice and inference</a></li>
+  <li><a href="#sec-curse" id="toc-sec-curse" class="nav-link" data-scroll-target="#sec-curse"><span class="header-section-number">4.3.4</span> The curse of dimensionality</a></li>
+  </ul></li>
+  <li><a href="#sec-semipar" id="toc-sec-semipar" class="nav-link" data-scroll-target="#sec-semipar"><span class="header-section-number">4.4</span> Semiparametric models</a>
+  <ul class="collapse">
+  <li><a href="#partially-linear-model" id="toc-partially-linear-model" class="nav-link" data-scroll-target="#partially-linear-model"><span class="header-section-number">4.4.1</span> Partially linear model</a></li>
+  <li><a href="#single-index-models" id="toc-single-index-models" class="nav-link" data-scroll-target="#single-index-models"><span class="header-section-number">4.4.2</span> Single-index models</a></li>
+  </ul></li>
+  <li><a href="#sec-ct4" id="toc-sec-ct4" class="nav-link" data-scroll-target="#sec-ct4"><span class="header-section-number">4.5</span> Computer tutorial 4</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-kernel-density-estimation" id="toc-problem-1-kernel-density-estimation" class="nav-link" data-scroll-target="#problem-1-kernel-density-estimation"><span class="header-section-number">4.5.1</span> Problem 1: Kernel density estimation</a></li>
+  <li><a href="#problem-2-wageexperience-profiles" id="toc-problem-2-wageexperience-profiles" class="nav-link" data-scroll-target="#problem-2-wageexperience-profiles"><span class="header-section-number">4.5.2</span> Problem 2: Wage–experience profiles</a></li>
+  <li><a href="#problem-3-a-partially-linear-wage-equation" id="toc-problem-3-a-partially-linear-wage-equation" class="nav-link" data-scroll-target="#problem-3-a-partially-linear-wage-equation"><span class="header-section-number">4.5.3</span> Problem 3: A partially linear wage equation</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.6</span> Exercises</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -289,28 +339,684 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-In preparation
+Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
+<p><span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 9; <span class="citation" data-cites="hansen2022b">Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 17 (density estimation); <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 19 (nonparametric regression); <span class="citation" data-cites="li2007">Li and Racine (<a href="../references.html#ref-li2007" role="doc-biblioref">2007</a>)</span>, Ch. 1–2 and 7; <span class="citation" data-cites="fan1996">Fan and Gijbels (<a href="../references.html#ref-fan1996" role="doc-biblioref">1996</a>)</span>, Ch. 2–3 (local polynomials).</p>
+</div>
+</div>
+<p>The previous chapters assumed that the model is known up to a finite-dimensional parameter: a density <span class="math inline">\(f(y\mid\bx;\btheta)\)</span> for ML, a moment function <span class="math inline">\(\bpsi(\bw,\btheta)\)</span> for GMM. This chapter drops that assumption for the two objects applied work cares about most, the density of a variable and the conditional mean of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>. The price is a slower rate of convergence, a bandwidth that has to be chosen, and the curse of dimensionality. Semiparametric models, sketched at the end, keep some parametric structure to avoid the worst of these costs.</p>
+<section id="parametric-nonparametric-and-semiparametric-models" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="parametric-nonparametric-and-semiparametric-models"><span class="header-section-number">4.1</span> Parametric, nonparametric and semiparametric models</h2>
+<p>Much of applied econometrics estimates a conditional expectation function (CEF), <span class="math display">\[
+y_i=m(\bx_i)+\varepsilon_i,\qquad \E[\varepsilon_i\mid\bx_i]=0,\qquad m(\bx)=\E[y_i\mid\bx_i=\bx].
+\]</span> There are three ways to model <span class="math inline">\(m(\cdot)\)</span>.</p>
 <ul>
-<li>Histogram and kernel density estimation; bias, variance and bandwidth choice</li>
-<li>Nadaraya-Watson and local linear regression</li>
-<li>Rule-of-thumb and cross-validated bandwidths; confidence bands</li>
-<li>Curse of dimensionality and semiparametric alternatives</li>
-<li>Computer tutorial 4</li>
+<li><strong>Parametric:</strong> <span class="math inline">\(m(\bx)=g(\bx,\btheta)\)</span> with <span class="math inline">\(g\)</span> known and <span class="math inline">\(\btheta\)</span> finite-dimensional, e.g.&nbsp;<span class="math inline">\(\bx'\bbeta\)</span> or <span class="math inline">\(\Phi(\bx'\bbeta)\)</span>. If <span class="math inline">\(g\)</span> is correct, this is efficient, allows extrapolation outside the data and often has a behavioural interpretation. If <span class="math inline">\(g\)</span> is wrong, the estimates converge to a pseudo-true value (<a href="01-mle.html#sec-pmle" class="quarto-xref"><span>Section 1.6</span></a>) that may be far from anything of interest. Specification searches over many <span class="math inline">\(g\)</span>’s do not solve this: the correct model need not be among those tried, need not be selected, and the search invalidates the usual inference.</li>
+<li><strong>Nonparametric:</strong> <span class="math inline">\(m\)</span> is only assumed to be smooth. This minimizes the risk of misspecification and is useful for exploring data and for checking parametric models. The costs: slower convergence, results that are hard to display for more than two regressors, and precision that deteriorates quickly with the dimension of <span class="math inline">\(\bx\)</span> (the <strong>curse of dimensionality</strong>, <a href="#sec-curse" class="quarto-xref"><span>Section 4.3.4</span></a>).</li>
+<li><strong>Semiparametric:</strong> part of the model is parametric and part is not, for example <span class="math inline">\(m(\bx,z)=\bx'\bbeta+\lambda(z)\)</span> with <span class="math inline">\(\lambda\)</span> unknown (partially linear), or <span class="math inline">\(m(\bx)=g(\bx'\bbeta)\)</span> with <span class="math inline">\(g\)</span> unknown (single index). Some authors also call a model semiparametric if the mean is parametric but the error distribution is left unspecified, which covers GMM.</li>
 </ul>
+</section>
+<section id="sec-density" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-density"><span class="header-section-number">4.2</span> Density estimation</h2>
+<p>Let <span class="math inline">\(X_1,\ldots,X_n\)</span> be i.i.d. with distribution function <span class="math inline">\(F\)</span> and density <span class="math inline">\(f\)</span>. A parametric estimator fits <span class="math inline">\(f(x\mid\btheta)\)</span>, e.g.&nbsp;<span class="math inline">\(N(\mu,\sigma^2)\)</span>, which imposes symmetry, unimodality and thin tails; as <span class="citation" data-cites="li2007">Li and Racine (<a href="../references.html#ref-li2007" role="doc-biblioref">2007</a>)</span> put it, the approach is somewhat circular, because we need to know the form of the density we want to estimate.</p>
+<section id="the-histogram" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="the-histogram"><span class="header-section-number">4.2.1</span> The histogram</h3>
+<p>Divide the support into bins <span class="math inline">\((b_j,b_{j+1}]\)</span> of width <span class="math inline">\(h=b_{j+1}-b_j\)</span>, <span class="math inline">\(j=1,\ldots,k\)</span>. The empirical distribution function <span class="math inline">\(\hat F(x)=n^{-1}\#\{i:X_i\le x\}\)</span> estimates <span class="math inline">\(F\)</span> consistently, and <span class="math inline">\(f(x)=\lim_{h\to0}\{F(b_{j+1})-F(b_j)\}/h\)</span> for <span class="math inline">\(x\in(b_j,b_{j+1}]\)</span>. Replacing <span class="math inline">\(F\)</span> by <span class="math inline">\(\hat F\)</span> and keeping <span class="math inline">\(h\)</span> positive gives the histogram.</p>
+<div id="def-hist" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.1 (Histogram estimator)</strong></span> For <span class="math inline">\(x\in(b_j,b_{j+1}]\)</span>, <span class="math display">\[
+\hat f(x)=\frac{\#\{i:X_i\in(b_j,b_{j+1}]\}}{nh}=\frac1n\sum_{i=1}^nW_{hi}(x),\qquad
+W_{hi}(x)=\begin{cases}1/h&amp;\text{if $X_i$ and $x$ are in the same bin,}\\0&amp;\text{otherwise.}\end{cases}
+\]</span></p>
+</div>
+<p>The histogram is a proper density: <span class="math inline">\(\hat f\ge0\)</span>, and <span class="math inline">\(\int\hat f(x)\,dx=\sum_jh\cdot\#\{X_i\in\text{bin }j\}/(nh)=1\)</span>.</p>
+<div id="thm-hist" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1 (Bias and variance of the histogram)</strong></span> Let <span class="math inline">\(f\)</span> have a bounded second derivative and let <span class="math inline">\(x\in(b_j,b_{j+1}]\)</span>. As <span class="math inline">\(h\to0\)</span> and <span class="math inline">\(nh\to\infty\)</span>, <span class="math display">\[
+\E[\hat f(x)]-f(x)=\tfrac12f'(x)\big[h-2(x-b_j)\big]+O(h^2),\qquad
+\Var[\hat f(x)]=\frac{f(x)}{nh}+o\Big(\frac1{nh}\Big).
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Bias.</em> <span class="math inline">\(\E[\hat f(x)]=\E[W_{hi}(x)]=h^{-1}\{F(b_{j+1})-F(b_j)\}\)</span>. Expand <span class="math inline">\(F(b)=F(x)+f(x)(b-x)+\frac12f'(x)(b-x)^2+R\)</span> around <span class="math inline">\(x\)</span> for <span class="math inline">\(b=b_j\)</span> and <span class="math inline">\(b=b_{j+1}\)</span>. Both distances are at most <span class="math inline">\(h\)</span>, so the remainders are <span class="math inline">\(O(h^3)\)</span>. The terms <span class="math inline">\(F(x)\)</span> cancel, <span class="math inline">\(f(x)(b_{j+1}-b_j)/h=f(x)\)</span>, and <span class="math inline">\((b_{j+1}-x)^2-(b_j-x)^2=h\{h-2(x-b_j)\}\)</span>, which gives the result.</p>
+<p><em>Variance.</em> <span class="math inline">\(nh\hat f(x)\)</span> is binomial with success probability <span class="math inline">\(p=F(b_{j+1})-F(b_j)=hf(x)+O(h^2)\)</span>, so <span class="math inline">\(\Var[\hat f(x)]=p(1-p)/(nh^2)=f(x)/(nh)+O(1/n)\)</span>.</p>
 </div>
 </div>
+</div>
+<p>The bias is of order <span class="math inline">\(h\)</span>, has the sign of <span class="math inline">\(f'(x)\)</span> in the left half of a bin and the opposite sign in the right half, and vanishes only at the bin centre. The variance is of order <span class="math inline">\(1/(nh)\)</span> and proportional to <span class="math inline">\(f(x)\)</span>. A wider bin reduces the variance and increases the bias: this <strong>bias-variance trade-off</strong> is the central theme of the chapter. Since <span class="math inline">\(\text{MSE}=\Var+\text{bias}^2\to0\)</span> when <span class="math inline">\(h\to0\)</span> and <span class="math inline">\(nh\to\infty\)</span>, the histogram is consistent.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-hist-mc" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hist-mc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: Histogram of a Beta(2,4) density with <span class="math inline">\(n=1000\)</span>: Monte Carlo mean, bias and variance over 2000 samples, and the approximations of <a href="#thm-hist" class="quarto-xref">Theorem&nbsp;<span>4.1</span></a>, at the deciles 0.1, 0.3, 0.5, 0.7 and 0.9 of the distribution. Bins on <span class="math inline">\([0,1]\)</span>.
+</figcaption>
+<div aria-describedby="tbl-hist-mc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">bins</th>
+<th style="text-align: right;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(f(x)\)</span></th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">bias (Thm)</th>
+<th style="text-align: right;">variance</th>
+<th style="text-align: right;"><span class="math inline">\(f/(nh)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.112</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.669</td>
+<td style="text-align: right;">0.098</td>
+<td style="text-align: right;">0.111</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0.031</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.218</td>
+<td style="text-align: right;">2.085</td>
+<td style="text-align: right;">2.090</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.011</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.314</td>
+<td style="text-align: right;">2.028</td>
+<td style="text-align: right;">1.995</td>
+<td style="text-align: right;">-0.032</td>
+<td style="text-align: right;">-0.027</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.041</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.422</td>
+<td style="text-align: right;">1.630</td>
+<td style="text-align: right;">1.612</td>
+<td style="text-align: right;">-0.018</td>
+<td style="text-align: right;">-0.014</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0.033</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.584</td>
+<td style="text-align: right;">0.841</td>
+<td style="text-align: right;">0.878</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.041</td>
+<td style="text-align: right;">0.017</td>
+<td style="text-align: right;">0.017</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.112</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.573</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">0.063</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.218</td>
+<td style="text-align: right;">2.085</td>
+<td style="text-align: right;">2.070</td>
+<td style="text-align: right;">-0.016</td>
+<td style="text-align: right;">-0.009</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.083</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.314</td>
+<td style="text-align: right;">2.028</td>
+<td style="text-align: right;">2.028</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">0.081</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.422</td>
+<td style="text-align: right;">1.630</td>
+<td style="text-align: right;">1.671</td>
+<td style="text-align: right;">0.041</td>
+<td style="text-align: right;">0.044</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">0.065</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.584</td>
+<td style="text-align: right;">0.841</td>
+<td style="text-align: right;">0.826</td>
+<td style="text-align: right;">-0.016</td>
+<td style="text-align: right;">-0.017</td>
+<td style="text-align: right;">0.032</td>
+<td style="text-align: right;">0.034</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#tbl-hist-mc" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows the trade-off: doubling the number of bins halves the bias where it is large and doubles the variance everywhere. The approximations of <a href="#thm-hist" class="quarto-xref">Theorem&nbsp;<span>4.1</span></a> are accurate. The bias at a given <span class="math inline">\(x\)</span> is erratic because it depends on where <span class="math inline">\(x\)</span> happens to lie in its bin.</p>
+<p><strong>Optimal bin width.</strong> A global criterion is the integrated MSE. Integrating the variance gives <span class="math inline">\(1/(nh)\)</span>; integrating the squared bias over a bin gives approximately <span class="math inline">\(f'(x)^2\int_0^h(h/2-t)^2dt/h=f'(x)^2h^2/12\)</span> per unit length. Hence <span class="math display">\[
+\text{AIMSE}(h)=\frac1{nh}+\frac{h^2}{12}\int f'(x)^2dx,\qquad
+h^*=\Big(\frac{6}{n\int f'(x)^2dx}\Big)^{1/3}\propto n^{-1/3},
+\]</span> and the AIMSE at <span class="math inline">\(h^*\)</span> is of order <span class="math inline">\(n^{-2/3}\)</span>. For a normal reference density <span class="math inline">\(\int f'^2=1/(4\sqrt\pi\sigma^3)\)</span>, so <span class="math inline">\(h^*=(24\sqrt\pi)^{1/3}\sigma n^{-1/3}\approx3.49\,\sigma n^{-1/3}\)</span>; for an exponential with mean <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(h^*\approx2.29\,\lambda n^{-1/3}\)</span>.</p>
+<p><strong>Drawbacks.</strong> The histogram is a step function, depends on the location of the bin edges, has a bias of order <span class="math inline">\(h\)</span> that is largest at the edges, and weights all observations in a bin equally, although those close to <span class="math inline">\(x\)</span> carry more information about <span class="math inline">\(f(x)\)</span>.</p>
+</section>
+<section id="kernel-density-estimation" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="kernel-density-estimation"><span class="header-section-number">4.2.2</span> Kernel density estimation</h3>
+<p>The histogram uses the observations in a bin <em>containing</em> <span class="math inline">\(x\)</span>. The kernel estimator centres the window <em>at</em> <span class="math inline">\(x\)</span>. A histogram with a single bin <span class="math inline">\([x-h,x+h]\)</span> is <span class="math display">\[
+\hat f(x)=\frac{1}{2nh}\#\{i:|X_i-x|\le h\}=\frac1{nh}\sum_{i=1}^nK\Big(\frac{X_i-x}{h}\Big),\qquad K(u)=\tfrac12\mathbb 1\{|u|\le1\},
+\]</span> which suggests replacing the uniform weight <span class="math inline">\(K\)</span> by one that declines smoothly with the distance from <span class="math inline">\(x\)</span>.</p>
+<div id="def-kde" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.2 (Kernel density estimator)</strong></span> <span class="math display">\[
+\hat f(x)=\frac1{nh}\sum_{i=1}^nK\Big(\frac{X_i-x}{h}\Big)=\frac1n\sum_{i=1}^nK_h(X_i-x),\qquad K_h(u)=\frac1hK\Big(\frac uh\Big),
+\]</span> where <span class="math inline">\(h&gt;0\)</span> is the <strong>bandwidth</strong> and the <strong>kernel</strong> <span class="math inline">\(K\)</span> is a symmetric function with <span class="math inline">\(\int K(u)\,du=1\)</span>. A second-order kernel also satisfies <span class="math inline">\(\mu_2(K)=\int u^2K(u)\,du\in(0,\infty)\)</span>. We write <span class="math inline">\(R_K=\int K(u)^2du\)</span>.</p>
+</div>
+<p>If <span class="math inline">\(K\ge0\)</span>, <span class="math inline">\(\hat f\)</span> is itself a density: an average of <span class="math inline">\(n\)</span> small densities centred at the observations. <a href="#tbl-kernels" class="quarto-xref">Table&nbsp;<span>4.2</span></a> lists the common kernels.</p>
+<div id="tbl-kernels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-kernels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.2: Second-order kernels. <span class="math inline">\(\delta_0=(R_K/\mu_2^2)^{1/5}\)</span> is used in <a href="#eq-silverman" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>.
+</figcaption>
+<div aria-describedby="tbl-kernels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Kernel</th>
+<th style="text-align: left;"><span class="math inline">\(K(u)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mu_2(K)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(R_K\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Uniform</td>
+<td style="text-align: left;"><span class="math inline">\(\frac12\mathbb 1\{\lvert u\rvert\le1\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/2\)</span></td>
+<td style="text-align: center;">1.3510</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Triangular</td>
+<td style="text-align: left;"><span class="math inline">\((1-\lvert u\rvert)\mathbb 1\{\lvert u\rvert\le1\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/6\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2/3\)</span></td>
+<td style="text-align: center;">1.8882</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Epanechnikov</td>
+<td style="text-align: left;"><span class="math inline">\(\frac34(1-u^2)\mathbb 1\{\lvert u\rvert\le1\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3/5\)</span></td>
+<td style="text-align: center;">1.7188</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quartic (biweight)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{15}{16}(1-u^2)^2\mathbb 1\{\lvert u\rvert\le1\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/7\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(5/7\)</span></td>
+<td style="text-align: center;">2.0362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gaussian</td>
+<td style="text-align: left;"><span class="math inline">\(\phi(u)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1/(2\sqrt\pi)\)</span></td>
+<td style="text-align: center;">0.7764</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="thm-kde" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.2 (Bias and variance of the kernel density estimator)</strong></span> Let <span class="math inline">\(f\)</span> be twice continuously differentiable near <span class="math inline">\(x\)</span> and <span class="math inline">\(K\)</span> a second-order kernel. As <span class="math inline">\(h\to0\)</span> and <span class="math inline">\(nh\to\infty\)</span>, <span class="math display">\[
+\E[\hat f(x)]-f(x)=\tfrac12h^2\mu_2(K)f''(x)+o(h^2),\qquad
+\Var[\hat f(x)]=\frac{R_Kf(x)}{nh}+o\Big(\frac1{nh}\Big).
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Bias.</em> Substituting <span class="math inline">\(u=(t-x)/h\)</span>, <span class="math display">\[
+\E[\hat f(x)]=\int\frac1hK\Big(\frac{t-x}{h}\Big)f(t)\,dt=\int K(u)f(x+hu)\,du .
+\]</span> A second-order expansion <span class="math inline">\(f(x+hu)=f(x)+huf'(x)+\frac12h^2u^2f''(x)+o(h^2)\)</span> and the kernel properties <span class="math inline">\(\int K=1\)</span>, <span class="math inline">\(\int uK=0\)</span> (symmetry) and <span class="math inline">\(\int u^2K=\mu_2\)</span> give the result.</p>
+<p><em>Variance.</em> The summands are i.i.d., so <span class="math inline">\(\Var[\hat f(x)]=n^{-1}\Var[K_h(X_i-x)]=n^{-1}\{\E[K_h(X_i-x)^2]-(\E[K_h(X_i-x)])^2\}\)</span>. The same substitution gives <span class="math inline">\(\E[K_h^2]=h^{-1}\int K(u)^2f(x+hu)\,du=h^{-1}R_Kf(x)+O(1)\)</span>, and <span class="math inline">\((\E[K_h])^2=O(1)\)</span>.</p>
+</div>
+</div>
+</div>
+<p>Compared with the histogram, the bias is of order <span class="math inline">\(h^2\)</span> instead of <span class="math inline">\(h\)</span> and depends on the curvature <span class="math inline">\(f''\)</span>, not the slope: the estimator underestimates peaks (<span class="math inline">\(f''&lt;0\)</span>) and overestimates troughs (<span class="math inline">\(f''&gt;0\)</span>). The variance has the same order <span class="math inline">\(1/(nh)\)</span> and increases with <span class="math inline">\(R_K\)</span>.</p>
+<p><strong>Optimal bandwidth.</strong> Integrating the leading terms of the MSE gives the asymptotic mean integrated squared error <span class="math display">\[
+\text{AMISE}(h)=\frac{R_K}{nh}+\frac{h^4}{4}\mu_2(K)^2R(f''),\qquad R(f'')=\int f''(x)^2dx .
+\]</span> Setting the derivative to zero, <span class="math display">\[
+h_{opt}=\Big(\frac{R_K}{\mu_2(K)^2R(f'')\,n}\Big)^{1/5}\propto n^{-1/5},\qquad
+\text{AMISE}(h_{opt})=\tfrac54\big(\mu_2(K)^2R(f'')\big)^{1/5}R_K^{4/5}\,n^{-4/5}.
+\]</span> The kernel estimator converges at rate <span class="math inline">\(n^{-4/5}\)</span> in MISE, faster than the histogram (<span class="math inline">\(n^{-2/3}\)</span>), but slower than a correctly specified parametric model (<span class="math inline">\(n^{-1}\)</span>). The optimal bandwidth depends on the kernel, the sample size and the unknown curvature <span class="math inline">\(R(f'')\)</span>.</p>
+<p><strong>Rule of thumb.</strong> If <span class="math inline">\(f\)</span> is <span class="math inline">\(N(\mu,\sigma^2)\)</span>, then <span class="math inline">\(R(f'')=3/(8\sqrt\pi\sigma^5)\approx0.212\sigma^{-5}\)</span> and <span id="eq-silverman"><span class="math display">\[
+h_{opt}=\delta_0\Big(\frac{8\sqrt\pi}{3}\Big)^{1/5}\sigma n^{-1/5}\approx1.3643\,\delta_0\,\hat\sigma\,n^{-1/5},\qquad \hat\sigma=\min\Big\{s,\frac{\text{IQR}}{1.349}\Big\},
+\tag{4.1}\]</span></span> with <span class="math inline">\(\delta_0\)</span> from <a href="#tbl-kernels" class="quarto-xref">Table&nbsp;<span>4.2</span></a>; for the Gaussian kernel <span class="math inline">\(h\approx1.06\,\hat\sigma n^{-1/5}\)</span>. Using the smaller of the standard deviation and the scaled interquartile range protects against outliers and skewness <span class="citation" data-cites="silverman1986">(<a href="../references.html#ref-silverman1986" role="doc-biblioref">Silverman 1986</a>)</span>. The rule works well for unimodal, roughly symmetric densities and oversmooths multimodal ones.</p>
+<p><strong>Least-squares cross-validation.</strong> Choose <span class="math inline">\(h\)</span> to minimize an estimate of the integrated squared error <span class="math inline">\(\int(\hat f_h-f)^2=\int\hat f_h^2-2\int\hat f_hf+\int f^2\)</span>. The last term does not depend on <span class="math inline">\(h\)</span>; <span class="math inline">\(\int\hat f_hf=\E[\hat f_h(X)]\)</span> is estimated by the leave-one-out average <span class="math inline">\(n^{-1}\sum_i\hat f_{-i}(X_i)\)</span>, where <span class="math inline">\(\hat f_{-i}\)</span> omits observation <span class="math inline">\(i\)</span>. This gives <span class="math display">\[
+\text{CV}(h)=\frac1{n^2h}\sum_{i=1}^n\sum_{j=1}^n\bar K\Big(\frac{X_i-X_j}{h}\Big)-\frac2n\sum_{i=1}^n\hat f_{-i}(X_i),\qquad \bar K(u)=\int K(u-t)K(t)\,dt .
+\]</span> For the Gaussian kernel <span class="math inline">\(\bar K\)</span> is the <span class="math inline">\(N(0,2)\)</span> density. Cross-validation makes no reference-density assumption but is noisy in small samples.</p>
+<p><strong>Choice of kernel.</strong> It matters much less than the bandwidth. The Epanechnikov kernel minimizes the AMISE at the optimal bandwidth, but the efficiency loss of the others is a few percent. To give two kernels the same amount of smoothing, scale the bandwidths in proportion to <span class="math inline">\(\delta_0\)</span>: <span class="math inline">\(h_B=(\delta_0^B/\delta_0^A)h_A\)</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Bandwidths in R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>density()</code> in R parametrizes every kernel by its <em>standard deviation</em> <code>bw</code>, not by the half-width of its support. For the Epanechnikov kernel on <span class="math inline">\([-1,1]\)</span>, which has standard deviation <span class="math inline">\(1/\sqrt5\)</span>, <code>bw</code> <span class="math inline">\(=h/\sqrt5\)</span>. The default <code>bw.nrd0</code> is <span class="math inline">\(0.9\hat\sigma n^{-1/5}\)</span>, slightly smaller than the Gaussian rule <span class="math inline">\(1.06\hat\sigma n^{-1/5}\)</span>.</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-kde-psid" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kde-psid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-nonparametric_files/figure-html/fig-kde-psid-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kde-psid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Log hourly wage of 177 women aged 30–50 (PSID; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 9): histogram and Epanechnikov kernel estimates with the rule-of-thumb bandwidth <span class="math inline">\(h_{ROT}\)</span> from <a href="#eq-silverman" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, half and twice of it.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The rule-of-thumb bandwidth here is <span class="math inline">\(h_{ROT}=0.545\)</span>. Halving it produces spurious bumps; doubling it flattens the peak and spreads mass into the tails (<a href="#fig-kde-psid" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>).</p>
+<p><strong>Inference.</strong> Under the conditions of <a href="#thm-kde" class="quarto-xref">Theorem&nbsp;<span>4.2</span></a>, <span class="math inline">\(\sqrt{nh}\,\{\hat f(x)-f(x)-\text{bias}\}\cvd N(0,R_Kf(x))\)</span>. With the MSE-optimal <span class="math inline">\(h\propto n^{-1/5}\)</span>, <span class="math inline">\(\sqrt{nh}\cdot h^2\)</span> converges to a constant, so the bias does not vanish relative to the standard error and the interval <span class="math inline">\(\hat f(x)\pm1.96\sqrt{R_K\hat f(x)/(nh)}\)</span> is not centred at <span class="math inline">\(f(x)\)</span>. In practice one either <strong>undersmooths</strong> (uses a bandwidth smaller than the MSE-optimal one, so that the bias is negligible) or bootstraps; the resulting bands are pointwise, not uniform in <span class="math inline">\(x\)</span>.</p>
+</section>
+</section>
+<section id="sec-npreg" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-npreg"><span class="header-section-number">4.3</span> Nonparametric regression</h2>
+<p>Let <span class="math inline">\((y_i,x_i)\)</span> be i.i.d. with <span class="math inline">\(y_i=m(x_i)+\varepsilon_i\)</span>, <span class="math inline">\(\E[\varepsilon_i\mid x_i]=0\)</span> and <span class="math inline">\(\Var(\varepsilon_i\mid x_i)=\sigma^2(x_i)\)</span>; <span class="math inline">\(x\)</span> is scalar until <a href="#sec-curse" class="quarto-xref"><span>Section 4.3.4</span></a>. With a discrete regressor, <span class="math inline">\(m(x_0)\)</span> is estimated by the average of <span class="math inline">\(y_i\)</span> among observations with <span class="math inline">\(x_i=x_0\)</span>. With many values or a continuous regressor, we average over observations with <span class="math inline">\(x_i\)</span> <em>close to</em> <span class="math inline">\(x_0\)</span>.</p>
+<section id="the-nadarayawatson-estimator" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="the-nadarayawatson-estimator"><span class="header-section-number">4.3.1</span> The Nadaraya–Watson estimator</h3>
+<div id="def-nw" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.3 (Nadaraya–Watson estimator <span class="citation" data-cites="nadaraya1964 watson1964">(<a href="../references.html#ref-nadaraya1964" role="doc-biblioref">Nadaraya 1964</a>; <a href="../references.html#ref-watson1964" role="doc-biblioref">Watson 1964</a>)</span>)</strong></span> <span class="math display">\[
+\hat m(x)=\frac{\sum_{i=1}^nK_h(x_i-x)\,y_i}{\sum_{i=1}^nK_h(x_i-x)}=\sum_{i=1}^nw_i(x)\,y_i,\qquad w_i(x)=\frac{K_h(x_i-x)}{\sum_{j=1}^nK_h(x_j-x)} .
+\]</span></p>
+</div>
+<p>With the uniform kernel this is the average of <span class="math inline">\(y_i\)</span> over <span class="math inline">\(|x_i-x|\le h\)</span>. The weights are nonnegative (for <span class="math inline">\(K\ge0\)</span>) and sum to one, so <span class="math inline">\(\hat m(x)\)</span> is a <strong>local weighted average</strong> and a <strong>linear smoother</strong>: linear in the <span class="math inline">\(y_i\)</span>. Three equivalent views help:</p>
+<ol type="1">
+<li><strong>Plug-in:</strong> <span class="math inline">\(m(x)=\int yf(x,y)\,dy/f(x)\)</span>. Replacing the joint and the marginal density by kernel estimates with a product kernel gives exactly <a href="#def-nw" class="quarto-xref">Definition&nbsp;<span>4.3</span></a>: the numerator is an estimate of <span class="math inline">\(\int yf(x,y)\,dy\)</span> and the denominator, divided by <span class="math inline">\(n\)</span>, is the kernel density estimate <span class="math inline">\(\hat f(x)\)</span>.</li>
+<li><strong>Local constant:</strong> <span class="math inline">\(\hat m(x)=\arg\min_\theta\sum_iK_h(x_i-x)(y_i-\theta)^2\)</span>, a weighted least squares fit of a constant.</li>
+<li><strong>Local averaging with shrinking windows:</strong> consistency requires <span class="math inline">\(h\to0\)</span> (average ever closer to <span class="math inline">\(x\)</span>, so the bias vanishes) and <span class="math inline">\(nh\to\infty\)</span> (the window contains ever more observations, so the variance vanishes).</li>
+</ol>
+<div id="thm-nw" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.3 (Bias and variance of the NW estimator)</strong></span> Let <span class="math inline">\(x\)</span> be an interior point of the support with <span class="math inline">\(f(x)&gt;0\)</span>, let <span class="math inline">\(m\)</span> and <span class="math inline">\(f\)</span> be twice continuously differentiable and <span class="math inline">\(\sigma^2(\cdot)\)</span> continuous near <span class="math inline">\(x\)</span>. As <span class="math inline">\(h\to0\)</span> and <span class="math inline">\(nh\to\infty\)</span>, <span class="math display">\[
+\E[\hat m(x)\mid x_1,\ldots,x_n]-m(x)\approx h^2\mu_2(K)\Big(\tfrac12m''(x)+\frac{m'(x)f'(x)}{f(x)}\Big),\qquad
+\Var[\hat m(x)\mid x_1,\ldots,x_n]\approx\frac{R_K\,\sigma^2(x)}{nh\,f(x)} .
+\]</span></p>
+</div>
+<p>The variance is large where the data are sparse (<span class="math inline">\(f(x)\)</span> small) or noisy (<span class="math inline">\(\sigma^2(x)\)</span> large). The bias has two parts. The first, <span class="math inline">\(\frac12m''\)</span>, reflects curvature. The second, <span class="math inline">\(m'f'/f\)</span>, is a <strong>design bias</strong>: if <span class="math inline">\(m\)</span> is increasing and the density of <span class="math inline">\(x\)</span> is increasing too, the window contains more observations to the right of <span class="math inline">\(x\)</span>, where <span class="math inline">\(m\)</span> is larger, and the local average is pulled up.</p>
+</section>
+<section id="local-polynomial-regression" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="local-polynomial-regression"><span class="header-section-number">4.3.2</span> Local polynomial regression</h3>
+<p>NW fits a constant in a neighbourhood of <span class="math inline">\(x\)</span>. A Taylor expansion <span class="math inline">\(m(x_i)\approx m(x)+m'(x)(x_i-x)+\dots+m^{(p)}(x)(x_i-x)^p/p!\)</span> suggests fitting a polynomial instead.</p>
+<div id="def-lp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.4 (Local polynomial estimator)</strong></span> <span class="math display">\[
+\hat\btheta(x)=\arg\min_{\theta_0,\ldots,\theta_p}\sum_{i=1}^nK_h(x_i-x)\Big[y_i-\theta_0-\theta_1(x_i-x)-\dots-\theta_p(x_i-x)^p\Big]^2 ,
+\]</span> and <span class="math inline">\(\hat m(x)=\hat\theta_0(x)\)</span>; <span class="math inline">\(k!\,\hat\theta_k(x)\)</span> estimates the derivative <span class="math inline">\(m^{(k)}(x)\)</span>. In matrix form, with <span class="math inline">\(\bZ_x\)</span> the <span class="math inline">\(n\times(p+1)\)</span> matrix with rows <span class="math inline">\((1,x_i-x,\ldots,(x_i-x)^p)\)</span> and <span class="math inline">\(\bm K_x=\operatorname{diag}\{K_h(x_i-x)\}\)</span>, <span class="math inline">\(\hat\btheta(x)=(\bZ_x'\bm K_x\bZ_x)^{-1}\bZ_x'\bm K_x\by\)</span>.</p>
+</div>
+<p><span class="math inline">\(p=0\)</span> is NW and <span class="math inline">\(p=1\)</span> the <strong>local linear</strong> (LL) estimator. For LL at an interior point, <span class="math display">\[
+\text{bias}\approx\tfrac12h^2\mu_2(K)\,m''(x),\qquad \Var\approx\frac{R_K\sigma^2(x)}{nhf(x)} ,
+\]</span> the same variance as NW but without the design bias <span class="citation" data-cites="fan1996">(<a href="../references.html#ref-fan1996" role="doc-biblioref">Fan and Gijbels 1996</a>)</span>. More generally, the bias of odd-order fits does not depend on <span class="math inline">\(f\)</span>, and going from <span class="math inline">\(p\)</span> even to <span class="math inline">\(p+1\)</span> removes a bias term without increasing the asymptotic variance. This is why <span class="math inline">\(p=1\)</span> (and sometimes <span class="math inline">\(p=3\)</span>) is recommended.</p>
+<p><strong>Boundaries.</strong> Near the edge of the support the kernel window is one-sided. NW then averages only observations on one side, and its bias is of order <span class="math inline">\(h\)</span> rather than <span class="math inline">\(h^2\)</span>. The local linear fit extrapolates the local slope and keeps a bias of order <span class="math inline">\(h^2\)</span> at the boundary.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-nw-ll" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nw-ll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-nonparametric_files/figure-html/fig-nw-ll-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nw-ll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Nadaraya–Watson and local linear fits (Gaussian kernel, <span class="math inline">\(h=0.08\)</span>) to <span class="math inline">\(n=300\)</span> observations from <span class="math inline">\(y=\sin(2\pi x)+2x+\varepsilon\)</span>, <span class="math inline">\(x\sim U(0,1)\)</span>, <span class="math inline">\(\varepsilon\sim N(0,0.5^2)\)</span>. The true <span class="math inline">\(m\)</span> is dashed. NW is biased towards the interior at both boundaries.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-boundary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-boundary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.3: Bias and standard deviation of NW and local linear estimates at an interior point (<span class="math inline">\(x=0.5\)</span>) and at the boundary (<span class="math inline">\(x=0\)</span>) in the design of <a href="#fig-nw-ll" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>, 1000 samples.
+</figcaption>
+<div aria-describedby="tbl-boundary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: left;">point</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Nadaraya-Watson</td>
+<td style="text-align: left;">interior x = 0.5</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.061</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nadaraya-Watson</td>
+<td style="text-align: left;">boundary x = 0</td>
+<td style="text-align: right;">0.499</td>
+<td style="text-align: right;">0.090</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">local linear</td>
+<td style="text-align: left;">interior x = 0.5</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.054</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">local linear</td>
+<td style="text-align: left;">boundary x = 0</td>
+<td style="text-align: right;">0.045</td>
+<td style="text-align: right;">0.143</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>At the interior point both estimators are nearly unbiased, with similar standard deviations. At the boundary the NW bias is large, while the local linear estimator stays nearly unbiased at the cost of a larger variance (<a href="#tbl-boundary" class="quarto-xref">Table&nbsp;<span>4.3</span></a>).</p>
+</section>
+<section id="bandwidth-choice-and-inference" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="bandwidth-choice-and-inference"><span class="header-section-number">4.3.3</span> Bandwidth choice and inference</h3>
+<p>The integrated MSE of the local linear estimator over a region <span class="math inline">\([\xi_1,\xi_2]\)</span> with weight <span class="math inline">\(w(x)=\mathbb 1\{\xi_1\le x\le\xi_2\}\)</span> is approximately <span class="math display">\[
+\text{AIMSE}(h)=h^4\mu_2(K)^2\bar B+\frac{R_K\bar\sigma^2}{nh},\qquad
+\bar B=\int\big(\tfrac12m''(x)\big)^2f(x)w(x)\,dx,\quad \bar\sigma^2=\int\sigma^2(x)w(x)\,dx,
+\]</span> minimized by <span class="math inline">\(h_0=\big(R_K\bar\sigma^2/(4\mu_2(K)^2\bar B)\big)^{1/5}n^{-1/5}\)</span>.</p>
+<p><strong>Rule of thumb</strong> <span class="citation" data-cites="fan1996 hansen2022">(<a href="../references.html#ref-fan1996" role="doc-biblioref">Fan and Gijbels 1996, sec. 4.2</a>; <a href="../references.html#ref-hansen2022" role="doc-biblioref">Hansen 2022a, sec. 19.9</a>)</span>. Fit a global polynomial of order four by OLS, compute <span class="math inline">\(\hat m''(x)\)</span> from it, estimate <span class="math inline">\(\bar B\)</span> by <span class="math inline">\(\frac1n\sum_i(\frac12\hat m''(x_i))^2w(x_i)\)</span> and <span class="math inline">\(\bar\sigma^2\)</span> by <span class="math inline">\(\hat\sigma^2(\xi_2-\xi_1)\)</span> with <span class="math inline">\(\hat\sigma^2\)</span> the residual variance of the polynomial fit (assuming homoskedasticity). For the Gaussian kernel <span class="math inline">\((R_K/4)^{1/5}\approx0.58\)</span>, so <span class="math display">\[
+h_{ROT}=0.58\Big(\frac{\hat\sigma^2(\xi_2-\xi_1)}{n\hat{\bar B}}\Big)^{1/5}.
+\]</span></p>
+<p><strong>Cross-validation.</strong> Choose <span class="math inline">\(h\)</span> to minimize the leave-one-out prediction error <span class="math display">\[
+\text{CV}(h)=\frac1n\sum_{i=1}^n\big(y_i-\hat m_{-i}(x_i)\big)^2w(x_i),
+\]</span> where <span class="math inline">\(\hat m_{-i}\)</span> is computed without observation <span class="math inline">\(i\)</span>. Leaving <span class="math inline">\(i\)</span> out is essential: with <span class="math inline">\(\hat m(x_i)\)</span> itself the criterion would be minimized by <span class="math inline">\(h\to0\)</span>, which interpolates the data.</p>
+<p><strong>Standard errors and bands.</strong> The local linear estimator is a weighted least squares coefficient, so a heteroskedasticity-robust variance is the sandwich <span class="math display">\[
+\widehat\Var[\hat\btheta(x)]=(\bZ_x'\bm K_x\bZ_x)^{-1}\Big(\sum_iK_h(x_i-x)^2\,\bm z_i\bm z_i'\,\hat\varepsilon_i^2\Big)(\bZ_x'\bm K_x\bZ_x)^{-1},
+\]</span> with <span class="math inline">\(\bm z_i=(1,x_i-x)'\)</span> and <span class="math inline">\(\hat\varepsilon_i\)</span> leave-one-out residuals, and <span class="math inline">\(\hat m(x)\pm1.96\,\text{se}\)</span> is a pointwise 95% interval. Alternatively, <span class="math inline">\(\sigma^2(x)\)</span> can be estimated by a nonparametric regression of <span class="math inline">\(\hat\varepsilon_i^2\)</span> on <span class="math inline">\(x_i\)</span> and plugged into <a href="#thm-nw" class="quarto-xref">Theorem&nbsp;<span>4.3</span></a>. As for densities, the interval is centred at <span class="math inline">\(\E[\hat m(x)]\)</span>, not <span class="math inline">\(m(x)\)</span>, unless one undersmooths; it is pointwise; and the bootstrap (resampling pairs <span class="math inline">\((y_i,x_i)\)</span>) is an alternative.</p>
+<p><strong>Nearest neighbours.</strong> The <span class="math inline">\(k\)</span>-NN estimator averages <span class="math inline">\(y\)</span> over the <span class="math inline">\(k\)</span> observations with <span class="math inline">\(x_i\)</span> closest to <span class="math inline">\(x\)</span>: a uniform kernel with a bandwidth that adapts to the local density of the data, wide where data are sparse and narrow where they are dense. The number of neighbours <span class="math inline">\(k\)</span> plays the role of <span class="math inline">\(nh\)</span>.</p>
+</section>
+<section id="sec-curse" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="sec-curse"><span class="header-section-number">4.3.4</span> The curse of dimensionality</h3>
+<p>All estimators extend to <span class="math inline">\(\bx\in\mathbb R^d\)</span> with a multivariate (usually product) kernel, e.g.&nbsp;<span class="math inline">\(\hat m(\bx)=\sum_i\prod_{l=1}^dK_{h}(x_{il}-x_l)y_i/\sum_i\prod_lK_h(x_{il}-x_l)\)</span>. The window now has volume <span class="math inline">\(h^d\)</span>, so the variance is of order <span class="math inline">\(1/(nh^d)\)</span> while the bias remains of order <span class="math inline">\(h^2\)</span>. Balancing the two gives <span class="math inline">\(h\propto n^{-1/(4+d)}\)</span> and an optimal MSE of order <span class="math inline">\(n^{-4/(4+d)}\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-curse" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-curse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: Sample size needed in <span class="math inline">\(d\)</span> dimensions to reach the optimal MSE rate that <span class="math inline">\(n=100\)</span> gives in one dimension, <span class="math inline">\(n_d=100^{(4+d)/5}\)</span>.
+</figcaption>
+<div aria-describedby="tbl-curse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(d\)</span></th>
+<th style="text-align: right;">MSE rate</th>
+<th style="text-align: right;"><span class="math inline">\(n_d\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: right;">n^(-4/5)</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">n^(-4/6)</td>
+<td style="text-align: right;">251</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: right;">n^(-4/7)</td>
+<td style="text-align: right;">631</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: right;">n^(-4/9)</td>
+<td style="text-align: right;">3,981</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: right;">n^(-4/14)</td>
+<td style="text-align: right;">398,107</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>With ten continuous regressors, about 400,000 observations deliver the precision that one hundred deliver with one regressor (<a href="#tbl-curse" class="quarto-xref">Table&nbsp;<span>4.4</span></a>). In addition, functions of more than two arguments are hard to display. This motivates restricting the model.</p>
+</section>
+</section>
+<section id="sec-semipar" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-semipar"><span class="header-section-number">4.4</span> Semiparametric models</h2>
+<p>Semiparametric models keep a finite-dimensional parameter of interest and leave a function unspecified. This section gives the main ideas; <span class="citation" data-cites="li2007">Li and Racine (<a href="../references.html#ref-li2007" role="doc-biblioref">2007</a>)</span> (Ch. 7–8) and <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span> (Sec. 19.24) treat them in detail.</p>
+<section id="partially-linear-model" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="partially-linear-model"><span class="header-section-number">4.4.1</span> Partially linear model</h3>
+<p><span class="math display">\[
+y_i=\bx_i'\bbeta+\lambda(z_i)+u_i,\qquad \E[u_i\mid\bx_i,z_i]=0 ,
+\]</span> with <span class="math inline">\(\lambda\)</span> unknown. Typically <span class="math inline">\(\bx_i\)</span> contains the variables of interest and <span class="math inline">\(z_i\)</span> a control whose effect is not of interest, e.g.&nbsp;a running variable, age or a location. Taking expectations conditional on <span class="math inline">\(z_i\)</span> and subtracting, <span class="math display">\[
+\underbrace{y_i-\E[y_i\mid z_i]}_{\tilde y_i}=\underbrace{\big(\bx_i-\E[\bx_i\mid z_i]\big)'}_{\tilde\bx_i'}\bbeta+u_i ,
+\]</span> because <span class="math inline">\(\lambda(z_i)-\E[\lambda(z_i)\mid z_i]=0\)</span>. The nuisance function is gone.</p>
+<div id="def-robinson" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.5 (Robinson’s estimator <span class="citation" data-cites="robinson1988">(<a href="../references.html#ref-robinson1988" role="doc-biblioref">Robinson 1988</a>)</span>)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>Estimate <span class="math inline">\(\E[y_i\mid z_i]\)</span> and each element of <span class="math inline">\(\E[\bx_i\mid z_i]\)</span> by nonparametric regressions on <span class="math inline">\(z_i\)</span>; form residuals <span class="math inline">\(\hat{\tilde y}_i\)</span> and <span class="math inline">\(\hat{\tilde\bx}_i\)</span>.</li>
+<li>Regress <span class="math inline">\(\hat{\tilde y}_i\)</span> on <span class="math inline">\(\hat{\tilde\bx}_i\)</span> by OLS without a constant: <span class="math inline">\(\hat\bbeta=\big(\sum_i\hat{\tilde\bx}_i\hat{\tilde\bx}_i'\big)^{-1}\sum_i\hat{\tilde\bx}_i\hat{\tilde y}_i\)</span>.</li>
+<li>If needed, <span class="math inline">\(\hat\lambda(z)=\hat\E[y\mid z]-\hat\E[\bx\mid z]'\hat\bbeta\)</span>.</li>
+</ol>
+</div>
+<p>Under regularity conditions (enough smoothness, suitable bandwidths, trimming where <span class="math inline">\(z\)</span> is sparse), <span class="math inline">\(\hat\bbeta\)</span> is <span class="math inline">\(\sqrt n\)</span>-consistent and asymptotically normal with the variance it would have if the conditional means were known: <span class="math display">\[
+\sqrt n(\hat\bbeta-\bbeta)\cvd N\Big(\bm0,\ \E[\tilde\bx_i\tilde\bx_i']^{-1}\E[u_i^2\tilde\bx_i\tilde\bx_i']\E[\tilde\bx_i\tilde\bx_i']^{-1}\Big).
+\]</span> The first-step nonparametric estimates converge slowly, but their errors enter the moment condition for <span class="math inline">\(\bbeta\)</span> only as products, which vanish faster than <span class="math inline">\(n^{-1/2}\)</span>. This is the same orthogonality idea that underlies double/debiased machine learning, which replaces the kernel regressions by machine-learning predictions with cross-fitting (<a href="05-statlearning.html" class="quarto-xref"><span>Chapter 5</span></a>). <span class="math inline">\(\bbeta\)</span> is identified only if <span class="math inline">\(\E[\tilde\bx_i\tilde\bx_i']\)</span> is nonsingular: <span class="math inline">\(\bx\)</span> must not be a function of <span class="math inline">\(z\)</span>, and it cannot contain a constant (absorbed by <span class="math inline">\(\lambda\)</span>).</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-robinson" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.5: Partially linear model <span class="math inline">\(y=\beta x+\lambda(z)+u\)</span> with <span class="math inline">\(\beta=1\)</span>, <span class="math inline">\(\lambda(z)=\sin(2z)+z^2\)</span>, <span class="math inline">\(x=z^2+v\)</span>: OLS of <span class="math inline">\(y\)</span> on <span class="math inline">\((1,x,z)\)</span> and Robinson’s estimator (local linear first steps), <span class="math inline">\(n=500\)</span>, 500 samples.
+</figcaption>
+<div aria-describedby="tbl-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">OLS on (1, x, z)</td>
+<td style="text-align: right;">0.661</td>
+<td style="text-align: right;">0.057</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Robinson</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.043</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Controlling for <span class="math inline">\(z\)</span> linearly leaves the nonlinear part of <span class="math inline">\(\lambda(z)\)</span> in the error. Because <span class="math inline">\(x\)</span> depends nonlinearly on <span class="math inline">\(z\)</span> too, this part is correlated with <span class="math inline">\(x\)</span>, and OLS is severely biased. Robinson’s estimator removes the bias at a small cost in precision (<a href="#tbl-robinson" class="quarto-xref">Table&nbsp;<span>4.5</span></a>).</p>
+</section>
+<section id="single-index-models" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="single-index-models"><span class="header-section-number">4.4.2</span> Single-index models</h3>
+<p><span class="math display">\[
+\E[y_i\mid\bx_i]=g(\bx_i'\bbeta),\qquad g\text{ unknown}.
+\]</span> Probit and logit are single-index models with <span class="math inline">\(g=\Phi\)</span> or <span class="math inline">\(\Lambda\)</span>; here <span class="math inline">\(g\)</span> is estimated from the data. The index reduces the <span class="math inline">\(d\)</span>-dimensional problem to a one-dimensional one.</p>
+<p><strong>Identification.</strong> For any <span class="math inline">\(a\)</span> and <span class="math inline">\(b\neq0\)</span>, <span class="math inline">\(g(\bx'\bbeta)=\tilde g(a+b\,\bx'\bbeta)\)</span> with <span class="math inline">\(\tilde g(v)=g((v-a)/b)\)</span>, so <span class="math inline">\(\bbeta\)</span> is identified only up to location and scale. One therefore excludes the constant from <span class="math inline">\(\bx\)</span> and normalizes one coefficient to one. <span class="math inline">\(\bx\)</span> must then contain at least two variables (otherwise nothing is left to estimate), and at least one with a continuous distribution (otherwise the index takes finitely many values and <span class="math inline">\(g\)</span> can fit any function of them).</p>
+<p><strong>Semiparametric least squares</strong> <span class="citation" data-cites="ichimura1993">(<a href="../references.html#ref-ichimura1993" role="doc-biblioref">Ichimura 1993</a>)</span>. If <span class="math inline">\(g\)</span> were known, <span class="math inline">\(\bbeta\)</span> would be estimated by nonlinear least squares. Ichimura replaces <span class="math inline">\(g\)</span> by a leave-one-out kernel regression of <span class="math inline">\(y\)</span> on the index: <span class="math display">\[
+\hat\bbeta=\arg\min_{\bbeta}\sum_{i=1}^n\big(y_i-\hat g_{-i}(\bx_i'\bbeta)\big)^2\tau_i ,
+\]</span> where <span class="math inline">\(\tau_i\)</span> trims observations where the density of the index is small. The objective is not smooth in <span class="math inline">\(\bbeta\)</span> and often has several local minima, so good starting values matter. The estimator is <span class="math inline">\(\sqrt n\)</span>-consistent and asymptotically normal.</p>
+<p><strong>Binary choice</strong> <span class="citation" data-cites="klein1993">(<a href="../references.html#ref-klein1993" role="doc-biblioref">Klein and Spady 1993</a>)</span>. For binary <span class="math inline">\(y\)</span>, <span class="math inline">\(g(v)=P(y=1\mid\bx'\bbeta=v)\)</span>. By Bayes’ rule, <span class="math display">\[
+g(v)=\frac{P(y=1)\,f(v\mid y=1)}{P(y=1)\,f(v\mid y=1)+P(y=0)\,f(v\mid y=0)},
+\]</span> which is estimated with kernel density estimates of the index in the two groups. Klein and Spady maximize the binary log-likelihood <span class="math inline">\(\sum_i[y_i\ln\hat g(\bx_i'\bbeta)+(1-y_i)\ln(1-\hat g(\bx_i'\bbeta))]\)</span> with <span class="math inline">\(\hat g\)</span> in place of <span class="math inline">\(\Phi\)</span> or <span class="math inline">\(\Lambda\)</span>. With the same normalization as above, the estimator is <span class="math inline">\(\sqrt n\)</span>-consistent, asymptotically normal, and attains the semiparametric efficiency bound when the error is independent of <span class="math inline">\(\bx\)</span>.</p>
+</section>
+</section>
+<section id="sec-ct4" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-ct4"><span class="header-section-number">4.5</span> Computer tutorial 4</h2>
+<p><strong>Learning goals.</strong> Program a kernel density estimator and a local polynomial regression from scratch and check them against built-in functions; compute rule-of-thumb and cross-validated bandwidths and see how sensitive the estimates are to them; build pointwise confidence bands; estimate a partially linear model with Robinson’s estimator.</p>
+<p><strong>Packages.</strong> Base R and <code>ggplot2</code>; optionally <code>KernSmooth</code>. <strong>Data.</strong> <code>psidf3050.csv</code> <span class="citation" data-cites="cameron2005">(<a href="../references.html#ref-cameron2005" role="doc-biblioref">Cameron and Trivedi 2005</a>, Ch. 9)</span>: 177 women aged 30–50 from the PSID, with the log hourly wage <code>lnhwage</code>. <code>cps09mar.csv</code> <span class="citation" data-cites="hansen2022">(<a href="../references.html#ref-hansen2022" role="doc-biblioref">Hansen 2022a</a>)</span>: 50,742 respondents of the March 2009 Current Population Survey, with <code>age</code>, <code>female</code>, <code>education</code> (years), <code>earnings</code> (annual), <code>hours</code> (per week), <code>week</code> (weeks worked) and <code>race</code> (2 = Black).</p>
+<section id="problem-1-kernel-density-estimation" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="problem-1-kernel-density-estimation"><span class="header-section-number">4.5.1</span> Problem 1: Kernel density estimation</h3>
+<ol type="a">
+<li><p>Write a function <code>kde(x0, x, h)</code> that returns the Epanechnikov kernel density estimate at the points <code>x0</code> (Definition 4.2 of the lecture notes). Estimate the density of <code>lnhwage</code> on a grid of 200 points with Silverman’s rule-of-thumb bandwidth, <span class="math inline">\(h=1.3643\,\delta_0\,\hat\sigma n^{-1/5}\)</span> with <span class="math inline">\(\hat\sigma=\min\{s,\text{IQR}/1.349\}\)</span>.</p></li>
+<li><p>Reproduce your estimate with <code>density()</code>. Which value of <code>bw</code> do you need, and why is it not <span class="math inline">\(h\)</span>?</p></li>
+<li><p>Compute the least-squares cross-validation criterion for the Gaussian kernel on a grid of bandwidths and find its minimizer. Compare with <code>bw.ucv()</code> and with the Gaussian rule of thumb <code>bw.nrd()</code>. Plot the density estimates for the three bandwidths.</p></li>
+<li><p>Add the normal density with the sample mean and standard deviation of <code>lnhwage</code> to the plot. What features of the data does it miss?</p></li>
+</ol>
+</section>
+<section id="problem-2-wageexperience-profiles" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="problem-2-wageexperience-profiles"><span class="header-section-number">4.5.2</span> Problem 2: Wage–experience profiles</h3>
+<p>We study <span class="math inline">\(m(x)=\E[\log\text{wage}\mid\text{experience}=x]\)</span> with the hourly wage <code>earnings / (hours * week)</code> and potential experience <code>age - education - 6</code>.</p>
+<ol type="a">
+<li>Take the subsample of Black women with 12 years of education (high school graduates), and restrict attention to experience in <span class="math inline">\([0,40]\)</span>, where about 90% of the observations lie.
+<ol type="i">
+<li>Compute the rule-of-thumb bandwidth for the local linear estimator with a Gaussian kernel (Section 4.3.3 of the lecture notes): fit a fourth-order polynomial, compute <span class="math inline">\(\hat{\bar B}\)</span> and <span class="math inline">\(\hat\sigma^2\)</span>, and use <span class="math inline">\(h_{ROT}=0.58\{\hat\sigma^2(\xi_2-\xi_1)/(n\hat{\bar B})\}^{1/5}\)</span>.</li>
+<li>Find the bandwidth that minimizes the leave-one-out cross-validation criterion of the local linear estimator on a grid from <span class="math inline">\(h_{ROT}/3\)</span> to <span class="math inline">\(3h_{ROT}\)</span>, counting only observations with experience in <span class="math inline">\([0,40]\)</span>.</li>
+<li>Plot the local linear estimates with both bandwidths.</li>
+<li>Add pointwise 95% confidence bands to the estimate with <span class="math inline">\(h_{ROT}\)</span>, using the heteroskedasticity-robust sandwich with leave-one-out residuals.</li>
+</ol></li>
+<li>Now take everyone with 20 years of education (professional degree or doctorate) and experience between 0 and 40.
+<ol type="i">
+<li>Estimate the regression separately for men and women with the Nadaraya–Watson estimator and plot it with 95% bands. Use the rule-of-thumb bandwidth of each group.</li>
+<li>Repeat with the local linear estimator. How do the estimates and bands change, in particular near 0 and 40 years?</li>
+<li>Does the evidence suggest that expected wages fall with experience beyond 20 years in this group?</li>
+</ol></li>
+</ol>
+</section>
+<section id="problem-3-a-partially-linear-wage-equation" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="problem-3-a-partially-linear-wage-equation"><span class="header-section-number">4.5.3</span> Problem 3: A partially linear wage equation</h3>
+<p>Take everyone with 16 years of education (bachelor’s degree) and experience between 0 and 40, and consider <span class="math display">\[
+\log\text{wage}_i=\beta\,\texttt{female}_i+\lambda(\text{experience}_i)+u_i .
+\]</span></p>
+<ol type="a">
+<li><p>Estimate <span class="math inline">\(\beta\)</span> by OLS with <span class="math inline">\(\lambda\)</span> linear and with <span class="math inline">\(\lambda\)</span> quadratic in experience.</p></li>
+<li><p>Estimate <span class="math inline">\(\beta\)</span> with Robinson’s estimator (Section 4.4.1 of the lecture notes), using local linear regressions on experience with the rule-of-thumb bandwidth. Experience takes only integer values: use this to save computing time.</p></li>
+<li><p>Compute a heteroskedasticity-robust standard error for <span class="math inline">\(\hat\beta\)</span> and compare the estimates. Why are they so similar here?</p></li>
+</ol>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.6</span> Exercises</h2>
+<p>Problem Set 4 contains the analytical exercises for this chapter:</p>
+<ul>
+<li><strong>Problem 1</strong>: the histogram for the linear density <span class="math inline">\(f(x)=2x\)</span>: exact bias and variance, integrated MSE and the optimal bin width, compared with the normal rule of thumb.</li>
+<li><strong>Problem 2</strong>: the kernel density estimator of a normal density: exact and approximate bias, where the bias vanishes, the optimal bandwidth and Silverman’s rule.</li>
+<li><strong>Problem 3</strong>: Nadaraya–Watson and local linear estimates by hand with a uniform kernel.</li>
+<li><strong>Problem 4</strong>: the partially linear model: identification, Robinson’s estimator with known conditional means, the binary-<span class="math inline">\(z\)</span> case, and Yatchew’s differencing estimator.</li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cameron2005" class="csl-entry" role="listitem">
+Cameron, A. Colin, and Pravin K. Trivedi. 2005. <em>Microeconometrics: Methods and Applications</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-fan1996" class="csl-entry" role="listitem">
+Fan, Jianqing, and Irène Gijbels. 1996. <em>Local Polynomial Modelling and Its Applications</em>. London: Chapman &amp; Hall.
+</div>
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022a. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-hansen2022b" class="csl-entry" role="listitem">
+———. 2022b. <em>Probability and Statistics for Economists</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-ichimura1993" class="csl-entry" role="listitem">
+Ichimura, Hidehiko. 1993. <span>“Semiparametric Least Squares (<span>SLS</span>) and Weighted <span>SLS</span> Estimation of Single-Index Models.”</span> <em>Journal of Econometrics</em> 58 (1–2): 71–120.
+</div>
+<div id="ref-klein1993" class="csl-entry" role="listitem">
+Klein, Roger W., and Richard H. Spady. 1993. <span>“An Efficient Semiparametric Estimator for Binary Response Models.”</span> <em>Econometrica</em> 61 (2): 387–421.
+</div>
+<div id="ref-li2007" class="csl-entry" role="listitem">
+Li, Qi, and Jeffrey S. Racine. 2007. <em>Nonparametric Econometrics: Theory and Practice</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-nadaraya1964" class="csl-entry" role="listitem">
+Nadaraya, E. A. 1964. <span>“On Estimating Regression.”</span> <em>Theory of Probability and Its Applications</em> 9 (1): 141–42.
+</div>
+<div id="ref-robinson1988" class="csl-entry" role="listitem">
+Robinson, Peter M. 1988. <span>“Root-<span>N</span>-Consistent Semiparametric Regression.”</span> <em>Econometrica</em> 56 (4): 931–54.
+</div>
+<div id="ref-silverman1986" class="csl-entry" role="listitem">
+Silverman, Bernard W. 1986. <em>Density Estimation for Statistics and Data Analysis</em>. London: Chapman &amp; Hall.
+</div>
+<div id="ref-watson1964" class="csl-entry" role="listitem">
+Watson, Geoffrey S. 1964. <span>“Smooth Regression Analysis.”</span> <em>Sankhyā: The Indian Journal of Statistics, Series A</em> 26 (4): 359–72.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
