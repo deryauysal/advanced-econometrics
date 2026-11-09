@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -243,8 +297,28 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#setting-up" id="toc-setting-up" class="nav-link active" data-scroll-target="#setting-up"><span class="header-section-number">B.1</span> Setting up</a></li>
+  <li><a href="#objects" id="toc-objects" class="nav-link" data-scroll-target="#objects"><span class="header-section-number">B.2</span> Objects</a></li>
+  <li><a href="#data-import-and-description" id="toc-data-import-and-description" class="nav-link" data-scroll-target="#data-import-and-description"><span class="header-section-number">B.3</span> Data import and description</a></li>
+  <li><a href="#matrix-algebra-and-ols-by-hand" id="toc-matrix-algebra-and-ols-by-hand" class="nav-link" data-scroll-target="#matrix-algebra-and-ols-by-hand"><span class="header-section-number">B.4</span> Matrix algebra and OLS by hand</a></li>
+  <li><a href="#functions-loops-and-simulations" id="toc-functions-loops-and-simulations" class="nav-link" data-scroll-target="#functions-loops-and-simulations"><span class="header-section-number">B.5</span> Functions, loops and simulations</a></li>
+  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">B.6</span> Optimisation</a></li>
+  <li><a href="#graphics" id="toc-graphics" class="nav-link" data-scroll-target="#graphics"><span class="header-section-number">B.7</span> Graphics</a></li>
+  <li><a href="#good-practice" id="toc-good-practice" class="nav-link" data-scroll-target="#good-practice"><span class="header-section-number">B.8</span> Good practice</a></li>
+  <li><a href="#sec-ct0" id="toc-sec-ct0" class="nav-link" data-scroll-target="#sec-ct0"><span class="header-section-number">B.9</span> Computer tutorial 0</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-data-handling" id="toc-problem-1-data-handling" class="nav-link" data-scroll-target="#problem-1-data-handling"><span class="header-section-number">B.9.1</span> Problem 1: Data handling</a></li>
+  <li><a href="#problem-2-ols-by-hand" id="toc-problem-2-ols-by-hand" class="nav-link" data-scroll-target="#problem-2-ols-by-hand"><span class="header-section-number">B.9.2</span> Problem 2: OLS by hand</a></li>
+  <li><a href="#problem-3-maximum-likelihood-with-optim" id="toc-problem-3-maximum-likelihood-with-optim" class="nav-link" data-scroll-target="#problem-3-maximum-likelihood-with-optim"><span class="header-section-number">B.9.3</span> Problem 3: Maximum likelihood with <code>optim</code></a></li>
+  <li><a href="#problem-4-a-small-monte-carlo-study" id="toc-problem-4-a-small-monte-carlo-study" class="nav-link" data-scroll-target="#problem-4-a-small-monte-carlo-study"><span class="header-section-number">B.9.4</span> Problem 4: A small Monte Carlo study</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -305,28 +379,458 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This appendix collects the R tools used in the computer tutorials. It assumes that you have used R or another statistical language before; it is a reference, not a course. <span class="citation" data-cites="wickham2023">Wickham, Çetinkaya-Rundel, and Grolemund (<a href="../references.html#ref-wickham2023" role="doc-biblioref">2023</a>)</span> is a free introduction to data handling in R, and the R documentation (<code>?function</code> in the console) is the reference for every function used below. Computer tutorial 0 at the end of the appendix practises the material.</p>
+<section id="setting-up" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="setting-up"><span class="header-section-number">B.1</span> Setting up</h2>
+<p><strong>Software.</strong> Install R (<a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a>) and RStudio (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>). RStudio is an editor around R; the computations are done by R.</p>
+<p><strong>Projects and scripts.</strong> Keep everything for this course in one folder with a subfolder <code>data</code>. In RStudio, create a project for this folder (<em>File → New Project → Existing Directory</em>). Opening the <code>.Rproj</code> file sets the working directory to the project folder, so data can be read with relative paths such as <code>"data/mroz.csv"</code>, and the code runs unchanged on another computer. Avoid <code>setwd("C:/Users/...")</code> in scripts for the same reason. Write code in scripts (<code>.R</code>) or Quarto documents (<code>.qmd</code>), not in the console, so that every result can be reproduced.</p>
+<p><strong>Packages.</strong> A package is installed once and loaded in every session:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"sandwich"</span>, <span class="st">"lmtest"</span>, <span class="st">"ggplot2"</span>))   <span class="co"># once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)                                       <span class="co"># every session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-In preparation
+<p>The tutorials use the following packages.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Package</th>
+<th style="text-align: left;">Used for</th>
+<th style="text-align: left;">Tutorials</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>sandwich</code>, <code>lmtest</code></td>
+<td style="text-align: left;">robust variance matrices, coefficient tests</td>
+<td style="text-align: left;">1, 2, 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>MASS</code></td>
+<td style="text-align: left;">negative binomial data</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>nleqslv</code></td>
+<td style="text-align: left;">solving systems of moment equations</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>AER</code></td>
+<td style="text-align: left;">instrumental variables (<code>ivreg</code>)</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>boot</code></td>
+<td style="text-align: left;">bootstrap</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>statmod</code>, <code>randtoolbox</code> (optional)</td>
+<td style="text-align: left;">Gauss–Hermite nodes, Halton sequences</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ggplot2</code></td>
+<td style="text-align: left;">graphics</td>
+<td style="text-align: left;">4, 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>glmnet</code>, <code>randomForest</code></td>
+<td style="text-align: left;">lasso, ridge, elastic net, random forests</td>
+<td style="text-align: left;">5</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="objects" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="objects"><span class="header-section-number">B.2</span> Objects</h2>
+<p>Everything in R is an object, created with the assignment operator <code>&lt;-</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)            <span class="co"># numeric vector</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x); x[<span class="dv">2</span>]; x[<span class="sc">-</span><span class="dv">1</span>]; x[x <span class="sc">&gt;</span> <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 4 6 8</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 4 6 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.25</span>)     <span class="co"># also 1:10, rep(0, 5)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> x <span class="sc">&gt;</span> <span class="dv">3</span>                    <span class="co"># logical vector</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b); <span class="fu">mean</span>(b)               <span class="co"># TRUE counts as 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 0.75</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
+<p>Indexing starts at 1. <code>x[-1]</code> drops the first element, and indexing with a logical vector keeps the elements where it is <code>TRUE</code>. Arithmetic is element by element: <code>x * x</code> squares each element, <code>sum(x * x)</code> is the inner product.</p>
+<p><strong>Matrices</strong> have two indices, <code>[row, column]</code>; leaving one index empty selects all rows or columns.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)    <span class="co"># filled column by column</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A; <span class="fu">dim</span>(A); A[<span class="dv">2</span>, ]; A[, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    1    3    5
+#&gt; [2,]    2    4    6</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 2 3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 2 4 6</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 5 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="dv">1</span>, x)                   <span class="co"># bind columns; the 1 is recycled</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;        x
+#&gt; [1,] 1 2
+#&gt; [2,] 1 4
+#&gt; [3,] 1 6
+#&gt; [4,] 1 8</code></pre>
+</div>
+</div>
+<p><strong>Data frames</strong> are tables whose columns can have different types; columns are accessed with <code>$</code> or by name. <strong>Lists</strong> collect objects of any type and are what most estimation functions return. <strong>Factors</strong> are categorical variables; in a regression a factor is expanded into dummies automatically.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">x =</span> x, <span class="at">group =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>)))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x; df[df<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"a"</span>, ]; <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 2 4 6 8</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   id x group
+#&gt; 1  1 2     a
+#&gt; 3  3 6     a</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">estimate =</span> <span class="fl">1.5</span>, <span class="at">se =</span> <span class="fl">0.2</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 1.5</code></pre>
+</div>
+</div>
+<p><strong>Missing values</strong> are coded <code>NA</code>. Most summary functions return <code>NA</code> if any value is missing unless called with <code>na.rm = TRUE</code>; <code>complete.cases(df)</code> marks rows without missing values.</p>
+</section>
+<section id="data-import-and-description" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="data-import-and-description"><span class="header-section-number">B.3</span> Data import and description</h2>
+<p>All data sets of the course are comma-separated files (<code>.csv</code>), read with <code>read.csv</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>attend <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/attend.csv"</span>)   <span class="co"># in your project: "data/attend.csv"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(attend)                                <span class="co"># variables and types</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 'data.frame':    680 obs. of  5 variables:
+#&gt;  $ termgpa: num  3.19 2.73 3 2.04 3.68 ...
+#&gt;  $ priGPA : num  2.64 3.52 2.46 2.61 3.32 ...
+#&gt;  $ ACT    : int  23 25 24 20 23 26 21 22 24 21 ...
+#&gt;  $ attend : num  84.4 68.8 93.8 96.9 100 ...
+#&gt;  $ soph   : int  1 0 0 1 1 1 0 1 0 1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(attend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     termgpa          priGPA           ACT            attend      
+#&gt;  Min.   :0.000   Min.   :0.857   Min.   :13.00   Min.   :  6.25  
+#&gt;  1st Qu.:2.138   1st Qu.:2.190   1st Qu.:20.00   1st Qu.: 75.00  
+#&gt;  Median :2.670   Median :2.560   Median :22.00   Median : 87.50  
+#&gt;  Mean   :2.601   Mean   :2.587   Mean   :22.51   Mean   : 81.71  
+#&gt;  3rd Qu.:3.120   3rd Qu.:2.942   3rd Qu.:25.00   3rd Qu.: 93.75  
+#&gt;  Max.   :4.000   Max.   :3.930   Max.   :32.00   Max.   :100.00  
+#&gt;       soph       
+#&gt;  Min.   :0.0000  
+#&gt;  1st Qu.:0.0000  
+#&gt;  Median :1.0000  
+#&gt;  Mean   :0.5765  
+#&gt;  3rd Qu.:1.0000  
+#&gt;  Max.   :1.0000</code></pre>
+</div>
+</div>
+<p>Useful functions for a first look: <code>head</code>, <code>table</code> (frequencies), <code>aggregate</code> or <code>tapply</code> (statistics by group), <code>cor</code>, <code>subset</code>, and <code>write.csv</code> to save a data frame.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(attend<span class="sc">$</span>termgpa, attend<span class="sc">$</span>soph, mean)   <span class="co"># mean term GPA by year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;        0        1 
+#&gt; 2.487417 2.684449</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(attend[, <span class="fu">c</span>(<span class="st">"termgpa"</span>, <span class="st">"attend"</span>, <span class="st">"priGPA"</span>)]), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;         termgpa attend priGPA
+#&gt; termgpa   1.000  0.560  0.653
+#&gt; attend    0.560  1.000  0.427
+#&gt; priGPA    0.653  0.427  1.000</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-algebra-and-ols-by-hand" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="matrix-algebra-and-ols-by-hand"><span class="header-section-number">B.4</span> Matrix algebra and OLS by hand</h2>
+<p>The operators and functions needed for estimators in matrix form:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">R</th>
+<th style="text-align: left;">Mathematics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>A %*% B</code></td>
+<td style="text-align: left;">matrix product <span class="math inline">\(\bA\bm B\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>t(A)</code></td>
+<td style="text-align: left;">transpose <span class="math inline">\(\bA'\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>crossprod(X)</code>, <code>crossprod(X, y)</code></td>
+<td style="text-align: left;"><span class="math inline">\(\bX'\bX\)</span>, <span class="math inline">\(\bX'\by\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>solve(A)</code>, <code>solve(A, b)</code></td>
+<td style="text-align: left;"><span class="math inline">\(\bA^{-1}\)</span>, solution of <span class="math inline">\(\bA\bm z=\bm b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>diag(A)</code>, <code>diag(k)</code></td>
+<td style="text-align: left;">diagonal of <span class="math inline">\(\bA\)</span>, identity matrix <span class="math inline">\(\bI_k\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>outer(x, y)</code></td>
+<td style="text-align: left;">matrix with elements <span class="math inline">\(x_iy_j\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To compute the OLS estimator <span class="math inline">\(\hat\bbeta=(\bX'\bX)^{-1}\bX'\by\)</span> and its heteroskedasticity-robust variance <span class="math inline">\((\bX'\bX)^{-1}\big(\sum_i\hat u_i^2\bx_i\bx_i'\big)(\bX'\bX)^{-1}\)</span>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> attend<span class="sc">$</span>termgpa</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, attend<span class="sc">$</span>attend, attend<span class="sc">$</span>priGPA, attend<span class="sc">$</span>ACT)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>XtXi <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(X))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>bhat <span class="ot">&lt;-</span> XtXi <span class="sc">%*%</span> <span class="fu">crossprod</span>(X, y)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>u    <span class="ot">&lt;-</span> <span class="fu">drop</span>(y <span class="sc">-</span> X <span class="sc">%*%</span> bhat)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>meat <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X <span class="sc">*</span> u)                 <span class="co"># sum of u_i^2 x_i x_i'</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>se_rob <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(XtXi <span class="sc">%*%</span> meat <span class="sc">%*%</span> XtXi))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">bhat =</span> <span class="fu">drop</span>(bhat), se_rob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;             bhat      se_rob
+#&gt; [1,] -1.06032875 0.182373039
+#&gt; [2,]  0.01741182 0.001670940
+#&gt; [3,]  0.57473590 0.048226432
+#&gt; [4,]  0.03340267 0.006457915</code></pre>
+</div>
+</div>
+<p><code>X * u</code> multiplies row <span class="math inline">\(i\)</span> of <span class="math inline">\(\bX\)</span> by <span class="math inline">\(\hat u_i\)</span>, so <code>crossprod(X * u)</code> equals <span class="math inline">\(\sum_i\hat u_i^2\bx_i\bx_i'\)</span> without a loop. <code>solve(crossprod(X), crossprod(X, y))</code> solves the normal equations directly, which is numerically more stable than inverting. The same results from the standard functions:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich); <span class="fu">library</span>(lmtest)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(termgpa <span class="sc">~</span> attend <span class="sc">+</span> priGPA <span class="sc">+</span> ACT, <span class="at">data =</span> attend)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fit, <span class="at">vcov =</span> <span class="fu">vcovHC</span>(fit, <span class="at">type =</span> <span class="st">"HC0"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; t test of coefficients:
+#&gt; 
+#&gt;               Estimate Std. Error t value  Pr(&gt;|t|)    
+#&gt; (Intercept) -1.0603288  0.1823730 -5.8141 9.402e-09 ***
+#&gt; attend       0.0174118  0.0016709 10.4204 &lt; 2.2e-16 ***
+#&gt; priGPA       0.5747359  0.0482264 11.9174 &lt; 2.2e-16 ***
+#&gt; ACT          0.0334027  0.0064579  5.1724 3.049e-07 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><code>HC0</code> is the formula above; the default <code>HC3</code> applies a small-sample correction.</p>
+</section>
+<section id="functions-loops-and-simulations" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="functions-loops-and-simulations"><span class="header-section-number">B.5</span> Functions, loops and simulations</h2>
+<p>A function takes arguments and returns the value of its last expression (or of <code>return()</code>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X) {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(X), <span class="fu">crossprod</span>(X, y))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">drop</span>(y <span class="sc">-</span> X <span class="sc">%*%</span> b)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">coef =</span> <span class="fu">drop</span>(b), <span class="at">sigma2 =</span> <span class="fu">sum</span>(u<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">nrow</span>(X) <span class="sc">-</span> <span class="fu">ncol</span>(X)))</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ols</span>(y, X)<span class="sc">$</span>coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] -1.06032875  0.01741182  0.57473590  0.03340267</code></pre>
+</div>
+</div>
+<p>Repeating a computation is done with <code>for</code> loops or, more compactly, with <code>sapply</code> (apply a function to each element of a vector and simplify the result) and <code>replicate</code> (evaluate an expression many times). A Monte Carlo study always fixes the seed with <code>set.seed</code> so that the results can be reproduced. A template that is used throughout the tutorials:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>one_draw <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); y <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rexp</span>(n) <span class="sc">-</span> <span class="dv">1</span>       <span class="co"># skewed, mean-zero errors</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x))[<span class="dv">2</span>]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">one_draw</span>(<span class="dv">50</span>))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(est), <span class="at">sd =</span> <span class="fu">sd</span>(est))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;      mean        sd 
+#&gt; 1.9998029 0.1520735</code></pre>
+</div>
+</div>
+<p>Random numbers: <code>rnorm</code>, <code>runif</code>, <code>rbinom</code>, <code>rexp</code>, <code>rpois</code>, <code>sample</code>; the corresponding densities, cdfs and quantiles start with <code>d</code>, <code>p</code> and <code>q</code> (e.g.&nbsp;<code>dnorm</code>, <code>pnorm</code>, <code>qnorm</code>).</p>
+</section>
+<section id="optimisation" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">B.6</span> Optimisation</h2>
+<p>Maximum likelihood and GMM require numerical optimisation. <code>optim</code> <strong>minimises</strong> a function, so we pass the <em>negative</em> log-likelihood. With <code>method = "BFGS"</code> it uses the gradient (numerical if not supplied), and <code>hessian = TRUE</code> returns the Hessian at the optimum, whose inverse estimates the variance of the ML estimator (<a href="../chapters/01-mle.html" class="quarto-xref"><span>Chapter 1</span></a>).</p>
+<p>As an example, the normal linear regression model has log-likelihood <span class="math inline">\(\sum_i\{-\frac12\ln(2\pi\sigma^2)-\frac{(y_i-\bx_i'\bbeta)^2}{2\sigma^2}\}\)</span>. We estimate <span class="math inline">\(\ln\sigma\)</span> instead of <span class="math inline">\(\sigma\)</span> so that the parameter is unrestricted:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>negll <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, y, X) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X); b <span class="ot">&lt;-</span> theta[<span class="dv">1</span><span class="sc">:</span>k]; s <span class="ot">&lt;-</span> <span class="fu">exp</span>(theta[k <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> X <span class="sc">%*%</span> b, <span class="at">sd =</span> s, <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(X)), <span class="dv">0</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">optim</span>(start, negll, <span class="at">y =</span> y, <span class="at">X =</span> X, <span class="at">method =</span> <span class="st">"BFGS"</span>, <span class="at">hessian =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxit =</span> <span class="dv">500</span>, <span class="at">reltol =</span> <span class="fl">1e-12</span>))</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>opt<span class="sc">$</span>convergence                      <span class="co"># 0 = converged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(<span class="at">ML =</span> opt<span class="sc">$</span>par[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">OLS =</span> <span class="fu">coef</span>(fit)), <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;                  ML     OLS
+#&gt; (Intercept) -1.0603 -1.0603
+#&gt; attend       0.0174  0.0174
+#&gt; priGPA       0.5747  0.5747
+#&gt; ACT          0.0334  0.0334</code></pre>
+</div>
+</div>
+<p>Always check <code>opt$convergence</code>, try different starting values, and compare with a closed-form or built-in estimator where one exists. Scaling matters: if regressors differ in magnitude by several orders, rescale them or the optimiser may stop early. For systems of equations (just-identified moment conditions) <code>nleqslv::nleqslv</code> solves <span class="math inline">\(\bar{\bm g}(\btheta)=\bm 0\)</span> directly.</p>
+</section>
+<section id="graphics" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="graphics"><span class="header-section-number">B.7</span> Graphics</h2>
+<p>Base R graphics are quick for checks; <code>ggplot2</code> gives better results for reports.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(attend, <span class="fu">aes</span>(attend, termgpa)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"classes attended (%)"</span>, <span class="at">y =</span> <span class="st">"term GPA"</span>) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-r-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="b-r-primer_files/figure-html/fig-r-scatter-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.1: Term GPA against the percentage of classes attended, attend data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Base equivalents: <code>hist(x)</code>, <code>plot(x, y)</code>, <code>lines</code>, <code>abline(fit)</code>, <code>par(mfrow = c(1, 3))</code> for several panels.</p>
+</section>
+<section id="good-practice" class="level2" data-number="B.8">
+<h2 data-number="B.8" class="anchored" data-anchor-id="good-practice"><span class="header-section-number">B.8</span> Good practice</h2>
 <ul>
-<li>Projects, scripts and working directories</li>
-<li>Data import, data frames and matrices</li>
-<li>Matrix algebra and OLS by hand</li>
-<li>Writing functions; optimisation with optim</li>
-<li>Computer tutorial 0</li>
+<li>Start each script with <code>library()</code> calls and, for simulations, <code>set.seed()</code>.</li>
+<li>Use relative paths within a project.</li>
+<li>Write small functions instead of copying code, and check each one on a case where you know the answer.</li>
+<li>Compare hand-coded estimators with the built-in function before using them in a simulation.</li>
+<li>Comment what the code does and why, not how R works.</li>
+<li>A Quarto document (<code>.qmd</code>) combines text, code and output in one file; the lecture notes and the tutorials are written this way.</li>
 </ul>
-</div>
-</div>
+</section>
+<section id="sec-ct0" class="level2" data-number="B.9">
+<h2 data-number="B.9" class="anchored" data-anchor-id="sec-ct0"><span class="header-section-number">B.9</span> Computer tutorial 0</h2>
+<p><strong>Learning goals.</strong> Organise an R project; import, describe and subset data; compute OLS, its standard errors and a maximum likelihood estimator by hand and check them against built-in functions; write a small Monte Carlo study.</p>
+<p><strong>Packages.</strong> <code>sandwich</code>, <code>lmtest</code>. <strong>Data.</strong> <code>attend.csv</code> from the data sets of <span class="citation" data-cites="wooldridge2020">Wooldridge (<a href="../references.html#ref-wooldridge2020" role="doc-biblioref">2020</a>)</span>: 680 students in an intermediate microeconomics course.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>termgpa</code></td>
+<td style="text-align: left;">GPA for the term, from 0 (worst) to 4 (best); a student passes if <code>termgpa</code> <span class="math inline">\(\ge1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>priGPA</code></td>
+<td style="text-align: left;">cumulative GPA prior to the term</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ACT</code></td>
+<td style="text-align: left;">ACT score (university entrance test)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>attend</code></td>
+<td style="text-align: left;">percentage of classes attended</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>soph</code></td>
+<td style="text-align: left;">= 1 if the student is a sophomore (second year), 0 if first year</td>
+</tr>
+</tbody>
+</table>
+<section id="problem-1-data-handling" class="level3" data-number="B.9.1">
+<h3 data-number="B.9.1" class="anchored" data-anchor-id="problem-1-data-handling"><span class="header-section-number">B.9.1</span> Problem 1: Data handling</h3>
+<ol type="a">
+<li><p>Create a project folder with a subfolder <code>data</code>, save <code>attend.csv</code> there, and create an RStudio project and a script for this tutorial.</p></li>
+<li><p>Import the data as a data frame <code>attend</code>. Check the number of observations, the variable types and whether there are missing values.</p></li>
+<li><p>Extract <code>termgpa</code> as a numeric vector in two ways: from the data frame and from the data converted to a matrix. Create it also as an <span class="math inline">\(n\times1\)</span> and a <span class="math inline">\(1\times n\)</span> matrix, and check with <code>identical()</code> that converting back gives the original vector.</p></li>
+<li><p>Report descriptive statistics. Draw a histogram of <code>termgpa</code> with a title and an axis label, and a scatter plot of <code>termgpa</code> against <code>attend</code>. Compute the correlation matrix of <code>termgpa</code>, <code>attend</code>, <code>priGPA</code> and <code>soph</code>. What do you learn?</p></li>
+<li><p>Create a dummy <code>passed</code> (0/1, not <code>TRUE</code>/<code>FALSE</code>). How many students failed, by year?</p></li>
+<li><p>Compute the mean <code>termgpa</code> of students who attended more than 50% of the classes and of the others. Then compute mean attendance by year and pass status. Interpret, and say why these comparisons are not causal effects of attendance.</p></li>
+<li><p>Save the data of first-year students, without <code>soph</code>, as <code>attend_fy.csv</code>.</p></li>
+</ol>
+</section>
+<section id="problem-2-ols-by-hand" class="level3" data-number="B.9.2">
+<h3 data-number="B.9.2" class="anchored" data-anchor-id="problem-2-ols-by-hand"><span class="header-section-number">B.9.2</span> Problem 2: OLS by hand</h3>
+<p>Consider the model <span class="math display">\[
+\texttt{termgpa}_i=\beta_0+\beta_1\texttt{attend}_i+\beta_2\texttt{priGPA}_i+\beta_3\texttt{ACT}_i+u_i .
+\]</span></p>
+<ol type="a">
+<li><p>Estimate the model with <code>lm</code> and interpret <span class="math inline">\(\hat\beta_1\)</span>.</p></li>
+<li><p>Write a function <code>ols(y, X)</code> that returns the coefficients, the conventional standard errors based on <span class="math inline">\(s^2(\bX'\bX)^{-1}\)</span> with <span class="math inline">\(s^2=\hat\bu'\hat\bu/(n-k)\)</span>, and the heteroskedasticity-robust (HC0) standard errors. Check the results against <code>lm</code> and <code>vcovHC(..., type = "HC0")</code>.</p></li>
+<li><p>Plot the fitted against the actual values, the residuals against the fitted values, and a histogram of the residuals. Is homoskedasticity plausible?</p></li>
+</ol>
+</section>
+<section id="problem-3-maximum-likelihood-with-optim" class="level3" data-number="B.9.3">
+<h3 data-number="B.9.3" class="anchored" data-anchor-id="problem-3-maximum-likelihood-with-optim"><span class="header-section-number">B.9.3</span> Problem 3: Maximum likelihood with <code>optim</code></h3>
+<p>Assume additionally <span class="math inline">\(u_i\mid\bx_i\sim N(0,\sigma^2)\)</span>.</p>
+<ol type="a">
+<li><p>Write the negative log-likelihood as a function of <span class="math inline">\(\btheta=(\bbeta',\ln\sigma)'\)</span> and minimise it with <code>optim(..., method = "BFGS", hessian = TRUE)</code>. Why is it convenient to estimate <span class="math inline">\(\ln\sigma\)</span> rather than <span class="math inline">\(\sigma\)</span>?</p></li>
+<li><p>Compare <span class="math inline">\(\hat\bbeta_{ML}\)</span> with OLS and <span class="math inline">\(\hat\sigma^2_{ML}\)</span> with <span class="math inline">\(s^2\)</span>. Explain the difference.</p></li>
+<li><p>Compute standard errors from the inverse Hessian. How do they relate to the conventional OLS standard errors?</p></li>
+</ol>
+</section>
+<section id="problem-4-a-small-monte-carlo-study" class="level3" data-number="B.9.4">
+<h3 data-number="B.9.4" class="anchored" data-anchor-id="problem-4-a-small-monte-carlo-study"><span class="header-section-number">B.9.4</span> Problem 4: A small Monte Carlo study</h3>
+<p>Simulate <span class="math inline">\(y_i=1+0.5x_i+u_i\)</span> with <span class="math inline">\(x_i\sim N(0,1)\)</span> and heteroskedastic errors <span class="math inline">\(u_i=|x_i|\,\varepsilon_i\)</span>, <span class="math inline">\(\varepsilon_i\sim N(0,1)\)</span>.</p>
+<ol type="a">
+<li><p>For <span class="math inline">\(n=50\)</span> and <span class="math inline">\(n=500\)</span> and 2000 replications, record <span class="math inline">\(\hat\beta_1\)</span> and whether the nominal 95% confidence interval contains <span class="math inline">\(0.5\)</span>, once with conventional and once with robust (HC0) standard errors. Use <code>set.seed</code>.</p></li>
+<li><p>Is <span class="math inline">\(\hat\beta_1\)</span> unbiased? Compare the coverage rates of the two intervals and explain.</p></li>
+</ol>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-wickham2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. 2nd ed. Sebastopol, CA: O’Reilly. <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>.
+</div>
+<div id="ref-wooldridge2020" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2020. <em>Introductory Econometrics: A Modern Approach</em>. 7th ed. Boston: Cengage.
+</div>
+</div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
