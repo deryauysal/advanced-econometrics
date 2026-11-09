@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,8 +247,35 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-pred" id="toc-sec-pred" class="nav-link active" data-scroll-target="#sec-pred"><span class="header-section-number">5.1</span> Prediction and the bias–variance trade-off</a></li>
+  <li><a href="#sec-modelsel" id="toc-sec-modelsel" class="nav-link" data-scroll-target="#sec-modelsel"><span class="header-section-number">5.2</span> Model selection</a>
+  <ul class="collapse">
+  <li><a href="#penalized-fit-criteria" id="toc-penalized-fit-criteria" class="nav-link" data-scroll-target="#penalized-fit-criteria"><span class="header-section-number">5.2.1</span> Penalized fit criteria</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">5.2.2</span> Cross-validation</a></li>
+  </ul></li>
+  <li><a href="#sec-shrink" id="toc-sec-shrink" class="nav-link" data-scroll-target="#sec-shrink"><span class="header-section-number">5.3</span> Shrinkage estimators</a>
+  <ul class="collapse">
+  <li><a href="#why-bias-can-help" id="toc-why-bias-can-help" class="nav-link" data-scroll-target="#why-bias-can-help"><span class="header-section-number">5.3.1</span> Why bias can help</a></li>
+  <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">5.3.2</span> Ridge regression</a></li>
+  <li><a href="#the-lasso" id="toc-the-lasso" class="nav-link" data-scroll-target="#the-lasso"><span class="header-section-number">5.3.3</span> The lasso</a></li>
+  <li><a href="#elastic-net-and-the-choice-of-lambda" id="toc-elastic-net-and-the-choice-of-lambda" class="nav-link" data-scroll-target="#elastic-net-and-the-choice-of-lambda"><span class="header-section-number">5.3.4</span> Elastic net and the choice of <span class="math inline">\(\lambda\)</span></a></li>
+  </ul></li>
+  <li><a href="#sec-trees" id="toc-sec-trees" class="nav-link" data-scroll-target="#sec-trees"><span class="header-section-number">5.4</span> Outlook: trees and forests</a></li>
+  <li><a href="#sec-mlcausal" id="toc-sec-mlcausal" class="nav-link" data-scroll-target="#sec-mlcausal"><span class="header-section-number">5.5</span> Outlook: machine learning for causal inference</a></li>
+  <li><a href="#sec-ct5" id="toc-sec-ct5" class="nav-link" data-scroll-target="#sec-ct5"><span class="header-section-number">5.6</span> Computer tutorial 5</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-ridge-lasso-and-elastic-net-on-simulated-data" id="toc-problem-1-ridge-lasso-and-elastic-net-on-simulated-data" class="nav-link" data-scroll-target="#problem-1-ridge-lasso-and-elastic-net-on-simulated-data"><span class="header-section-number">5.6.1</span> Problem 1: Ridge, lasso and elastic net on simulated data</a></li>
+  <li><a href="#problem-2-predicting-wages" id="toc-problem-2-predicting-wages" class="nav-link" data-scroll-target="#problem-2-predicting-wages"><span class="header-section-number">5.6.2</span> Problem 2: Predicting wages</a></li>
+  <li><a href="#problem-3-the-gender-wage-gap-with-many-controls" id="toc-problem-3-the-gender-wage-gap-with-many-controls" class="nav-link" data-scroll-target="#problem-3-the-gender-wage-gap-with-many-controls"><span class="header-section-number">5.6.3</span> Problem 3: The gender wage gap with many controls</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.7</span> Exercises</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -289,29 +336,462 @@ window.Quarto = {
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \]</span></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-In preparation
+Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be added before the corresponding lectures. Planned content:</p>
+<p><span class="citation" data-cites="james2023">James et al. (<a href="../references.html#ref-james2023" role="doc-biblioref">2023</a>)</span>, Ch. 2, 5, 6 and 8; <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022</a>)</span>, Ch. 28–29; <span class="citation" data-cites="belloni2014">Belloni, Chernozhukov, and Hansen (<a href="../references.html#ref-belloni2014" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="chernozhukov2018">Chernozhukov et al. (<a href="../references.html#ref-chernozhukov2018" role="doc-biblioref">2018</a>)</span>.</p>
+</div>
+</div>
+<p>Econometrics is mostly about estimating parameters with a causal or structural interpretation. Statistical (or machine) learning is mostly about <strong>prediction</strong>: given a new <span class="math inline">\(\bx_0\)</span>, predict <span class="math inline">\(y_0\)</span> as accurately as possible. The two goals call for different tools. For prediction, a biased estimator is welcome if it reduces the variance enough, and a model is judged by how it performs on data it has not seen. This chapter introduces the basic ideas: the bias–variance trade-off for prediction, model selection by penalties and cross-validation, and shrinkage estimators (ridge, lasso, elastic net). Two short outlook sections sketch tree-based methods and the use of the lasso for causal inference.</p>
+<section id="sec-pred" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-pred"><span class="header-section-number">5.1</span> Prediction and the bias–variance trade-off</h2>
+<p><strong>Terminology.</strong> In <strong>supervised learning</strong> we observe an outcome <span class="math inline">\(y\)</span> and <strong>features</strong> (regressors) <span class="math inline">\(\bx\)</span>; it is called <em>regression</em> if <span class="math inline">\(y\)</span> is continuous and <em>classification</em> if <span class="math inline">\(y\)</span> is categorical. In <strong>unsupervised learning</strong> there is no outcome, and the aim is to find structure in <span class="math inline">\(\bx\)</span> (e.g.&nbsp;clusters). We focus on regression. The <strong>training sample</strong> <span class="math inline">\(\{(y_i,\bx_i)\}_{i=1}^n\)</span> is used to fit a prediction rule <span class="math inline">\(\hat f(\bx)\)</span>; a <strong>test sample</strong> of new observations <span class="math inline">\((y_0,\bx_0)\)</span> from the same distribution is used to judge it.</p>
+<p>Let <span class="math inline">\(y=f(\bx)+u\)</span> with <span class="math inline">\(\E[u\mid\bx]=0\)</span> and <span class="math inline">\(\Var(u\mid\bx)=\sigma^2\)</span>, so that <span class="math inline">\(f(\bx)=\E[y\mid\bx]\)</span> is the best predictor under squared loss.</p>
+<div id="thm-biasvar" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.1 (Bias–variance decomposition of the prediction error)</strong></span> For a test point <span class="math inline">\((y_0,\bx_0)\)</span> independent of the training sample, <span class="math display">\[
+\E\big[(y_0-\hat f(\bx_0))^2\mid\bx_0\big]=\underbrace{\Var\big[\hat f(\bx_0)\big]}_{\text{variance}}+\underbrace{\big\{\E[\hat f(\bx_0)]-f(\bx_0)\big\}^2}_{\text{bias}^2}+\underbrace{\sigma^2}_{\text{irreducible}},
+\]</span> where <span class="math inline">\(\E\)</span> and <span class="math inline">\(\Var\)</span> are over training samples given <span class="math inline">\(\bx_0\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Write <span class="math inline">\(y_0-\hat f=(y_0-f)+(f-\E\hat f)+(\E\hat f-\hat f)\)</span>, with <span class="math inline">\(f=f(\bx_0)\)</span> and <span class="math inline">\(\hat f=\hat f(\bx_0)\)</span>. The first term is <span class="math inline">\(u_0\)</span>, which has mean zero and is independent of the training sample; the third has mean zero; the second is a constant. Squaring and taking expectations, all cross products vanish.</p>
+</div>
+</div>
+</div>
+<p>The irreducible error <span class="math inline">\(\sigma^2\)</span> cannot be reduced by any method. A more flexible method (more regressors, a smaller bandwidth, a smaller penalty) has smaller bias and larger variance. The best predictor balances the two, exactly as the MSE-optimal bandwidth in <a href="04-nonparametric.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
+<p><strong>In-sample fit is optimistic.</strong> The training MSE <span class="math inline">\(n^{-1}\sum_i(y_i-\hat f(\bx_i))^2\)</span> uses the same data to fit and to evaluate. It falls monotonically as the model becomes more flexible, while the test MSE eventually rises (<a href="#fig-overfit" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>). For OLS with <span class="math inline">\(k\)</span> regressors and fixed design, <span class="math inline">\(\E[\text{training MSE}]=\sigma^2(n-k)/n\)</span>, whereas the expected squared error for new outcomes at the same <span class="math inline">\(\bx_i\)</span> is <span class="math inline">\(\sigma^2(n+k)/n\)</span>: the <strong>optimism</strong> is <span class="math inline">\(2k\sigma^2/n\)</span> (Problem Set 5, Problem 1). There are two remedies: penalize the in-sample fit for model size, or estimate the test error directly on data not used for fitting.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-overfit" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overfit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-statlearning_files/figure-html/fig-overfit-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overfit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Training and test MSE of polynomial regressions of degree 1 to 12, <span class="math inline">\(n=50\)</span>, <span class="math inline">\(y=\sin(2x)+x+u\)</span>, <span class="math inline">\(x\sim U(-2,2)\)</span>, <span class="math inline">\(u\sim N(0,0.5^2)\)</span>; averages over 200 samples (the test averages for high degrees are driven by a few samples with wild extrapolation near <span class="math inline">\(\pm2\)</span>). The dashed line is the irreducible error <span class="math inline">\(\sigma^2=0.25\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-modelsel" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-modelsel"><span class="header-section-number">5.2</span> Model selection</h2>
+<section id="penalized-fit-criteria" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="penalized-fit-criteria"><span class="header-section-number">5.2.1</span> Penalized fit criteria</h3>
+<p>For a model with <span class="math inline">\(k\)</span> parameters and maximized log-likelihood <span class="math inline">\(\ln\hat L\)</span>, <span class="math display">\[
+\text{AIC}=-2\ln\hat L+2k,\qquad \text{BIC}=-2\ln\hat L+k\ln n ,
+\]</span> and smaller values are preferred. For the normal linear regression model with <span class="math inline">\(\hat\sigma^2=\text{MSE}=n^{-1}\sum_i\hat u_i^2\)</span>, <span class="math inline">\(-2\ln\hat L=n\ln\text{MSE}+n(1+\ln2\pi)\)</span>, so up to a constant <span class="math inline">\(\text{AIC}=n\ln\text{MSE}+2k\)</span> and <span class="math inline">\(\text{BIC}=n\ln\text{MSE}+k\ln n\)</span>. Two related measures for OLS:</p>
 <ul>
-<li>Prediction vs.&nbsp;estimation; bias-variance trade-off</li>
-<li>Cross-validation</li>
-<li>Ridge, lasso and elastic net</li>
-<li>Trees and ensembles (overview)</li>
-<li>Lasso for inference and double machine learning (outlook)</li>
-<li>Computer tutorial 5</li>
+<li><strong>Adjusted <span class="math inline">\(R^2\)</span></strong>, <span class="math inline">\(\bar R^2=1-\frac{\sum_i\hat u_i^2/(n-k)}{\sum_i(y_i-\bar y)^2/(n-1)}\)</span> (larger is better). In a comparison of nested models it prefers the larger model if the <span class="math inline">\(F\)</span> statistic for the extra regressors exceeds one, a weak penalty.</li>
+<li><strong>Mallows’ <span class="math inline">\(C_p\)</span></strong>, <span class="math inline">\(C_p=\frac{n\,\text{MSE}}{\tilde\sigma^2}-n+2k\)</span>, where <span class="math inline">\(\tilde\sigma^2\)</span> is the unbiased error variance estimate from the <em>largest</em> model considered. <span class="math inline">\(C_p\)</span> estimates the scaled prediction error <span class="math inline">\((n/\sigma^2)\E[\text{test MSE}]-n\)</span> and is close to <span class="math inline">\(k\)</span> for a correct model.</li>
 </ul>
+<p>AIC approximates the expected out-of-sample log-likelihood (Kullback–Leibler) and tends to choose models that predict well, sometimes too large ones. BIC approximates the posterior probability of a model; its penalty grows with <span class="math inline">\(n\)</span>, and it selects the true model with probability approaching one if it is among the candidates (it is <em>consistent</em>), at the risk of underfitting in small samples. All three are derived for correctly specified, homoskedastic models.</p>
+<p><strong>Searching over models.</strong> With <span class="math inline">\(p\)</span> candidate regressors there are <span class="math inline">\(2^p\)</span> subsets. <em>Best subset selection</em> fits all of them (feasible up to <span class="math inline">\(p\approx40\)</span> with leaps-and-bounds algorithms); <em>forward selection</em> starts from the intercept and adds the variable that improves the fit most, and <em>backward selection</em> starts from the full model; both need at most <span class="math inline">\(p(p+1)/2\)</span> fits. Inference after any such search is problematic: the usual standard errors ignore that the model was chosen on the same data.</p>
+</section>
+<section id="cross-validation" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">5.2.2</span> Cross-validation</h3>
+<p>Cross-validation estimates the test error directly by fitting on part of the data and predicting the rest.</p>
+<ul>
+<li><strong>Validation set.</strong> Split the sample once into a training and a validation part. Simple, but the estimate depends strongly on the split and uses only part of the data for fitting.</li>
+<li><strong><span class="math inline">\(K\)</span>-fold cross-validation.</strong> Split the sample into <span class="math inline">\(K\)</span> folds of roughly equal size. For <span class="math inline">\(j=1,\ldots,K\)</span> fit on all folds except <span class="math inline">\(j\)</span> and compute the MSE on fold <span class="math inline">\(j\)</span>; then <span class="math inline">\(\text{CV}_K=K^{-1}\sum_{j=1}^K\text{MSE}_j\)</span>. <span class="math inline">\(K=5\)</span> or <span class="math inline">\(10\)</span> is the usual compromise: each fit uses most of the data (small bias), and the <span class="math inline">\(K\)</span> fits are not too similar (moderate variance).</li>
+<li><strong>Leave-one-out (LOOCV)</strong>, <span class="math inline">\(K=n\)</span>: <span class="math inline">\(\text{CV}_n=n^{-1}\sum_i\big(y_i-\hat y_{(-i)}\big)^2\)</span>, where <span class="math inline">\(\hat y_{(-i)}\)</span> is the prediction for observation <span class="math inline">\(i\)</span> from a fit without it. This is the criterion used for bandwidths in <a href="04-nonparametric.html#sec-npreg" class="quarto-xref"><span>Section 4.3</span></a>.</li>
+</ul>
+<div id="thm-loocv" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.2 (LOOCV for linear smoothers)</strong></span> Let the fitted values be <span class="math inline">\(\hat\by=\bm H\by\)</span> for an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(\bm H\)</span> that does not depend on <span class="math inline">\(\by\)</span>, and suppose that the prediction for observation <span class="math inline">\(i\)</span> from the fit without it is <span class="math inline">\(\hat y_{(-i)}=\sum_{j\neq i}H_{ij}y_j/(1-H_{ii})\)</span>. Then <span class="math display">\[
+y_i-\hat y_{(-i)}=\frac{y_i-\hat y_i}{1-H_{ii}},\qquad \text{CV}_n=\frac1n\sum_{i=1}^n\Big(\frac{y_i-\hat y_i}{1-H_{ii}}\Big)^2 .
+\]</span> The condition holds for OLS (<span class="math inline">\(\bm H=\bX(\bX'\bX)^{-1}\bX'\)</span>, <span class="math inline">\(H_{ii}\)</span> the leverage), for ridge regression with the total penalty <span class="math inline">\(n\lambda\)</span> held fixed, and for the Nadaraya–Watson estimator.</p>
+</div>
+<p>So for OLS a single fit suffices. The proof for OLS and NW is Problem Set 5, Problem 2.</p>
+<p><strong>One-standard-error rule.</strong> The <span class="math inline">\(K\)</span> fold errors give a standard error <span class="math inline">\(\text{se}(\text{CV}_K)=\{(K-1)^{-1}\sum_j(\text{MSE}_j-\text{CV}_K)^2\}^{1/2}/\sqrt K\)</span>. To guard against overfitting, one often chooses the simplest model whose CV error is within one standard error of the minimum.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-modelsel" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelsel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Model selection in a simulated sample (<span class="math inline">\(n=40\)</span>): <span class="math inline">\(y=2+x_1+u\)</span>, <span class="math inline">\(u\sim N(0,3^2)\)</span>, with <span class="math inline">\(x_1,x_2,x_3\)</span> standard normal and pairwise correlation 0.5. MSE is the training MSE; AIC and BIC are from R’s <code>AIC()</code> and <code>BIC()</code>, which count <span class="math inline">\(\sigma^2\)</span> as a parameter (differences between models are unaffected); <span class="math inline">\(C_p\)</span> uses <span class="math inline">\(\tilde\sigma^2\)</span> from the model with all three regressors. Best value in each column in bold.
+</figcaption>
+<div aria-describedby="tbl-modelsel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;">MSE</th>
+<th style="text-align: right;"><span class="math inline">\(\bar R^2\)</span></th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;"><span class="math inline">\(C_p\)</span></th>
+<th style="text-align: right;">LOOCV</th>
+<th style="text-align: right;">5-fold CV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">intercept only</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.80</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">208.81</td>
+<td style="text-align: right;">212.19</td>
+<td style="text-align: right;">6.17</td>
+<td style="text-align: right;">10.31</td>
+<td style="text-align: right;">10.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8.24</td>
+<td style="text-align: right;">0.137</td>
+<td style="text-align: right;"><strong>203.89</strong></td>
+<td style="text-align: right;"><strong>208.96</strong></td>
+<td style="text-align: right;"><strong>1.15</strong></td>
+<td style="text-align: right;"><strong>9.05</strong></td>
+<td style="text-align: right;"><strong>9.51</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9.40</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">209.14</td>
+<td style="text-align: right;">214.21</td>
+<td style="text-align: right;">6.36</td>
+<td style="text-align: right;">10.17</td>
+<td style="text-align: right;">10.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9.74</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">210.58</td>
+<td style="text-align: right;">215.64</td>
+<td style="text-align: right;">7.90</td>
+<td style="text-align: right;">10.76</td>
+<td style="text-align: right;">10.46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x1 + x2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">8.24</td>
+<td style="text-align: right;">0.114</td>
+<td style="text-align: right;">205.89</td>
+<td style="text-align: right;">212.64</td>
+<td style="text-align: right;">3.14</td>
+<td style="text-align: right;">9.37</td>
+<td style="text-align: right;">9.83</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x1 + x3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: right;"><strong>0.140</strong></td>
+<td style="text-align: right;">204.69</td>
+<td style="text-align: right;">211.44</td>
+<td style="text-align: right;">2.04</td>
+<td style="text-align: right;">9.33</td>
+<td style="text-align: right;">10.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x2 + x3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9.40</td>
+<td style="text-align: right;">-0.010</td>
+<td style="text-align: right;">211.13</td>
+<td style="text-align: right;">217.88</td>
+<td style="text-align: right;">8.34</td>
+<td style="text-align: right;">10.80</td>
+<td style="text-align: right;">10.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x1 + x2 + x3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;"><strong>7.99</strong></td>
+<td style="text-align: right;">0.117</td>
+<td style="text-align: right;">206.64</td>
+<td style="text-align: right;">215.08</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">9.69</td>
+<td style="text-align: right;">10.79</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+</figure>
+</div>
+</div>
+<p>In <a href="#tbl-modelsel" class="quarto-xref">Table&nbsp;<span>5.1</span></a> the training MSE is smallest for the largest model, as it must be. All penalized criteria and both cross-validation criteria pick the true model with <span class="math inline">\(x_1\)</span> only, except <span class="math inline">\(\bar R^2\)</span>, which prefers <span class="math inline">\(x_1+x_3\)</span>; with <span class="math inline">\(n=40\)</span> this need not happen in every sample. (<span class="math inline">\(C_p\)</span> is close to <span class="math inline">\(k\)</span> for the correct model, <span class="math inline">\(1.15\)</span> versus <span class="math inline">\(2\)</span>, and equals <span class="math inline">\(k=4\)</span> by construction for the largest model.)</p>
+</section>
+</section>
+<section id="sec-shrink" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-shrink"><span class="header-section-number">5.3</span> Shrinkage estimators</h2>
+<section id="why-bias-can-help" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="why-bias-can-help"><span class="header-section-number">5.3.1</span> Why bias can help</h3>
+<div id="exm-shrink" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.1 (Shrinking an unbiased estimator)</strong></span> Let <span class="math inline">\(\hat\theta\)</span> be unbiased with variance <span class="math inline">\(v\)</span>, and <span class="math inline">\(\tilde\theta=a\hat\theta\)</span> with <span class="math inline">\(0\le a\le1\)</span>. Then <span class="math inline">\(\text{bias}(\tilde\theta)=(a-1)\theta\)</span>, <span class="math inline">\(\Var(\tilde\theta)=a^2v\)</span> and <span class="math display">\[
+\text{MSE}(\tilde\theta)=a^2v+(1-a)^2\theta^2&lt;v=\text{MSE}(\hat\theta)\iff\theta^2&lt;\frac{1+a}{1-a}\,v .
+\]</span> With <span class="math inline">\(a=0.9\)</span>, shrinking wins whenever <span class="math inline">\(\theta^2&lt;19v\)</span>, i.e.&nbsp;unless <span class="math inline">\(\theta\)</span> is large relative to its standard error. The MSE-optimal factor is <span class="math inline">\(a^*=\theta^2/(\theta^2+v)\)</span>, which depends on the unknown <span class="math inline">\(\theta\)</span>; the shrinkage methods below choose the amount of shrinkage from the data.</p>
+</div>
+<p>A famous extreme case is the <strong>James–Stein</strong> result: if <span class="math inline">\(y_i\sim N(\mu_i,1)\)</span> independently, <span class="math inline">\(i=1,\ldots,n\ge4\)</span>, the estimator <span class="math inline">\(\tilde\mu_i=\bar y+(1-c)(y_i-\bar y)\)</span> with <span class="math inline">\(c=(n-3)/\sum_j(y_j-\bar y)^2\)</span> has a smaller total MSE <span class="math inline">\(\sum_i\E(\tilde\mu_i-\mu_i)^2\)</span> than the MLE <span class="math inline">\(\hat\mu_i=y_i\)</span> for every <span class="math inline">\((\mu_1,\ldots,\mu_n)\)</span> <span class="citation" data-cites="hansen2022">(<a href="../references.html#ref-hansen2022" role="doc-biblioref">Hansen 2022, sec. 28.20</a>)</span>. For prediction the same logic applies: with <span class="math inline">\(\tilde y_0=\bx_0'\tilde\bbeta\)</span>, <span class="math inline">\(\E[(y_0-\tilde y_0)^2\mid\bx_0]=\bx_0'\,\text{MSE}(\tilde\bbeta)\,\bx_0+\sigma^2\)</span>, where <span class="math inline">\(\text{MSE}(\tilde\bbeta)=\E[(\tilde\bbeta-\bbeta)(\tilde\bbeta-\bbeta)']\)</span>, so a smaller MSE of the coefficients means a smaller prediction error.</p>
+<p><strong>Standardization.</strong> Shrinkage penalizes the size of the coefficients, which depends on the units of the regressors. Throughout, each regressor is standardized to mean zero and variance one, <span class="math inline">\(y\)</span> is demeaned, and there is no intercept in <span class="math inline">\(\bx\)</span> (it is recovered as <span class="math inline">\(\bar y\)</span>). We write the model as <span class="math inline">\(y_i=\bx_i'\bbeta+u_i\)</span> with <span class="math inline">\(\bx_i\)</span> of dimension <span class="math inline">\(p\)</span>.</p>
+</section>
+<section id="ridge-regression" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="ridge-regression"><span class="header-section-number">5.3.2</span> Ridge regression</h3>
+<div id="def-ridge" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.1 (Ridge estimator)</strong></span> For a tuning parameter <span class="math inline">\(\lambda\ge0\)</span>, <span class="math display">\[
+\hat\bbeta_R(\lambda)=\arg\min_{\bbeta}\ \frac1n\sum_{i=1}^n(y_i-\bx_i'\bbeta)^2+\lambda\sum_{j=1}^p\beta_j^2=(\bX'\bX+n\lambda\bI_p)^{-1}\bX'\by .
+\]</span> Equivalently, it minimizes the sum of squared residuals subject to <span class="math inline">\(\sum_j\beta_j^2\le s\)</span> for some <span class="math inline">\(s\)</span> that corresponds to <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<p>The first-order condition <span class="math inline">\(-\frac2n\bX'(\by-\bX\bbeta)+2\lambda\bbeta=\bm0\)</span> gives the closed form, which exists even if <span class="math inline">\(p&gt;n\)</span> or the regressors are collinear: <span class="math inline">\(\bX'\bX+n\lambda\bI\)</span> is positive definite for <span class="math inline">\(\lambda&gt;0\)</span>. Properties:</p>
+<ul>
+<li><span class="math inline">\(\hat\bbeta_R(\lambda)\to\hat\bbeta_{OLS}\)</span> as <span class="math inline">\(\lambda\to0\)</span> (if <span class="math inline">\(\bX'\bX\)</span> is invertible) and <span class="math inline">\(\to\bm0\)</span> as <span class="math inline">\(\lambda\to\infty\)</span>.</li>
+<li><span class="math inline">\(\hat\bbeta_R=\bm A_\lambda\hat\bbeta_{OLS}\)</span> with <span class="math inline">\(\bm A_\lambda=(\bI+n\lambda(\bX'\bX)^{-1})^{-1}\)</span>: ridge shrinks OLS. If the regressors are orthogonal with <span class="math inline">\(\bX'\bX=n\bI\)</span>, <span class="math inline">\(\hat\beta_{R,j}=\hat\beta_{OLS,j}/(1+\lambda)\)</span>, the same proportional shrinkage for every coefficient.</li>
+<li>Conditional on <span class="math inline">\(\bX\)</span>, <span class="math inline">\(\E[\hat\bbeta_R]=\bm A_\lambda\bbeta\neq\bbeta\)</span> and <span class="math inline">\(\Var[\hat\bbeta_R]=\sigma^2(\bX'\bX+n\lambda\bI)^{-1}\bX'\bX(\bX'\bX+n\lambda\bI)^{-1}\)</span>, which is smaller (in the matrix sense) than the OLS variance. There is always some <span class="math inline">\(\lambda&gt;0\)</span> with a smaller MSE than OLS (Problem Set 5, Problem 3 shows it for orthogonal regressors).</li>
+<li>Ridge works well when many regressors matter, each a little, and when OLS is imprecise because of collinearity. It never sets a coefficient exactly to zero.</li>
+</ul>
+</section>
+<section id="the-lasso" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="the-lasso"><span class="header-section-number">5.3.3</span> The lasso</h3>
+<div id="def-lasso" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.2 (Lasso (least absolute shrinkage and selection operator) <span class="citation" data-cites="tibshirani1996">(<a href="../references.html#ref-tibshirani1996" role="doc-biblioref">Tibshirani 1996</a>)</span>)</strong></span> <span class="math display">\[
+\hat\bbeta_L(\lambda)=\arg\min_{\bbeta}\ \frac1n\sum_{i=1}^n(y_i-\bx_i'\bbeta)^2+\lambda\sum_{j=1}^p|\beta_j| ,
+\]</span> or equivalently least squares subject to <span class="math inline">\(\sum_j|\beta_j|\le s\)</span>.</p>
+</div>
+<p>There is no closed form in general, but the problem is convex and fast algorithms (coordinate descent, LARS) compute the whole path of solutions over <span class="math inline">\(\lambda\)</span>. With orthogonal regressors, <span class="math inline">\(\bX'\bX=n\bI\)</span>, the problem separates into <span class="math inline">\(p\)</span> scalar problems and the solution is <strong>soft thresholding</strong>: <span class="math display">\[
+\hat\beta_{L,j}=\operatorname{sign}(\hat\beta_{OLS,j})\Big(|\hat\beta_{OLS,j}|-\frac\lambda2\Big)_+ ,
+\]</span> where <span class="math inline">\((a)_+=\max(a,0)\)</span>. Small OLS coefficients are set exactly to zero, large ones are shrunk by a constant <span class="math inline">\(\lambda/2\)</span> (Problem Set 5, Problem 3). This is why the lasso <em>selects</em> variables. Geometrically, the <span class="math inline">\(\ell_1\)</span> constraint region <span class="math inline">\(\sum_j|\beta_j|\le s\)</span> has corners on the axes, and the elliptical contours of the sum of squared residuals typically first touch it at a corner, where some coefficients are zero; the <span class="math inline">\(\ell_2\)</span> region of ridge is round and has no corners <span class="citation" data-cites="james2023">(<a href="../references.html#ref-james2023" role="doc-biblioref">James et al. 2023, fig. 6.7</a>)</span>.</p>
+<p>The lasso works well when the true model is <strong>sparse</strong>: few regressors with nonzero coefficients. Its estimates of the selected coefficients are biased towards zero. The <strong>post-lasso</strong> estimator refits OLS on the selected regressors to remove this bias. A weighted version, <span class="math inline">\(\lambda\sum_j\kappa_j|\beta_j|\)</span>, allows different penalties per coefficient; the <em>adaptive lasso</em> uses <span class="math inline">\(\kappa_j=1/|\hat\beta_j|\)</span> from a first-step estimate.</p>
+</section>
+<section id="elastic-net-and-the-choice-of-lambda" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="elastic-net-and-the-choice-of-lambda"><span class="header-section-number">5.3.4</span> Elastic net and the choice of <span class="math inline">\(\lambda\)</span></h3>
+<p>The <strong>elastic net</strong> combines both penalties, <span class="math display">\[
+\frac1n\sum_{i=1}^n(y_i-\bx_i'\bbeta)^2+\lambda\sum_{j=1}^p\big[\alpha|\beta_j|+(1-\alpha)\beta_j^2\big],\qquad0\le\alpha\le1,
+\]</span> with ridge (<span class="math inline">\(\alpha=0\)</span>) and lasso (<span class="math inline">\(\alpha=1\)</span>) as special cases. The lasso tends to pick one variable out of a group of highly correlated ones, somewhat arbitrarily; the ridge part makes the elastic net select or drop such groups together. (The R package <code>glmnet</code> minimizes <span class="math inline">\(\frac1{2n}\sum_i(y_i-\bx_i'\bbeta)^2+\lambda\sum_j[\alpha|\beta_j|+\frac{1-\alpha}{2}\beta_j^2]\)</span>, so its <span class="math inline">\(\lambda\)</span> is on a different scale from the one used here.)</p>
+<p><strong>Choosing <span class="math inline">\(\lambda\)</span>.</strong> <span class="math inline">\(\lambda\)</span> is chosen by <span class="math inline">\(K\)</span>-fold cross-validation over a decreasing grid: <code>lambda.min</code> minimizes the CV error, <code>lambda.1se</code> is the largest <span class="math inline">\(\lambda\)</span> within one standard error of the minimum (a sparser model). Information criteria and theory-based penalties <span class="citation" data-cites="belloni2014">(<a href="../references.html#ref-belloni2014" role="doc-biblioref">Belloni, Chernozhukov, and Hansen 2014</a>)</span> are alternatives; the latter are used when the lasso serves as a first step for inference (<a href="#sec-mlcausal" class="quarto-xref"><span>Section 5.5</span></a>).</p>
+<p><strong>Other models.</strong> Shrinkage applies to any M-estimator: for logit, probit or Poisson, replace the average squared residual by the average negative log-likelihood (half the deviance, up to a constant), e.g.&nbsp;<span class="math inline">\(-\frac1n\sum_i[y_i\ln\Lambda(\bx_i'\bbeta)+(1-y_i)\ln(1-\Lambda(\bx_i'\bbeta))]+\lambda\sum_j|\beta_j|\)</span> for the lasso logit.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-paths" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-statlearning_files/figure-html/fig-paths-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Coefficient paths of ridge and lasso (<code>glmnet</code>) for <span class="math inline">\(n=100\)</span>, <span class="math inline">\(p=20\)</span> independent standard normal regressors, <span class="math inline">\(\beta_j=2\)</span> for <span class="math inline">\(j\le5\)</span> and <span class="math inline">\(0\)</span> otherwise, <span class="math inline">\(u\sim N(0,1)\)</span>. Solid: the five relevant regressors. Vertical line: <span class="math inline">\(\lambda\)</span> chosen by 10-fold CV (<code>lambda.min</code>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As <span class="math inline">\(\lambda\)</span> falls (moving left in <a href="#fig-paths" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>), ridge coefficients grow smoothly and none is ever exactly zero; lasso coefficients enter one by one. At the cross-validated <span class="math inline">\(\lambda\)</span> the lasso keeps the five relevant regressors and a few irrelevant ones with small coefficients.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-shrink-mc" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-shrink-mc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: Test MSE (new observations, <span class="math inline">\(\sigma^2=1\)</span>) of OLS, ridge, lasso and elastic net (<span class="math inline">\(\alpha=0.5\)</span>), <span class="math inline">\(\lambda\)</span> by 10-fold CV; <span class="math inline">\(n=100\)</span>, <span class="math inline">\(p=50\)</span> regressors with pairwise correlation 0.5; averages over 100 samples. Sparse: <span class="math inline">\(\beta_j=1\)</span> for <span class="math inline">\(j\le5\)</span>, 0 otherwise. Dense: <span class="math inline">\(\beta_j=0.3\)</span> for all <span class="math inline">\(j\)</span>.
+</figcaption>
+<div aria-describedby="tbl-shrink-mc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">OLS</th>
+<th style="text-align: right;">ridge</th>
+<th style="text-align: right;">lasso</th>
+<th style="text-align: right;">elastic net</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sparse</td>
+<td style="text-align: right;">2.039</td>
+<td style="text-align: right;">1.618</td>
+<td style="text-align: right;">1.187</td>
+<td style="text-align: right;">1.214</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dense</td>
+<td style="text-align: right;">2.107</td>
+<td style="text-align: right;">1.195</td>
+<td style="text-align: right;">1.919</td>
+<td style="text-align: right;">1.885</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>With <span class="math inline">\(p=50\)</span> and <span class="math inline">\(n=100\)</span>, OLS predicts poorly in both designs. In the sparse design the lasso and the elastic net are best; in the dense design, where every regressor matters a little, ridge is best and the lasso loses most of its advantage (<a href="#tbl-shrink-mc" class="quarto-xref">Table&nbsp;<span>5.2</span></a>). The elastic net is a robust compromise.</p>
+</section>
+</section>
+<section id="sec-trees" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-trees"><span class="header-section-number">5.4</span> Outlook: trees and forests</h2>
+<p><strong>Regression trees</strong> split the regressor space into rectangles and predict <span class="math inline">\(y\)</span> by the mean in each rectangle, <span class="math inline">\(\hat f(\bx)=\sum_{m=1}^Mc_m\mathbb 1\{\bx\in R_m\}\)</span>. The splits are chosen greedily: at each step, for every regressor <span class="math inline">\(j\)</span> and split point <span class="math inline">\(s\)</span>, compute the sum of squared residuals of the two half-spaces <span class="math inline">\(\{x_j&lt;s\}\)</span> and <span class="math inline">\(\{x_j\ge s\}\)</span>, and take the best split; then repeat within each part. A large tree is grown and then pruned back with a penalty on the number of leaves chosen by CV. Trees are easy to interpret and capture interactions, but they predict poorly because they have high variance: small changes in the data change the first splits and therefore the whole tree.</p>
+<ul>
+<li><strong>Bagging</strong> (bootstrap aggregation) averages the predictions of trees grown on <span class="math inline">\(B\)</span> bootstrap samples, <span class="math inline">\(\hat f_{bag}(\bx)=B^{-1}\sum_b\hat f_b(\bx)\)</span>. Averaging reduces variance. Each bootstrap sample leaves out about <span class="math inline">\((1-1/n)^n\approx e^{-1}\approx37\%\)</span> of the observations, which serve as a built-in test sample (out-of-bag error).</li>
+<li><strong>Random forests</strong> additionally consider only a random subset of <span class="math inline">\(m&lt;p\)</span> regressors at each split (often <span class="math inline">\(m\approx\sqrt p\)</span> or <span class="math inline">\(p/3\)</span>). This decorrelates the trees, so averaging reduces the variance further.</li>
+<li><strong>Boosting</strong> fits a sequence of small trees, each to the residuals of the current fit, and adds them with a small learning rate: <span class="math inline">\(\hat f\leftarrow\hat f+\eta\hat f_b\)</span>.</li>
+</ul>
+<p>Random forests are close relatives of the nearest-neighbour and kernel estimators of <a href="04-nonparametric.html" class="quarto-xref"><span>Chapter 4</span></a>: the prediction is a weighted average of <span class="math inline">\(y_i\)</span>’s of observations that fall in the same leaves as <span class="math inline">\(\bx\)</span>, with data-driven weights. Computer Tutorial 5 compares them with the shrinkage estimators.</p>
+</section>
+<section id="sec-mlcausal" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-mlcausal"><span class="header-section-number">5.5</span> Outlook: machine learning for causal inference</h2>
+<p>Prediction methods do not deliver causal effects by themselves, but they can estimate <strong>nuisance functions</strong> in a causal model. Consider the partially linear model of <a href="04-nonparametric.html#sec-semipar" class="quarto-xref"><span>Section 4.4</span></a> with a treatment <span class="math inline">\(d\)</span> and many controls <span class="math inline">\(\bx\)</span>, <span class="math display">\[
+y=\alpha d+g(\bx)+u,\qquad \E[u\mid d,\bx]=0 ,
+\]</span> where <span class="math inline">\(\alpha\)</span> is of interest (selection on observables) and <span class="math inline">\(g\)</span> is approximated by a linear combination of many terms (polynomials, interactions, dummies), <span class="math inline">\(g(\bx)\approx\bx'\bgamma\)</span>, of which few matter (approximate sparsity).</p>
+<p><strong>Naive post-selection fails.</strong> Running a lasso of <span class="math inline">\(y\)</span> on <span class="math inline">\(d\)</span> and <span class="math inline">\(\bx\)</span> (with <span class="math inline">\(d\)</span> unpenalized) and then OLS on <span class="math inline">\(d\)</span> and the selected controls is biased: a control that is strongly correlated with <span class="math inline">\(d\)</span> but has a moderate effect on <span class="math inline">\(y\)</span> is easily dropped, because <span class="math inline">\(d\)</span> already explains part of its effect. The omitted control then biases <span class="math inline">\(\hat\alpha\)</span>.</p>
+<p><strong>Double selection</strong> <span class="citation" data-cites="belloni2014">(<a href="../references.html#ref-belloni2014" role="doc-biblioref">Belloni, Chernozhukov, and Hansen 2014</a>)</span>. (1) Lasso of <span class="math inline">\(y\)</span> on <span class="math inline">\(\bx\)</span>, selected set <span class="math inline">\(\bx_y\)</span>. (2) Lasso of <span class="math inline">\(d\)</span> on <span class="math inline">\(\bx\)</span>, selected set <span class="math inline">\(\bx_d\)</span>. (3) OLS of <span class="math inline">\(y\)</span> on <span class="math inline">\(d\)</span> and the union of <span class="math inline">\(\bx_y\)</span> and <span class="math inline">\(\bx_d\)</span>. A control that matters for <span class="math inline">\(d\)</span> is kept through step 2 even if its coefficient in the <span class="math inline">\(y\)</span> equation is small. Under sparsity conditions, <span class="math inline">\(\hat\alpha\)</span> is <span class="math inline">\(\sqrt n\)</span>-consistent and asymptotically normal, and the usual robust standard errors from step 3 are valid.</p>
+<p><strong>Orthogonality and double/debiased machine learning (DML)</strong> <span class="citation" data-cites="chernozhukov2018">(<a href="../references.html#ref-chernozhukov2018" role="doc-biblioref">Chernozhukov et al. 2018</a>)</span>. The partialling-out estimator of Robinson solves the sample analogue of <span class="math display">\[
+\E\Big[\big(d-\eta_1(\bx)\big)\big\{y-\eta_2(\bx)-\alpha\big(d-\eta_1(\bx)\big)\big\}\Big]=0,\qquad \eta_1(\bx)=\E[d\mid\bx],\ \eta_2(\bx)=\E[y\mid\bx].
+\]</span> This moment is <strong>Neyman orthogonal</strong>: its derivative with respect to the nuisance functions is zero in expectation at the true values (Problem Set 5, Problem 4). Small errors in <span class="math inline">\(\hat\eta_1,\hat\eta_2\)</span> therefore affect <span class="math inline">\(\hat\alpha\)</span> only through their <em>product</em>, which vanishes faster than <span class="math inline">\(n^{-1/2}\)</span> if each converges faster than <span class="math inline">\(n^{-1/4}\)</span>. This is the condition <span class="math inline">\(\bA_{21}=\bm0\)</span> of the two-step GMM theory in <a href="02-gmm.html#sec-twostep" class="quarto-xref"><span>Section 2.9</span></a>: the first step does not change the asymptotic distribution of the second. DML estimates <span class="math inline">\(\eta_1,\eta_2\)</span> with any machine learner (lasso, random forests, boosting) and uses <strong>cross-fitting</strong>: split the sample into <span class="math inline">\(K\)</span> folds, estimate the nuisance functions without fold <span class="math inline">\(k\)</span>, compute the residuals <span class="math inline">\(d_i-\hat\eta_1(\bx_i)\)</span> and <span class="math inline">\(y_i-\hat\eta_2(\bx_i)\)</span> in fold <span class="math inline">\(k\)</span>, and regress the pooled <span class="math inline">\(y\)</span>-residuals on the pooled <span class="math inline">\(d\)</span>-residuals. Cross-fitting prevents the overfitting of the machine learner from contaminating the second step.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-dml" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.3: Estimates of <span class="math inline">\(\alpha=0.5\)</span> in <span class="math inline">\(y=\alpha d+\bx'\bgamma+u\)</span>, <span class="math inline">\(d=\bx'\btheta+v\)</span>, <span class="math inline">\(n=400\)</span>, <span class="math inline">\(p=150\)</span> independent standard normal controls; five confounders with <span class="math inline">\(\theta_j=0.6\)</span> and <span class="math inline">\(\gamma_j=0.25\)</span>, all other coefficients zero. Lasso penalties by 5-fold CV; 100 samples.
+</figcaption>
+<div aria-describedby="tbl-dml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">OLS of y on d only</td>
+<td style="text-align: right;">0.271</td>
+<td style="text-align: right;">0.028</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">naive post-lasso</td>
+<td style="text-align: right;">0.264</td>
+<td style="text-align: right;">0.052</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">double selection</td>
+<td style="text-align: right;">-0.003</td>
+<td style="text-align: right;">0.055</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DML (cross-fitted lasso)</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.052</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OLS on d and all 150 controls</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.066</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Ignoring the controls, or selecting them only by their effect on <span class="math inline">\(y\)</span>, gives a large bias. Double selection and DML are close to unbiased. OLS with all 150 controls is unbiased too, but noisier; with more controls than observations it would not be available at all (<a href="#tbl-dml" class="quarto-xref">Table&nbsp;<span>5.3</span></a>).</p>
+</section>
+<section id="sec-ct5" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-ct5"><span class="header-section-number">5.6</span> Computer tutorial 5</h2>
+<p><strong>Learning goals.</strong> Fit ridge, lasso and elastic net with <code>glmnet</code>, read coefficient paths and cross-validation curves, and compare the methods by their test error; compare shrinkage with OLS and a random forest in a real prediction problem; use the lasso for inference on a treatment coefficient with many controls (double selection and cross-fitted partialling out).</p>
+<p><strong>Packages.</strong> <code>glmnet</code>, <code>randomForest</code>, <code>ggplot2</code>. <strong>Data.</strong> Simulated data and <code>cps09mar.csv</code> <span class="citation" data-cites="hansen2022">(<a href="../references.html#ref-hansen2022" role="doc-biblioref">Hansen 2022</a>)</span>, as in Computer Tutorial 4.</p>
+<section id="problem-1-ridge-lasso-and-elastic-net-on-simulated-data" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="problem-1-ridge-lasso-and-elastic-net-on-simulated-data"><span class="header-section-number">5.6.1</span> Problem 1: Ridge, lasso and elastic net on simulated data</h3>
+<ol type="a">
+<li><p>Simulate <span class="math inline">\(n=100\)</span> observations with <span class="math inline">\(p=30\)</span> regressors. The regressors come in three groups of ten: within each group the pairwise correlation is 0.8, across groups they are independent. Let <span class="math inline">\(\beta_j=1.5\)</span> for the first three regressors of group 1, <span class="math inline">\(\beta_j=-1\)</span> for the first three regressors of group 2, and <span class="math inline">\(\beta_j=0\)</span> otherwise; <span class="math inline">\(y=\bX\bbeta+u\)</span>, <span class="math inline">\(u\sim N(0,1)\)</span>.</p></li>
+<li><p>Fit ridge (<span class="math inline">\(\alpha=0\)</span>), lasso (<span class="math inline">\(\alpha=1\)</span>) and elastic net (<span class="math inline">\(\alpha=0.5\)</span>) with <code>glmnet</code> and plot the coefficient paths against <span class="math inline">\(\log\lambda\)</span>. Which coefficients become exactly zero, and in which order do the regressors enter the lasso?</p></li>
+<li><p>Choose <span class="math inline">\(\lambda\)</span> by 10-fold cross-validation with <code>cv.glmnet</code>. Plot the CV curve for the lasso and report <code>lambda.min</code> and <code>lambda.1se</code>. How many regressors does the lasso select with each? Which of the truly relevant ones are missed, and which irrelevant ones are included?</p></li>
+<li><p>Generate a test sample of 10,000 observations from the same model and compare the test MSE of OLS, ridge, lasso, elastic net and the post-lasso estimator (OLS on the regressors selected with <code>lambda.min</code>).</p></li>
+</ol>
+</section>
+<section id="problem-2-predicting-wages" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="problem-2-predicting-wages"><span class="header-section-number">5.6.2</span> Problem 2: Predicting wages</h3>
+<p>We predict the log hourly wage in <code>cps09mar.csv</code> from age, education, sex, ethnicity, race, marital status, union membership and region.</p>
+<ol type="a">
+<li><p>Draw a random subsample of 6000 observations. Recode race into white, Black and other, and marital status into married (codes 1–3), never married (7) and previously married (4–6). Build a design matrix with fourth-order polynomials in potential experience, a quadratic in education, the dummies, and all their pairwise interactions. How many regressors are there?</p></li>
+<li><p>Use the first 2000 observations as training sample and the other 4000 as test sample. Compute the test MSE of: OLS on all regressors; a simple Mincer regression of log wage on experience, experience squared, education and <code>female</code>; ridge, lasso and elastic net with <span class="math inline">\(\lambda\)</span> chosen by CV; a random forest on the original variables.</p></li>
+<li><p>Which variables does the lasso keep? Compare the test MSEs with the variance of log wages in the test sample. What do you conclude?</p></li>
+</ol>
+</section>
+<section id="problem-3-the-gender-wage-gap-with-many-controls" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="problem-3-the-gender-wage-gap-with-many-controls"><span class="header-section-number">5.6.3</span> Problem 3: The gender wage gap with many controls</h3>
+<p>Using the 6000 observations of Problem 2, we estimate <span class="math inline">\(\alpha\)</span> in <span class="math display">\[
+\log\text{wage}_i=\alpha\,\texttt{female}_i+g(\bx_i)+u_i ,
+\]</span> where <span class="math inline">\(\bx_i\)</span> contains all regressors of Problem 2(a) that do not involve <code>female</code>.</p>
+<ol type="a">
+<li><p>Estimate <span class="math inline">\(\alpha\)</span> by OLS of log wage on <code>female</code> alone and on <code>female</code> and all controls.</p></li>
+<li><p>Estimate <span class="math inline">\(\alpha\)</span> by double selection: lasso of log wage on the controls, lasso of <code>female</code> on the controls (use <code>lambda.1se</code>), then OLS on <code>female</code> and the union of the selected controls with a robust standard error.</p></li>
+<li><p>Estimate <span class="math inline">\(\alpha\)</span> by cross-fitted partialling out (DML) with five folds and the lasso as learner, and compute its standard error from the residual regression.</p></li>
+<li><p>Compare the estimates. Why does a naive lasso that always keeps <code>female</code> and selects among the controls by their effect on wages not suffice in general?</p></li>
+</ol>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.7</span> Exercises</h2>
+<p>Problem Set 5 contains the analytical exercises for this chapter:</p>
+<ul>
+<li><strong>Problem 1</strong>: the optimism of the training MSE for OLS and its relation to <span class="math inline">\(C_p\)</span> and AIC.</li>
+<li><strong>Problem 2</strong>: the leave-one-out shortcut for OLS and the Nadaraya–Watson estimator.</li>
+<li><strong>Problem 3</strong>: ridge, lasso, elastic net and best subset selection with orthogonal regressors: closed forms, MSE and the optimal ridge penalty.</li>
+<li><strong>Problem 4</strong>: Neyman orthogonality of the partialling-out moment, and why the naive moment is not orthogonal.</li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-belloni2014" class="csl-entry" role="listitem">
+Belloni, Alexandre, Victor Chernozhukov, and Christian Hansen. 2014. <span>“High-Dimensional Methods and Inference on Structural and Treatment Effects.”</span> <em>Journal of Economic Perspectives</em> 28 (2): 29–50.
+</div>
+<div id="ref-chernozhukov2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68.
+</div>
+<div id="ref-hansen2022" class="csl-entry" role="listitem">
+Hansen, Bruce E. 2022. <em>Econometrics</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-james2023" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2023. <em>An Introduction to Statistical Learning with Applications in r</em>. 2nd ed. New York: Springer.
+</div>
+<div id="ref-tibshirani1996" class="csl-entry" role="listitem">
+Tibshirani, Robert. 1996. <span>“Regression Shrinkage and Selection via the Lasso.”</span> <em>Journal of the Royal Statistical Society, Series B</em> 58 (1): 267–88.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
