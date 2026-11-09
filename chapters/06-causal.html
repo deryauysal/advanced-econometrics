@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Causal Inference – Econometrics: Advanced Methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../references.html" rel="next">
+<link href="../chapters/05-statlearning.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-50d8cff582db2d857f28324736e0ca3d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-causal.html">Optional reading</a></li><li class="breadcrumb-item"><a href="../chapters/06-causal.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Causal Inference</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Econometrics: Advanced Methods</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Estimation principles</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Maximum Likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Method of Moments and GMM</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Computation and flexible models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulation-Based Estimation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-statlearning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Statistical Learning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Optional reading</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-causal.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Causal Inference</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/a-asymptotics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Large-Sample Asymptotics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/b-r-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">A Short R Primer</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-cparams" id="toc-sec-cparams" class="nav-link active" data-scroll-target="#sec-cparams"><span class="header-section-number">6.1</span> Potential outcomes and causal parameters</a></li>
+  <li><a href="#sec-rct" id="toc-sec-rct" class="nav-link" data-scroll-target="#sec-rct"><span class="header-section-number">6.2</span> Randomized experiments</a></li>
+  <li><a href="#sec-soo" id="toc-sec-soo" class="nav-link" data-scroll-target="#sec-soo"><span class="header-section-number">6.3</span> Selection on observables</a>
+  <ul class="collapse">
+  <li><a href="#subclassification-and-matching" id="toc-subclassification-and-matching" class="nav-link" data-scroll-target="#subclassification-and-matching"><span class="header-section-number">6.3.1</span> Subclassification and matching</a></li>
+  <li><a href="#the-propensity-score" id="toc-the-propensity-score" class="nav-link" data-scroll-target="#the-propensity-score"><span class="header-section-number">6.3.2</span> The propensity score</a></li>
+  <li><a href="#weighting" id="toc-weighting" class="nav-link" data-scroll-target="#weighting"><span class="header-section-number">6.3.3</span> Weighting</a></li>
+  <li><a href="#regression-adjustment-and-what-ols-estimates" id="toc-regression-adjustment-and-what-ols-estimates" class="nav-link" data-scroll-target="#regression-adjustment-and-what-ols-estimates"><span class="header-section-number">6.3.4</span> Regression adjustment and what OLS estimates</a></li>
+  <li><a href="#doubly-robust-estimation" id="toc-doubly-robust-estimation" class="nav-link" data-scroll-target="#doubly-robust-estimation"><span class="header-section-number">6.3.5</span> Doubly robust estimation</a></li>
+  <li><a href="#illustration-smoking-and-birth-weight" id="toc-illustration-smoking-and-birth-weight" class="nav-link" data-scroll-target="#illustration-smoking-and-birth-weight"><span class="header-section-number">6.3.6</span> Illustration: smoking and birth weight</a></li>
+  </ul></li>
+  <li><a href="#sec-late" id="toc-sec-late" class="nav-link" data-scroll-target="#sec-late"><span class="header-section-number">6.4</span> Instrumental variables and the LATE</a>
+  <ul class="collapse">
+  <li><a href="#sec-late-weighting" id="toc-sec-late-weighting" class="nav-link" data-scroll-target="#sec-late-weighting"><span class="header-section-number">6.4.1</span> Covariates and kappa weighting</a></li>
+  </ul></li>
+  <li><a href="#sec-rd" id="toc-sec-rd" class="nav-link" data-scroll-target="#sec-rd"><span class="header-section-number">6.5</span> Regression discontinuity designs</a>
+  <ul class="collapse">
+  <li><a href="#sharp-and-fuzzy-designs" id="toc-sharp-and-fuzzy-designs" class="nav-link" data-scroll-target="#sharp-and-fuzzy-designs"><span class="header-section-number">6.5.1</span> Sharp and fuzzy designs</a></li>
+  <li><a href="#estimation-by-local-polynomials" id="toc-estimation-by-local-polynomials" class="nav-link" data-scroll-target="#estimation-by-local-polynomials"><span class="header-section-number">6.5.2</span> Estimation by local polynomials</a></li>
+  <li><a href="#validation-and-falsification" id="toc-validation-and-falsification" class="nav-link" data-scroll-target="#validation-and-falsification"><span class="header-section-number">6.5.3</span> Validation and falsification</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">6.6</span> Further reading</a></li>
+  <li><a href="#sec-causal-ex" id="toc-sec-causal-ex" class="nav-link" data-scroll-target="#sec-causal-ex"><span class="header-section-number">6.7</span> Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-causal.html">Optional reading</a></li><li class="breadcrumb-item"><a href="../chapters/06-causal.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Causal Inference</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-causal" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Causal Inference</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\bm}[1]{\boldsymbol{#1}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\bR}{\boldsymbol{R}}
+\newcommand{\br}{\boldsymbol{r}}
+\newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bZ}{\boldsymbol{Z}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bA}{\boldsymbol{A}}
+\newcommand{\bV}{\boldsymbol{V}}
+\newcommand{\bu}{\boldsymbol{u}}
+\newcommand{\bw}{\boldsymbol{w}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\bg}{\boldsymbol{g}}
+\newcommand{\bS}{\boldsymbol{S}}
+\newcommand{\bD}{\boldsymbol{D}}
+\newcommand{\bI}{\boldsymbol{I}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\AVar}{\operatorname{Avar}}
+\newcommand{\cvp}{\xrightarrow{\;p\;}}
+\newcommand{\cvd}{\xrightarrow{\;d\;}}
+\newcommand{\iid}{\overset{\text{iid}}{\sim}}
+\newcommand{\KLIC}{\operatorname{KLIC}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\]</span></p>
+</div>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Optional reading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter is <strong>optional</strong> and <strong>not part of the exam</strong>. It summarises the two causal inference lectures (Causal Inference I and II) for students who want a written reference. There is no problem set or computer tutorial for it; the short exercises at the end are for self-study.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span>; <span class="citation" data-cites="angrist2009">Angrist and Pischke (<a href="../references.html#ref-angrist2009" role="doc-biblioref">2009</a>)</span>, Ch. 3, 4 and 6; <span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 21; <span class="citation" data-cites="imbens2015">Imbens and Rubin (<a href="../references.html#ref-imbens2015" role="doc-biblioref">2015</a>)</span> for a book-length treatment. Instrumental variables and LATE: <span class="citation" data-cites="imbens1994">Imbens and Angrist (<a href="../references.html#ref-imbens1994" role="doc-biblioref">1994</a>)</span>, <span class="citation" data-cites="angrist1996">Angrist, Imbens, and Rubin (<a href="../references.html#ref-angrist1996" role="doc-biblioref">1996</a>)</span>, <span class="citation" data-cites="abadie2003">Abadie (<a href="../references.html#ref-abadie2003" role="doc-biblioref">2003</a>)</span>, <span class="citation" data-cites="sloczynski2025">Słoczyński, Uysal, and Wooldridge (<a href="../references.html#ref-sloczynski2025" role="doc-biblioref">2025</a>)</span>. Regression discontinuity: <span class="citation" data-cites="imbens2008">Imbens and Lemieux (<a href="../references.html#ref-imbens2008" role="doc-biblioref">2008</a>)</span>, <span class="citation" data-cites="lee2010">Lee and Lemieux (<a href="../references.html#ref-lee2010" role="doc-biblioref">2010</a>)</span>, <span class="citation" data-cites="cattaneo2020">Cattaneo, Idrobo, and Titiunik (<a href="../references.html#ref-cattaneo2020" role="doc-biblioref">2020</a>)</span>.</p>
+</div>
+</div>
+<p><a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a> introduced potential outcomes, the average treatment effect and inverse probability weighting as the leading example of a two-step GMM estimator. This chapter places those results in the wider toolbox of program evaluation. It covers three identification strategies: <strong>selection on observables</strong> (randomized experiments, matching, weighting, regression and doubly robust estimators), <strong>instrumental variables</strong> with heterogeneous effects (the local average treatment effect), and <strong>regression discontinuity</strong> designs. The estimators reuse the tools of the course: logit for the propensity score (<a href="01-mle.html" class="quarto-xref"><span>Chapter 1</span></a>), two-step GMM for inference (<a href="02-gmm.html#sec-twostep" class="quarto-xref"><span>Section 2.9</span></a>), and local linear regression at a boundary (<a href="04-nonparametric.html#sec-npreg" class="quarto-xref"><span>Section 4.3</span></a>).</p>
+<section id="sec-cparams" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-cparams"><span class="header-section-number">6.1</span> Potential outcomes and causal parameters</h2>
+<p>The notation follows <a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a>: <span class="math inline">\(D_i\in\{0,1\}\)</span> is the treatment, <span class="math inline">\((Y_{0i},Y_{1i})\)</span> are the potential outcomes, <span class="math inline">\(Y_i=D_iY_{1i}+(1-D_i)Y_{0i}\)</span> is observed, and the no-interference assumption (SUTVA) is maintained. Besides the ATE we use the average effects on the treated and on the untreated, <span class="math display">\[
+\tau=\E[Y_{1i}-Y_{0i}],\quad \tau_T=\E[Y_{1i}-Y_{0i}\mid D_i=1],\quad \tau_U=\E[Y_{1i}-Y_{0i}\mid D_i=0],
+\]</span> which are linked by <span class="math inline">\(\tau=\pi\tau_T+(1-\pi)\tau_U\)</span> with <span class="math inline">\(\pi=P(D_i=1)\)</span>. The three differ whenever effects are heterogeneous and units select into treatment on the basis of their gains.</p>
+<p><strong>What the naive comparison estimates.</strong> Let <span class="math inline">\(\Delta=\E[Y_i\mid D_i=1]-\E[Y_i\mid D_i=0]=\E[Y_{1i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]\)</span>. Adding and subtracting terms gives three equivalent decompositions, <span id="eq-naive"><span class="math display">\[
+\begin{aligned}
+\Delta&amp;=\tau_T+\big(\E[Y_{0i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]\big)\\
+&amp;=\tau+\big(\E[Y_{0i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]\big)\\
+&amp;\qquad+(1-\pi)(\tau_T-\tau_U)\\
+&amp;=\pi\tau_T+(1-\pi)\tau_U\\
+&amp;\qquad+(1-\pi)\big(\E[Y_{1i}\mid D_i=1]-\E[Y_{1i}\mid D_i=0]\big)\\
+&amp;\qquad+\pi\big(\E[Y_{0i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]\big).
+\end{aligned}
+\tag{6.1}\]</span></span> The first equality is the familiar one from <a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a>; the term in brackets is the selection bias. The second shows that, relative to the ATE, there are two sources of bias: different baseline outcomes, and different gains (<span class="math inline">\(\tau_T\neq\tau_U\)</span>). The third (<a href="#exr-c-naive" class="quarto-xref">Exercise&nbsp;<span>6.1</span></a>) writes <span class="math inline">\(\Delta\)</span> as the ATE plus a weighted sum of the differences between treated and untreated in <em>both</em> potential outcomes; it shows that <span class="math inline">\(\Delta=\tau\)</span> if the treated and untreated have the same mean of <span class="math inline">\(Y_0\)</span> and the same mean of <span class="math inline">\(Y_1\)</span>, which is weaker than full independence.</p>
+</section>
+<section id="sec-rct" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-rct"><span class="header-section-number">6.2</span> Randomized experiments</h2>
+<p>If <span class="math inline">\(D_i\)</span> is randomly assigned, <span class="math inline">\((Y_{0i},Y_{1i})\perp D_i\)</span>, so <span class="math inline">\(\E[Y_{di}\mid D_i=1]=\E[Y_{di}\mid D_i=0]\)</span> for <span class="math inline">\(d=0,1\)</span>. Both bias terms in <a href="#eq-naive" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> vanish and <span class="math inline">\(\Delta=\tau=\tau_T=\tau_U\)</span>. The difference in sample means <span class="math inline">\(\bar Y_1-\bar Y_0\)</span> is unbiased for <span class="math inline">\(\tau\)</span>. It is algebraically identical to the OLS slope in the regression of <span class="math inline">\(Y_i\)</span> on a constant and <span class="math inline">\(D_i\)</span>, so a regression is just a convenient way to compute it. Two points matter for inference. First, with heterogeneous effects the variances of <span class="math inline">\(Y\)</span> differ between the arms, so heteroskedasticity-robust standard errors should be used; the conventional OLS standard error is valid only if the two arms have equal variances or equal sizes. Second, adding pre-treatment covariates <span class="math inline">\(\bx_i\)</span> does not change what is estimated (they are independent of <span class="math inline">\(D_i\)</span>) but can reduce the variance. With heterogeneous effects, the regression should include <span class="math inline">\(D_i\)</span> interacted with the demeaned covariates, <span class="math inline">\(Y_i\)</span> on <span class="math inline">\((1,D_i,\bx_i-\bar\bx,D_i(\bx_i-\bar\bx))\)</span>, for the coefficient on <span class="math inline">\(D_i\)</span> to be consistent for <span class="math inline">\(\tau\)</span> and, in large samples, never less precise than the simple difference in means.</p>
+</section>
+<section id="sec-soo" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-soo"><span class="header-section-number">6.3</span> Selection on observables</h2>
+<p>Without randomization we rely on the two assumptions of <a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a>:</p>
+<ul>
+<li><strong>Unconfoundedness (conditional independence, CIA):</strong> <span class="math inline">\((Y_{0i},Y_{1i})\perp D_i\mid\bx_i\)</span>.</li>
+<li><strong>Overlap (common support):</strong> <span class="math inline">\(0&lt;p(\bx)&lt;1\)</span> for all <span class="math inline">\(\bx\)</span>, with <span class="math inline">\(p(\bx)=P(D_i=1\mid\bx_i=\bx)\)</span>.</li>
+</ul>
+<p>For <span class="math inline">\(\tau_T\)</span> it suffices that <span class="math inline">\(Y_{0i}\perp D_i\mid\bx_i\)</span> and <span class="math inline">\(p(\bx)&lt;1\)</span>. Under the CIA, <span class="math inline">\(\mu_d(\bx)\equiv\E[Y_i\mid D_i=d,\bx_i=\bx]=\E[Y_{di}\mid\bx_i=\bx]\)</span>, so the conditional effect <span class="math inline">\(\tau(\bx)=\mu_1(\bx)-\mu_0(\bx)\)</span> is identified wherever there is overlap, and <span id="eq-ra"><span class="math display">\[
+\tau=\E[\mu_1(\bx_i)-\mu_0(\bx_i)],\qquad \tau_T=\E[\mu_1(\bx_i)-\mu_0(\bx_i)\mid D_i=1].
+\tag{6.2}\]</span></span> All estimators below are different ways of estimating these averages. They differ in what they model: the outcome regressions <span class="math inline">\(\mu_d\)</span> (regression adjustment), the propensity score <span class="math inline">\(p\)</span> (weighting, propensity score matching), both (doubly robust), or neither (covariate matching).</p>
+<section id="subclassification-and-matching" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="subclassification-and-matching"><span class="header-section-number">6.3.1</span> Subclassification and matching</h3>
+<p><strong>Subclassification.</strong> If <span class="math inline">\(\bx_i\)</span> takes <span class="math inline">\(K\)</span> values <span class="math inline">\(\bx^1,\ldots,\bx^K\)</span>, <a href="#eq-ra" class="quarto-xref">Equation&nbsp;<span>6.2</span></a> is a weighted average of within-cell differences in means, <span class="math display">\[
+\hat\tau=\sum_{k=1}^K\big(\bar Y_{1k}-\bar Y_{0k}\big)\frac{N_k}{N},\qquad
+\hat\tau_T=\sum_{k=1}^K\big(\bar Y_{1k}-\bar Y_{0k}\big)\frac{N_{1k}}{N_1},
+\]</span> where <span class="math inline">\(N_k\)</span> and <span class="math inline">\(N_{1k}\)</span> are the numbers of units and of treated units in cell <span class="math inline">\(k\)</span>. Overlap requires every cell (for <span class="math inline">\(\tau_T\)</span>, every cell with treated units) to contain controls. With several or continuous covariates the cells become empty quickly: the curse of dimensionality of <a href="04-nonparametric.html#sec-curse" class="quarto-xref"><span>Section 4.3.4</span></a> in another guise.</p>
+<p><strong>Matching</strong> replaces exact cells by nearest neighbours. Let <span class="math inline">\(\mathcal J_M(i)\)</span> be the set of the <span class="math inline">\(M\)</span> units in the opposite group closest to unit <span class="math inline">\(i\)</span> in covariate space. The missing potential outcome is imputed by the average outcome of the matches, <span class="math display">\[
+\hat Y_{0i}=\begin{cases}Y_i&amp;D_i=0\\ M^{-1}\sum_{j\in\mathcal J_M(i)}Y_j&amp;D_i=1\end{cases},\qquad
+\hat Y_{1i}=\begin{cases}M^{-1}\sum_{j\in\mathcal J_M(i)}Y_j&amp;D_i=0\\ Y_i&amp;D_i=1\end{cases},
+\]</span> so the treated are imputed <span class="math inline">\(Y_0\)</span> from untreated matches and the untreated are imputed <span class="math inline">\(Y_1\)</span> from treated matches. Then <span class="math inline">\(\hat\tau=N^{-1}\sum_i(\hat Y_{1i}-\hat Y_{0i})\)</span> and <span class="math inline">\(\hat\tau_T=N_1^{-1}\sum_{i:D_i=1}(Y_i-\hat Y_{0i})\)</span>. Matching is usually done with replacement (a control can serve as a match several times), which reduces bias at the cost of variance.</p>
+<p><em>Distance.</em> Covariates on different scales are combined with a weighting matrix, <span class="math inline">\(\|\bx_i-\bx_j\|_{\bm V}=\{(\bx_i-\bx_j)'\bm V(\bx_i-\bx_j)\}^{1/2}\)</span>. The <strong>normalized Euclidean</strong> distance uses <span class="math inline">\(\bm V=\operatorname{diag}(\hat\sigma_1^{-2},\ldots,\hat\sigma_k^{-2})\)</span>, i.e.&nbsp;<span class="math inline">\(\sum_l(x_{li}-x_{lj})^2/\hat\sigma_l^2\)</span> under the root, and is invariant to rescaling each covariate. The <strong>Mahalanobis</strong> distance uses <span class="math inline">\(\bm V=\hat{\boldsymbol\Sigma}_x^{-1}\)</span> and also accounts for correlation between covariates.</p>
+<p><em>Bias.</em> When matches are not exact, <span class="math inline">\(\hat\tau_T\)</span> contains the term <span class="math inline">\(N_1^{-1}\sum_{i:D_i=1}M^{-1}\sum_{j\in\mathcal J_M(i)}\{\mu_0(\bx_i)-\mu_0(\bx_j)\}\)</span>. <span class="citation" data-cites="abadie2006">Abadie and Imbens (<a href="../references.html#ref-abadie2006" role="doc-biblioref">2006</a>)</span> show that this conditional bias is of order <span class="math inline">\(N^{-1/k}\)</span> with <span class="math inline">\(k\)</span> continuous covariates. For <span class="math inline">\(k\ge2\)</span> it is not negligible relative to the standard error, which is of order <span class="math inline">\(N^{-1/2}\)</span>, and for <span class="math inline">\(k\ge3\)</span> it dominates the distribution of the estimator. The <strong>bias-corrected</strong> matching estimator <span class="citation" data-cites="abadie2011">(<a href="../references.html#ref-abadie2011" role="doc-biblioref">Abadie and Imbens 2011</a>)</span> estimates <span class="math inline">\(\mu_0\)</span> (and <span class="math inline">\(\mu_1\)</span>) by a regression and subtracts <span class="math inline">\(\hat\mu_0(\bx_i)-\hat\mu_0(\bx_j)\)</span> from each matched difference. The standard bootstrap is not valid for matching with a fixed number of matches <span class="citation" data-cites="abadie2008">(<a href="../references.html#ref-abadie2008" role="doc-biblioref">Abadie and Imbens 2008</a>)</span>; analytic variance formulas are available in <span class="citation" data-cites="abadie2006">Abadie and Imbens (<a href="../references.html#ref-abadie2006" role="doc-biblioref">2006</a>)</span>.</p>
+</section>
+<section id="the-propensity-score" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="the-propensity-score"><span class="header-section-number">6.3.2</span> The propensity score</h3>
+<p><span class="citation" data-cites="rosenbaum1983">Rosenbaum and Rubin (<a href="../references.html#ref-rosenbaum1983" role="doc-biblioref">1983</a>)</span> showed that the propensity score is a <strong>balancing score</strong>: <span class="math inline">\(D_i\perp\bx_i\mid p(\bx_i)\)</span>, and if the CIA holds given <span class="math inline">\(\bx_i\)</span> it also holds given <span class="math inline">\(p(\bx_i)\)</span> alone, <span class="math display">\[
+(Y_{0i},Y_{1i})\perp D_i\mid\bx_i\quad\Longrightarrow\quad(Y_{0i},Y_{1i})\perp D_i\mid p(\bx_i)
+\]</span> (<a href="#exr-c-pscore" class="quarto-xref">Exercise&nbsp;<span>6.2</span></a>). Matching or subclassifying on the scalar <span class="math inline">\(p(\bx_i)\)</span> therefore removes the dimensionality problem of covariate matching, at the cost of having to model <span class="math inline">\(p\)</span>, in practice by a logit or probit with a flexible specification. Common implementations are nearest-neighbour matching on <span class="math inline">\(\hat p\)</span> (optionally within a <strong>caliper</strong> <span class="math inline">\(|\hat p_i-\hat p_j|&lt;\delta\)</span>), radius matching, stratification on <span class="math inline">\(\hat p\)</span>, and kernel or local linear matching, which use a weighted average of all controls with weights that decline with <span class="math inline">\(|\hat p_i-\hat p_j|\)</span>. Estimating <span class="math inline">\(p\)</span> affects the variance of the matching estimator, and treating <span class="math inline">\(\hat p\)</span> as known is not valid <span class="citation" data-cites="abadie2016">(<a href="../references.html#ref-abadie2016" role="doc-biblioref">Abadie and Imbens 2016</a>)</span>.</p>
+<p><em>Overlap in practice.</em> Plotting the distribution of <span class="math inline">\(\hat p\)</span> for treated and controls shows whether overlap is plausible. If some treated units have <span class="math inline">\(\hat p\)</span> above the largest control value, they have no comparable controls. A common response is to drop them (and report that the estimand now refers to the treated <em>on the common support</em>, so averages are over the treated units remaining after trimming) or to trim units with <span class="math inline">\(\hat p\notin[\alpha,1-\alpha]\)</span>, e.g.&nbsp;<span class="math inline">\(\alpha=0.1\)</span>, which changes the estimand to the ATE for the trimmed population.</p>
+<p><em>Balance.</em> Because <span class="math inline">\(p\)</span> is only a device to balance <span class="math inline">\(\bx\)</span>, the specification is judged by whether the weighted or matched samples are balanced, e.g.&nbsp;by standardized differences in covariate means, not by the fit of the logit.</p>
+</section>
+<section id="weighting" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="weighting"><span class="header-section-number">6.3.3</span> Weighting</h3>
+<p>The IPW identification result and the unnormalized and normalized ATE estimators are in <a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a> (<a href="02-gmm.html#eq-ipw" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>). For the ATT only <span class="math inline">\(Y_0\)</span> of the treated is missing, and controls are reweighted to look like the treated: <span class="math display">\[
+\tau_T=\frac{1}{\pi}\E\Big[\frac{D_i-p(\bx_i)}{1-p(\bx_i)}Y_i\Big],
+\]</span> <span class="math display">\[
+\hat\tau_{T,norm}=\frac{\sum_iD_iY_i}{\sum_iD_i}-\frac{\sum_i(1-D_i)\omega_iY_i}{\sum_i(1-D_i)\omega_i},\quad \omega_i=\frac{\hat p(\bx_i)}{1-\hat p(\bx_i)} .
+\]</span> Controls with a high propensity score, those that look like treated units, receive large weights (the odds of treatment). Problem Set 2, Problem 4 derives the moments and the two-step variance. As stressed in <a href="02-gmm.html#sec-po" class="quarto-xref"><span>Section 2.9.1</span></a>, the normalized versions, whose weights sum to one within each group, are preferred <span class="citation" data-cites="busso2014">(<a href="../references.html#ref-busso2014" role="doc-biblioref">Busso, DiNardo, and McCrary 2014</a>)</span>. One reason is a simple invariance property discussed in <a href="#sec-late-weighting" class="quarto-xref"><span>Section 6.4.1</span></a>: an unnormalized estimator changes if a constant is added to <span class="math inline">\(Y\)</span>.</p>
+</section>
+<section id="regression-adjustment-and-what-ols-estimates" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="regression-adjustment-and-what-ols-estimates"><span class="header-section-number">6.3.4</span> Regression adjustment and what OLS estimates</h3>
+<p><strong>Regression adjustment</strong> (RA) estimates <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\mu_1\)</span> by separate regressions in the control and treated samples, predicts both for every unit and averages according to <a href="#eq-ra" class="quarto-xref">Equation&nbsp;<span>6.2</span></a>: <span class="math display">\[
+\hat\tau_{RA}=\frac1N\sum_{i=1}^N\big(\hat\mu_1(\bx_i)-\hat\mu_0(\bx_i)\big),\qquad \hat\tau_{T,RA}=\frac1{N_1}\sum_{i:D_i=1}\big(\hat\mu_1(\bx_i)-\hat\mu_0(\bx_i)\big).
+\]</span> With linear <span class="math inline">\(\hat\mu_d\)</span> this is the same as the fully interacted regression of <a href="#sec-rct" class="quarto-xref"><span>Section 6.2</span></a>.</p>
+<p><strong>OLS with additive controls.</strong> Most applied work instead runs <span class="math inline">\(Y_i=\alpha+\tau D_i+\bx_i'\bbeta+u_i\)</span>. What does <span class="math inline">\(\tau\)</span> estimate when effects are heterogeneous?</p>
+<p><em>Saturated controls.</em> If <span class="math inline">\(\bx_i\)</span> is discrete and the regression includes a dummy for each cell, the OLS coefficient converges to <span class="math display">\[
+\tau_{OLS}=\sum_{k=1}^K\tau(\bx^k)\,w_k,\qquad w_k=\frac{p_k(1-p_k)P(\bx_i=\bx^k)}{\sum_{l=1}^Kp_l(1-p_l)P(\bx_i=\bx^l)},\quad p_k=p(\bx^k).
+\]</span> The ATE weights the cells by <span class="math inline">\(P(\bx_i=\bx^k)\)</span> and the ATT by <span class="math inline">\(p_kP(\bx_i=\bx^k)/\pi\)</span>. OLS instead weights by the conditional variance of treatment, <span class="math inline">\(p_k(1-p_k)\)</span>: cells where treated and controls are balanced (<span class="math inline">\(p_k\)</span> near <span class="math inline">\(1/2\)</span>) count most, cells where almost everyone or almost no one is treated count little. OLS is a variance-weighted average of cell effects, which coincides with the ATE only if <span class="math inline">\(\tau(\bx)\)</span> is constant or uncorrelated with <span class="math inline">\(p(1-p)\)</span>.</p>
+<p><em>Linear controls.</em> <span class="citation" data-cites="sloczynski2022">Słoczyński (<a href="../references.html#ref-sloczynski2022" role="doc-biblioref">2022</a>)</span> shows that, for any <span class="math inline">\(\bx_i\)</span>, the OLS coefficient is exactly <span id="eq-sloczynski"><span class="math display">\[
+\begin{gathered}
+\tau_{OLS}=w_1\,\tau_{T}^{\ell}+w_0\,\tau_{U}^{\ell},\qquad w_0=1-w_1,\\
+w_1=\frac{(1-\pi)\Var[p^\ell(\bx_i)\mid D_i=0]}{\pi\Var[p^\ell(\bx_i)\mid D_i=1]+(1-\pi)\Var[p^\ell(\bx_i)\mid D_i=0]},
+\end{gathered}
+\tag{6.3}\]</span></span> where <span class="math inline">\(p^\ell(\bx_i)\)</span> is the linear projection of <span class="math inline">\(D_i\)</span> on <span class="math inline">\((1,\bx_i)\)</span>, and <span class="math inline">\(\tau_T^{\ell}\)</span>, <span class="math inline">\(\tau_U^{\ell}\)</span> are the effects on the treated and untreated implied by separate linear regressions of <span class="math inline">\(Y\)</span> on <span class="math inline">\(p^\ell(\bx_i)\)</span> in each group. They equal <span class="math inline">\(\tau_T\)</span> and <span class="math inline">\(\tau_U\)</span> if <span class="math inline">\(\E[Y_{di}\mid\bx_i]\)</span> is linear in <span class="math inline">\(p^\ell(\bx_i)\)</span>. If the two conditional variances are similar, <span class="math inline">\(w_1\approx1-\pi\)</span>: <strong>the smaller group gets the larger weight</strong>. When few units are treated, OLS is close to the ATT, not the ATE; when most are treated, it is close to the ATU. The ATE puts weight <span class="math inline">\(\pi\)</span> on <span class="math inline">\(\tau_T\)</span>, so OLS can be far from the ATE when <span class="math inline">\(\pi\)</span> is far from <span class="math inline">\(1/2\)</span> and <span class="math inline">\(\tau_T\neq\tau_U\)</span>.</p>
+</section>
+<section id="doubly-robust-estimation" class="level3" data-number="6.3.5">
+<h3 data-number="6.3.5" class="anchored" data-anchor-id="doubly-robust-estimation"><span class="header-section-number">6.3.5</span> Doubly robust estimation</h3>
+<p>The <strong>augmented IPW</strong> (AIPW) estimator combines both models <span class="citation" data-cites="robins1994">(<a href="../references.html#ref-robins1994" role="doc-biblioref">Robins, Rotnitzky, and Zhao 1994</a>)</span>: <span class="math display">\[
+\begin{aligned}
+\hat\tau_{AIPW}=\frac1N\sum_{i=1}^N\Big[&amp;\hat\mu_1(\bx_i)-\hat\mu_0(\bx_i)\\
+&amp;+\frac{D_i\big(Y_i-\hat\mu_1(\bx_i)\big)}{\hat p(\bx_i)}-\frac{(1-D_i)\big(Y_i-\hat\mu_0(\bx_i)\big)}{1-\hat p(\bx_i)}\Big].
+\end{aligned}
+\]</span> It starts from RA and adds an IPW-weighted average of the residuals. If the outcome models are correct, the residual terms have mean zero; if the propensity score is correct, they remove the bias of misspecified outcome models. AIPW is therefore consistent if <em>either</em> model is correctly specified (<strong>double robustness</strong>), and it reaches the semiparametric efficiency bound when both are. The closely related <strong>IPWRA</strong> estimator runs the RA regressions weighted by <span class="math inline">\(1/\hat p\)</span> (treated) and <span class="math inline">\(1/(1-\hat p)\)</span> (controls) and has the same double robustness. The AIPW moment is also Neyman orthogonal, which is why it is the basis of the DML estimator of the ATE (<a href="05-statlearning.html#sec-mlcausal" class="quarto-xref"><span>Section 5.5</span></a> discusses the partially linear version).</p>
+</section>
+<section id="illustration-smoking-and-birth-weight" class="level3" data-number="6.3.6">
+<h3 data-number="6.3.6" class="anchored" data-anchor-id="illustration-smoking-and-birth-weight"><span class="header-section-number">6.3.6</span> Illustration: smoking and birth weight</h3>
+<p>We return to the data of Computer Tutorial 2 <span class="citation" data-cites="cattaneo2010">(<a href="../references.html#ref-cattaneo2010" role="doc-biblioref">Cattaneo 2010</a>)</span>: the effect of smoking during pregnancy (<code>mbsmoke</code>) on birth weight in grams, with controls for marital status, age (and its square), education and first birth. The propensity score is a logit, the outcome models are linear, and covariate matching uses one nearest neighbour with the Mahalanobis distance (without the squared age).</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-soo" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-soo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: Effect of smoking on birth weight (grams), <span class="math inline">\(N=4642\)</span>, of whom 19% smoked. Matching: one nearest neighbour (ties averaged), Mahalanobis distance, with replacement; bias correction by linear regression.
+</figcaption>
+<div aria-describedby="tbl-soo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: right;">ATE</th>
+<th style="text-align: right;">ATT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Difference in means</td>
+<td style="text-align: right;">-275.3</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OLS with additive controls</td>
+<td style="text-align: right;">-225.0</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regression adjustment</td>
+<td style="text-align: right;">-231.4</td>
+<td style="text-align: right;">-225.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IPW, unnormalized</td>
+<td style="text-align: right;">-331.1</td>
+<td style="text-align: right;">-298.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IPW, normalized</td>
+<td style="text-align: right;">-231.7</td>
+<td style="text-align: right;">-225.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AIPW (doubly robust)</td>
+<td style="text-align: right;">-231.1</td>
+<td style="text-align: right;">-229.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NN matching</td>
+<td style="text-align: right;">-204.8</td>
+<td style="text-align: right;">-239.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NN matching, bias-corrected</td>
+<td style="text-align: right;">-203.9</td>
+<td style="text-align: right;">-239.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The raw difference of about <span class="math inline">\(-275\)</span> g overstates the harm of smoking, because smokers are less often married and less educated. All estimators that model the outcome or the normalized propensity score agree on an ATE of about <span class="math inline">\(-230\)</span> g and an ATT of about <span class="math inline">\(-225\)</span> g (<a href="#tbl-soo" class="quarto-xref">Table&nbsp;<span>6.1</span></a>). Two results stand out. First, the <strong>unnormalized IPW</strong> estimate of the ATE is far off. Birth weights are around 3000 g, and the IPW weights <span class="math inline">\(D_i/\hat p_i\)</span> average to one only in expectation, so a small imbalance in the weights is multiplied by a large outcome level; the normalized estimator removes this. The unnormalized IPW estimate of the ATT is off for the same reason. Second, OLS with additive controls is close to the ATT rather than the ATE. The Słoczyński decomposition <a href="#eq-sloczynski" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> gives <span class="math inline">\(w_1=0.79\)</span>, <span class="math inline">\(\tau_T^\ell=-224.9\)</span>, <span class="math inline">\(\tau_U^\ell=-225.1\)</span>, so <span class="math inline">\(w_1\tau_T^\ell+w_0\tau_U^\ell=-225.0\)</span>, which reproduces the OLS coefficient exactly. With only 19% smokers, OLS puts about 80% of its weight on the effect for smokers. Here <span class="math inline">\(\tau_T\)</span> and <span class="math inline">\(\tau_U\)</span> happen to be close, so the distinction is minor; in applications with more heterogeneity it is not. Matching gives a smaller ATE and a larger ATT than the regression-based estimators. Since all matching covariates are discrete, about 90% of smokers and 72% of non-smokers have an exact match, so the bias correction changes almost nothing. The difference reflects that matching does not impose linear outcome models, together with its larger sampling variance; it is a reminder that estimates under the same identifying assumption can differ by more than rounding.</p>
+</section>
+</section>
+<section id="sec-late" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-late"><span class="header-section-number">6.4</span> Instrumental variables and the LATE</h2>
+<p>When unconfoundedness is implausible, an instrument can identify a causal effect, but with heterogeneous effects not the ATE. Let <span class="math inline">\(Z_i\in\{0,1\}\)</span> be a binary instrument (an offer, an eligibility rule, a lottery) and <span class="math inline">\(D_i\)</span> the treatment actually taken. Each unit has two <strong>potential treatments</strong> <span class="math inline">\(D_{0i},D_{1i}\)</span>, the treatment it would take with <span class="math inline">\(Z_i=0\)</span> and <span class="math inline">\(Z_i=1\)</span>, so <span class="math inline">\(D_i=Z_iD_{1i}+(1-Z_i)D_{0i}\)</span>, and potential outcomes <span class="math inline">\(Y_i(d,z)\)</span>.</p>
+<p>The pair <span class="math inline">\((D_{0i},D_{1i})\)</span> defines four <strong>types</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><span class="math inline">\(D_{1i}=0\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(D_{1i}=1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(D_{0i}=0\)</span></td>
+<td style="text-align: left;">never-taker</td>
+<td style="text-align: left;"><strong>complier</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(D_{0i}=1\)</span></td>
+<td style="text-align: left;">defier</td>
+<td style="text-align: left;">always-taker</td>
+</tr>
+</tbody>
+</table>
+<p>Types are not observed: a unit with <span class="math inline">\(Z_i=1,D_i=1\)</span> is a complier or an always-taker. <span class="citation" data-cites="imbens1994">Imbens and Angrist (<a href="../references.html#ref-imbens1994" role="doc-biblioref">1994</a>)</span> and <span class="citation" data-cites="angrist1996">Angrist, Imbens, and Rubin (<a href="../references.html#ref-angrist1996" role="doc-biblioref">1996</a>)</span> impose:</p>
+<ol type="1">
+<li><strong>Independence:</strong> <span class="math inline">\(\{Y_i(d,z),D_{0i},D_{1i}\}\perp Z_i\)</span> (the instrument is as good as randomly assigned).</li>
+<li><strong>Exclusion:</strong> <span class="math inline">\(Y_i(d,0)=Y_i(d,1)\equiv Y_{di}\)</span> (the instrument affects <span class="math inline">\(Y\)</span> only through <span class="math inline">\(D\)</span>).</li>
+<li><strong>First stage:</strong> <span class="math inline">\(\E[D_i\mid Z_i=1]\neq\E[D_i\mid Z_i=0]\)</span>.</li>
+<li><strong>Monotonicity:</strong> <span class="math inline">\(D_{1i}\ge D_{0i}\)</span> for all <span class="math inline">\(i\)</span> (no defiers).</li>
+</ol>
+<div id="thm-late" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.1 (LATE theorem)</strong></span> Under assumptions 1–4, the Wald estimand equals the average effect for compliers: <span class="math display">\[
+\frac{\E[Y_i\mid Z_i=1]-\E[Y_i\mid Z_i=0]}{\E[D_i\mid Z_i=1]-\E[D_i\mid Z_i=0]}=\E[Y_{1i}-Y_{0i}\mid D_{1i}&gt;D_{0i}]\equiv\tau_{LATE},
+\]</span> and the denominator is the share of compliers, <span class="math inline">\(P(D_{1i}&gt;D_{0i})\)</span>.</p>
+</div>
+<p>The proof is <a href="#exr-c-late" class="quarto-xref">Exercise&nbsp;<span>6.3</span></a>. The numerator is the <strong>intention-to-treat</strong> effect: always- and never-takers contribute nothing to it, because <span class="math inline">\(Z\)</span> does not change their treatment. With a binary instrument and no covariates, the Wald ratio is also the IV and 2SLS estimator. Compliers are the units whose treatment is changed by <em>this</em> instrument, so different instruments identify different LATEs, and <span class="math inline">\(\tau_{LATE}\)</span> can differ substantially from <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\tau_T\)</span>. The size and characteristics of the complier population are identified even though compliers cannot be individually identified: for example, <span class="math inline">\(P(D_{1i}=D_{0i}=1)=\E[D_i\mid Z_i=0]\)</span> is the share of always-takers.</p>
+<section id="sec-late-weighting" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="sec-late-weighting"><span class="header-section-number">6.4.1</span> Covariates and kappa weighting</h3>
+<p>Often the instrument is only as good as random conditional on covariates, <span class="math inline">\(\{Y_i(d,z),D_{0i},D_{1i}\}\perp Z_i\mid\bx_i\)</span>, with <strong>instrument propensity score</strong> <span class="math inline">\(q(\bx)=P(Z_i=1\mid\bx_i=\bx)\in(0,1)\)</span>. The common practice of adding <span class="math inline">\(\bx_i\)</span> linearly to 2SLS does not in general estimate the LATE when effects vary with <span class="math inline">\(\bx\)</span>; <span class="citation" data-cites="angrist1995">Angrist and Imbens (<a href="../references.html#ref-angrist1995" role="doc-biblioref">1995</a>)</span> show that even a saturated specification yields a weighted average of covariate-specific LATEs with weights that differ from the complier shares. Weighting estimators avoid this.</p>
+<p><strong>Abadie’s kappa</strong> <span class="citation" data-cites="abadie2003">(<a href="../references.html#ref-abadie2003" role="doc-biblioref">Abadie 2003</a>)</span>. Define <span class="math display">\[
+\begin{aligned}
+\kappa_i&amp;=1-\frac{D_i(1-Z_i)}{1-q(\bx_i)}-\frac{(1-D_i)Z_i}{q(\bx_i)},\\
+\kappa_{1i}&amp;=D_i\frac{Z_i-q(\bx_i)}{q(\bx_i)(1-q(\bx_i))},\qquad
+\kappa_{0i}=(1-D_i)\frac{q(\bx_i)-Z_i}{q(\bx_i)(1-q(\bx_i))}.
+\end{aligned}
+\]</span> For any function <span class="math inline">\(g\)</span>, <span class="math display">\[
+\begin{aligned}
+\E[g(Y_i,D_i,\bx_i)\mid D_{1i}&gt;D_{0i}]&amp;=\frac{\E[\kappa_ig(Y_i,D_i,\bx_i)]}{P(D_{1i}&gt;D_{0i})},\\
+\E[g(Y_{1i},\bx_i)\mid D_{1i}&gt;D_{0i}]&amp;=\frac{\E[\kappa_{1i}g(Y_i,\bx_i)]}{P(D_{1i}&gt;D_{0i})},
+\end{aligned}
+\]</span> and the same with <span class="math inline">\(Y_{0i}\)</span> and <span class="math inline">\(\kappa_{0i}\)</span>. Intuitively, <span class="math inline">\(\kappa_i\)</span> removes the always-takers (observed with <span class="math inline">\(D=1,Z=0\)</span>) and never-takers (observed with <span class="math inline">\(D=0,Z=1\)</span>) by giving the corresponding cells negative weight. With <span class="math inline">\(g=1\)</span>, <span class="math inline">\(\E[\kappa_i]=\E[\kappa_{1i}]=\E[\kappa_{0i}]=P(D_{1i}&gt;D_{0i})\)</span>. Taking <span class="math inline">\(g(\bx_i)=\bx_i\)</span> gives the <strong>mean characteristics of compliers</strong>, <span class="math inline">\(\E[\bx_i\mid D_{1i}&gt;D_{0i}]=\E[\kappa_i\bx_i]/\E[\kappa_i]\)</span>, which helps to interpret a LATE.</p>
+<p><strong>Weighting estimators of the LATE.</strong> Since <span class="math inline">\(\kappa_{1i}-\kappa_{0i}=(Z_i-q_i)/\{q_i(1-q_i)\}\)</span> with <span class="math inline">\(q_i=q(\bx_i)\)</span>, <span class="math display">\[
+\tau_{LATE}=\frac{\E[(\kappa_{1i}-\kappa_{0i})Y_i]}{P(D_{1i}&gt;D_{0i})},
+\]</span> and each of the three sample estimators of <span class="math inline">\(P(D_{1i}&gt;D_{0i})\)</span>, the sample means of <span class="math inline">\(\hat\kappa_i\)</span>, <span class="math inline">\(\hat\kappa_{1i}\)</span> and <span class="math inline">\(\hat\kappa_{0i}\)</span>, gives an estimator: <span class="math inline">\(\hat\tau_a\)</span>, <span class="math inline">\(\hat\tau_{a,1}\)</span> and <span class="math inline">\(\hat\tau_{a,0}\)</span>. The estimator <span class="math inline">\(\hat\tau_{a,1}\)</span> is identical to the ratio of two unnormalized IPW estimators, the effects of <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> and on <span class="math inline">\(D\)</span> <span class="citation" data-cites="tan2006">(<a href="../references.html#ref-tan2006" role="doc-biblioref">Tan 2006</a>)</span>, which is the most popular weighting estimator of the LATE.</p>
+<p><span class="citation" data-cites="sloczynski2025">Słoczyński, Uysal, and Wooldridge (<a href="../references.html#ref-sloczynski2025" role="doc-biblioref">2025</a>)</span> show that none of these is <strong>normalized</strong>: written as a difference between a weighted mean of <span class="math inline">\(Y\)</span> for compliers under treatment and under control, the weights do not sum to one. As a consequence they are not <strong>translation invariant</strong>: adding a constant <span class="math inline">\(c\)</span> to every <span class="math inline">\(Y_i\)</span> changes the estimate (<a href="#exr-c-kappa" class="quarto-xref">Exercise&nbsp;<span>6.4</span></a>). They recommend two normalized estimators, <span class="math display">\[
+\hat\tau_{a,10}=\frac{\sum_i\hat\kappa_{1i}Y_i}{\sum_i\hat\kappa_{1i}}-\frac{\sum_i\hat\kappa_{0i}Y_i}{\sum_i\hat\kappa_{0i}},
+\]</span> <span class="math display">\[
+\hat\tau_u=\frac{\hat\E_{w}[Y\mid Z=1]-\hat\E_{w}[Y\mid Z=0]}{\hat\E_{w}[D\mid Z=1]-\hat\E_{w}[D\mid Z=0]},
+\]</span> where <span class="math inline">\(\hat\E_w[V\mid Z=1]=\sum_iZ_iV_i/\hat q_i\big/\sum_iZ_i/\hat q_i\)</span> and <span class="math inline">\(\hat\E_w[V\mid Z=0]=\sum_i(1-Z_i)V_i/(1-\hat q_i)\big/\sum_i(1-Z_i)/(1-\hat q_i)\)</span> are normalized IPW means. <span class="math inline">\(\hat\tau_u\)</span> is the ratio of two normalized IPW estimators of the effects of <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> and on <span class="math inline">\(D\)</span>. Both are translation invariant and scale equivariant; the authors recommend <span class="math inline">\(\hat\tau_u\)</span>. The same lesson as for the ATE applies: normalize the weights.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-late" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-late-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: Estimators of the LATE (<span class="math inline">\(=1\)</span>; ATE <span class="math inline">\(=1.25\)</span>) with a covariate-dependent instrument. <span class="math inline">\(x\sim N(0,1)\)</span>, <span class="math inline">\(q(x)=\Lambda(0.3+0.8x)\)</span>; 20% always-takers (effect 3), 30% never-takers (effect 0.5), 50% compliers (effect <span class="math inline">\(1+x\)</span>); <span class="math inline">\(n=1000\)</span>, 1000 samples. Column 4: standard deviation when 10 is added to every <span class="math inline">\(Y\)</span>. Column 5: change in the estimate when 100 is added to <span class="math inline">\(Y\)</span> in one sample.
+</figcaption>
+<div aria-describedby="tbl-late-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 17%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">sd if Y + 10</th>
+<th style="text-align: right;">change if Y + 100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2SLS with linear control</td>
+<td style="text-align: right;">-0.091</td>
+<td style="text-align: right;">0.229</td>
+<td style="text-align: right;">0.229</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\hat\tau_a\)</span></td>
+<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">0.257</td>
+<td style="text-align: right;">0.449</td>
+<td style="text-align: right;">6.746</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\hat\tau_{a,1}\)</span> (Tan)</td>
+<td style="text-align: right;">0.011</td>
+<td style="text-align: right;">0.255</td>
+<td style="text-align: right;">0.441</td>
+<td style="text-align: right;">6.552</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\hat\tau_{a,0}\)</span></td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.265</td>
+<td style="text-align: right;">0.464</td>
+<td style="text-align: right;">7.011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\hat\tau_{a,10}\)</span> (normalized)</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.243</td>
+<td style="text-align: right;">0.243</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\hat\tau_u\)</span> (normalized)</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>In this design 2SLS with <span class="math inline">\(x\)</span> as a linear control is biased for the LATE, because the complier effect varies with <span class="math inline">\(x\)</span>, 2SLS weights the covariate-specific effects differently from the complier distribution, and the linear control only approximates the role of <span class="math inline">\(x\)</span>. All kappa estimators are close to unbiased. The unnormalized ones are only slightly less precise in the original design, but their precision depends on the arbitrary level of <span class="math inline">\(Y\)</span>: after adding 10 to the outcome their standard deviation rises by about 75%, and adding 100 moves the estimate in a single sample by several units. The normalized estimators (and 2SLS) are unaffected (<a href="#tbl-late" class="quarto-xref">Table&nbsp;<span>6.2</span></a>).</p>
+</section>
+</section>
+<section id="sec-rd" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-rd"><span class="header-section-number">6.5</span> Regression discontinuity designs</h2>
+<p>In a regression discontinuity (RD) design, treatment is determined, fully or partly, by whether a <strong>running variable</strong> (score) <span class="math inline">\(X_i\)</span> exceeds a known <strong>cutoff</strong> <span class="math inline">\(c\)</span>. Examples are test-score thresholds for scholarships, age or income limits for programs, and vote-share thresholds in elections. The idea is that units just above and just below the cutoff are comparable, so the jump in the outcome at <span class="math inline">\(c\)</span> reveals the effect of treatment, at least for units at the cutoff. We discuss the continuity-based framework; the alternative local randomization framework treats units in a small window around <span class="math inline">\(c\)</span> as if randomly assigned <span class="citation" data-cites="cattaneo2020">(<a href="../references.html#ref-cattaneo2020" role="doc-biblioref">Cattaneo, Idrobo, and Titiunik 2020</a>)</span>.</p>
+<section id="sharp-and-fuzzy-designs" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="sharp-and-fuzzy-designs"><span class="header-section-number">6.5.1</span> Sharp and fuzzy designs</h3>
+<p>Let <span class="math inline">\(T_i=\mathbb 1\{X_i\ge c\}\)</span> be treatment <em>assignment</em>.</p>
+<p><strong>Sharp RD.</strong> Treatment is a deterministic function of the score, <span class="math inline">\(D_i=T_i\)</span>. Then <span class="math inline">\(\E[Y_i\mid X_i=x]=\E[Y_{1i}\mid X_i=x]\)</span> for <span class="math inline">\(x\ge c\)</span> and <span class="math inline">\(\E[Y_{0i}\mid X_i=x]\)</span> for <span class="math inline">\(x&lt;c\)</span>. There is no overlap at all: at any value of <span class="math inline">\(X\)</span> we see only treated or only controls, and unconfoundedness given <span class="math inline">\(X\)</span> holds trivially. Identification comes from continuity instead <span class="citation" data-cites="hahn2001">(<a href="../references.html#ref-hahn2001" role="doc-biblioref">Hahn, Todd, and Van der Klaauw 2001</a>)</span>: if <span class="math inline">\(\E[Y_{0i}\mid X_i=x]\)</span> and <span class="math inline">\(\E[Y_{1i}\mid X_i=x]\)</span> are continuous at <span class="math inline">\(x=c\)</span>, <span class="math display">\[
+\tau_{SRD}\equiv\E[Y_{1i}-Y_{0i}\mid X_i=c]=\lim_{x\downarrow c}\E[Y_i\mid X_i=x]-\lim_{x\uparrow c}\E[Y_i\mid X_i=x].
+\]</span> The effect is <strong>local</strong>: it is the average effect for units at the cutoff. Extrapolating it away from <span class="math inline">\(c\)</span> requires additional assumptions on how effects vary with the score.</p>
+<p><strong>Fuzzy RD.</strong> Crossing the cutoff changes the probability of treatment, but not from 0 to 1, e.g.&nbsp;because eligibility does not force participation. Then <span class="math inline">\(T_i\)</span> is an instrument for <span class="math inline">\(D_i\)</span> at the cutoff. With potential treatments <span class="math inline">\(D_{1i},D_{0i}\)</span> (under <span class="math inline">\(T_i=1\)</span> and <span class="math inline">\(T_i=0\)</span>), continuity and monotonicity, <span class="math display">\[
+\begin{aligned}
+\tau_{FRD}&amp;=\frac{\lim_{x\downarrow c}\E[Y_i\mid X_i=x]-\lim_{x\uparrow c}\E[Y_i\mid X_i=x]}{\lim_{x\downarrow c}\E[D_i\mid X_i=x]-\lim_{x\uparrow c}\E[D_i\mid X_i=x]}\\
+&amp;=\E[Y_{1i}-Y_{0i}\mid X_i=c,\,D_{1i}&gt;D_{0i}],
+\end{aligned}
+\]</span> a LATE for compliers at the cutoff: the ratio of the jump in the outcome (the intention-to-treat effect) to the jump in the treatment probability (the first stage).</p>
+<p><strong>Extensions.</strong> In a <strong>kink</strong> design the slope rather than the level of the treatment intensity changes at <span class="math inline">\(c\)</span>, and the effect is identified from the change in the slope of <span class="math inline">\(\E[Y\mid X]\)</span> <span class="citation" data-cites="card2015">(<a href="../references.html#ref-card2015" role="doc-biblioref">Card et al. 2015</a>)</span>. With <strong>multiple cutoffs</strong> the score is usually centred at each unit’s cutoff and pooled; the pooled estimand is then a weighted average of cutoff-specific effects. With <strong>multiple scores</strong>, e.g.&nbsp;two exam thresholds or a geographic boundary, the effect is a function along the boundary.</p>
+</section>
+<section id="estimation-by-local-polynomials" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="estimation-by-local-polynomials"><span class="header-section-number">6.5.2</span> Estimation by local polynomials</h3>
+<p>The RD estimand is a difference of two regression functions evaluated at a <strong>boundary point</strong>: <span class="math inline">\(c\)</span> is the left boundary of the treated sample and the right boundary of the control sample. This is exactly the situation of <a href="04-nonparametric.html#tbl-boundary" class="quarto-xref">Table&nbsp;<span>4.3</span></a>, where Nadaraya–Watson has a bias of order <span class="math inline">\(h\)</span> and local linear regression a bias of order <span class="math inline">\(h^2\)</span>. The standard estimator is therefore local linear regression on each side, with a kernel <span class="math inline">\(K\)</span> and bandwidth <span class="math inline">\(h\)</span>: <span class="math display">\[
+(\hat\alpha_+,\hat\beta_+)=\arg\min_{a,b}\sum_{i:X_i\ge c}K\Big(\frac{X_i-c}{h}\Big)\big(Y_i-a-b(X_i-c)\big)^2,
+\]</span> <span class="math inline">\((\hat\alpha_-,\hat\beta_-)\)</span> analogously for <span class="math inline">\(X_i&lt;c\)</span>, and <span class="math inline">\(\hat\tau_{SRD}=\hat\alpha_+-\hat\alpha_-\)</span>. Practical recommendations <span class="citation" data-cites="cattaneo2020">(<a href="../references.html#ref-cattaneo2020" role="doc-biblioref">Cattaneo, Idrobo, and Titiunik 2020</a>)</span>:</p>
+<ul>
+<li><strong>Order:</strong> <span class="math inline">\(p=1\)</span> (or <span class="math inline">\(p=2\)</span>). Global high-order polynomials (fitting e.g.&nbsp;a quartic in <span class="math inline">\(X\)</span> to the whole sample) give the boundary points erratic weights and are not recommended.</li>
+<li><strong>Kernel:</strong> the triangular kernel <span class="math inline">\(K(u)=(1-|u|)\mathbb 1\{|u|\le1\}\)</span> is optimal for boundary estimation; the uniform kernel amounts to OLS of <span class="math inline">\(Y\)</span> on <span class="math inline">\((1,T_i,X_i-c,T_i(X_i-c))\)</span> within <span class="math inline">\([c-h,c+h]\)</span> (<a href="#exr-c-rd" class="quarto-xref">Exercise&nbsp;<span>6.5</span></a>). Results are usually not sensitive to the kernel.</li>
+<li><strong>Bandwidth:</strong> the bias-variance trade-off of <a href="04-nonparametric.html#sec-npreg" class="quarto-xref"><span>Section 4.3</span></a> applies. The standard choice minimizes the asymptotic MSE of <span class="math inline">\(\hat\tau_{SRD}\)</span>, possibly with different bandwidths on the two sides.</li>
+<li><strong>Inference:</strong> the MSE-optimal bandwidth is too large for conventional confidence intervals, whose centre is then off by a bias of the same order as the standard error (as for the density bands of <a href="04-nonparametric.html#sec-density" class="quarto-xref"><span>Section 4.2</span></a>). <strong>Robust bias-corrected</strong> intervals <span class="citation" data-cites="calonico2014">(<a href="../references.html#ref-calonico2014" role="doc-biblioref">Calonico, Cattaneo, and Titiunik 2014</a>)</span> subtract an estimate of the bias and inflate the standard error to account for estimating it. They are implemented, with the bandwidth selectors, in the R and Stata packages <code>rdrobust</code> (which includes <code>rdplot</code>) and <code>rddensity</code>.</li>
+<li><strong>Covariates:</strong> pre-determined covariates can be added linearly to the local regression. They should not change the estimate, but they can reduce the variance. Covariates affected by treatment must not be included.</li>
+</ul>
+<p>The fuzzy RD is estimated as the ratio of two such jumps, which is numerically the same as local 2SLS with <span class="math inline">\(T_i\)</span> as instrument for <span class="math inline">\(D_i\)</span>.</p>
+<p><strong>RD plots.</strong> A scatter plot of <span class="math inline">\(Y\)</span> against <span class="math inline">\(X\)</span> is often uninformative. The standard RD plot shows means of <span class="math inline">\(Y\)</span> in bins of <span class="math inline">\(X\)</span> (evenly spaced or quantile-spaced) together with a smooth fit on each side, which displays the jump and the shape of the regression functions.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-rd" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06-causal_files/figure-html/fig-rd-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Sharp RD with <span class="math inline">\(n=1000\)</span>, <span class="math inline">\(x\sim U(-1,1)\)</span>, cutoff 0, <span class="math inline">\(\E[Y_0\mid x]=0.5+0.6x+1.5x^2-0.8\sin(3x)\)</span> and effect <span class="math inline">\(0.5+0.5x\)</span>, so <span class="math inline">\(\tau_{SRD}=0.5\)</span>. Dots: means in 20 bins per side; solid lines: local linear fits (triangular kernel, <span class="math inline">\(h=0.5\)</span>); dashed: true regression functions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-rd" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.3: Bias, standard deviation and RMSE of sharp RD estimators of <span class="math inline">\(\tau_{SRD}=0.5\)</span> in the design of <a href="#fig-rd" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>, 1000 samples of <span class="math inline">\(n=1000\)</span>. Local linear: triangular kernel. Global: polynomials of order 1 and 4 in <span class="math inline">\(x\)</span>, interacted with <span class="math inline">\(T\)</span>, on the full sample.
+</figcaption>
+<div aria-describedby="tbl-rd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">estimator</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">rmse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">local linear, h = 0.1</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">0.222</td>
+<td style="text-align: right;">0.222</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">local linear, h = 0.25</td>
+<td style="text-align: right;">-0.006</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">0.142</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">local linear, h = 0.5</td>
+<td style="text-align: right;">-0.077</td>
+<td style="text-align: right;">0.100</td>
+<td style="text-align: right;">0.126</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">local linear, h = 1</td>
+<td style="text-align: right;">-0.517</td>
+<td style="text-align: right;">0.073</td>
+<td style="text-align: right;">0.522</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">global linear</td>
+<td style="text-align: right;">-0.924</td>
+<td style="text-align: right;">0.074</td>
+<td style="text-align: right;">0.927</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">global quartic</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.162</td>
+<td style="text-align: right;">0.161</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#tbl-rd" class="quarto-xref">Table&nbsp;<span>6.3</span></a> shows the bandwidth trade-off. A small bandwidth gives little bias but a large variance; a large one fits a straight line through a curved function and is badly biased; <span class="math inline">\(h=1\)</span> uses all data on each side and is as bad as a global linear fit. <a href="#fig-rd" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows the same bias in a single sample: on the right of the cutoff, where the regression function is strongly curved, the local linear fit with <span class="math inline">\(h=0.5\)</span> starts below the true intercept. The global quartic happens to work reasonably here, because the true function is smooth on the whole support, but it is noisier than local linear regression with a moderate bandwidth.</p>
+</section>
+<section id="validation-and-falsification" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="validation-and-falsification"><span class="header-section-number">6.5.3</span> Validation and falsification</h3>
+<p>The continuity assumptions are about unobserved potential outcomes and cannot be tested. Their implications can:</p>
+<ul>
+<li><strong>Manipulation of the score.</strong> If units can precisely sort to one side of the cutoff (students retaking a test until they pass, officials adjusting a poverty index), units just above and below <span class="math inline">\(c\)</span> are no longer comparable. Sorting usually shows up as a discontinuity in the density of <span class="math inline">\(X\)</span> at <span class="math inline">\(c\)</span>, which is tested by comparing density estimates on both sides <span class="citation" data-cites="mccrary2008 cattaneo2020b">(<a href="../references.html#ref-mccrary2008" role="doc-biblioref">McCrary 2008</a>; <a href="../references.html#ref-cattaneo2020b" role="doc-biblioref">Cattaneo, Jansson, and Ma 2020</a>)</span>.</li>
+<li><strong>Pre-determined covariates and placebo outcomes.</strong> Characteristics fixed before treatment should not jump at the cutoff. Running the RD estimator with each covariate as outcome is a balance test.</li>
+<li><strong>Placebo cutoffs.</strong> Estimating “effects” at values of <span class="math inline">\(X\)</span> where treatment does not change should give zero (using only treated or only control observations so that the true effect does not contaminate the estimate).</li>
+<li><strong>Sensitivity.</strong> Results should be robust to the bandwidth and, as a <strong>donut-hole</strong> check, to dropping the observations closest to <span class="math inline">\(c\)</span>, which are the most likely to have manipulated their score.</li>
+</ul>
+<p><strong>Example.</strong> <span class="citation" data-cites="meyersson2014">Meyersson (<a href="../references.html#ref-meyersson2014" role="doc-biblioref">2014</a>)</span> studies whether the election of an Islamic party mayor in Turkish municipalities in 1994 affected the share of young women who completed high school by 2000. The score is the Islamic party’s margin of victory, with cutoff zero. The naive comparison of municipalities with Islamic and secular mayors suggests a <em>negative</em> association, because Islamic parties won in poorer and more conservative places. The local linear RD estimate (triangular kernel, MSE-optimal bandwidth of about 17 percentage points) is a <em>positive</em> effect of about 3 percentage points, with a robust bias-corrected p-value of about 0.08 <span class="citation" data-cites="cattaneo2020">(<a href="../references.html#ref-cattaneo2020" role="doc-biblioref">Cattaneo, Idrobo, and Titiunik 2020</a>)</span>. The density test and the covariate balance tests do not indicate manipulation.</p>
+</section>
+</section>
+<section id="further-reading" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">6.6</span> Further reading</h2>
+<p><span class="citation" data-cites="imbens2015">Imbens and Rubin (<a href="../references.html#ref-imbens2015" role="doc-biblioref">2015</a>)</span> is the standard reference for the potential outcomes framework; <span class="citation" data-cites="angrist2009">Angrist and Pischke (<a href="../references.html#ref-angrist2009" role="doc-biblioref">2009</a>)</span> is an accessible applied treatment of all three strategies. For matching and weighting see <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="busso2014">Busso, DiNardo, and McCrary (<a href="../references.html#ref-busso2014" role="doc-biblioref">2014</a>)</span>, for LATE and kappa weighting <span class="citation" data-cites="abadie2003">Abadie (<a href="../references.html#ref-abadie2003" role="doc-biblioref">2003</a>)</span> and <span class="citation" data-cites="sloczynski2025">Słoczyński, Uysal, and Wooldridge (<a href="../references.html#ref-sloczynski2025" role="doc-biblioref">2025</a>)</span>, and for RD <span class="citation" data-cites="cattaneo2020">Cattaneo, Idrobo, and Titiunik (<a href="../references.html#ref-cattaneo2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="lee2010">Lee and Lemieux (<a href="../references.html#ref-lee2010" role="doc-biblioref">2010</a>)</span>. Difference-in-differences, the fourth main design, is not covered in this course.</p>
+</section>
+<section id="sec-causal-ex" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-causal-ex"><span class="header-section-number">6.7</span> Exercises</h2>
+<p>These exercises are optional and for self-study.</p>
+<div id="exr-c-naive" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.1 (Decomposing the naive comparison)</strong></span> &nbsp;</p>
+<ol type="a">
+<li>Show that <span class="math inline">\(\Delta=\tau+\big(\E[Y_{0i}\mid D_i=1]-\E[Y_{0i}\mid D_i=0]\big)+(1-\pi)(\tau_T-\tau_U)\)</span>.</li>
+<li>Verify the third equality in <a href="#eq-naive" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>.</li>
+<li>Suppose <span class="math inline">\(\E[Y_{0i}\mid D_i=1]=\E[Y_{0i}\mid D_i=0]\)</span> but individuals with larger gains select into treatment. Which of <span class="math inline">\(\tau\)</span>, <span class="math inline">\(\tau_T\)</span> and <span class="math inline">\(\tau_U\)</span> does <span class="math inline">\(\Delta\)</span> equal?</li>
+</ol>
+</div>
+<div id="exr-c-pscore" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.2 (The propensity score theorem)</strong></span> Let <span class="math inline">\(p(\bx)=P(D=1\mid\bx)\)</span> with <span class="math inline">\(0&lt;p(\bx)&lt;1\)</span>. (a) Show that <span class="math inline">\(P(D=1\mid\bx,p(\bx))=P(D=1\mid p(\bx))\)</span>, i.e.&nbsp;<span class="math inline">\(D\perp\bx\mid p(\bx)\)</span>. (b) Show that if <span class="math inline">\((Y_0,Y_1)\perp D\mid\bx\)</span>, then <span class="math inline">\((Y_0,Y_1)\perp D\mid p(\bx)\)</span>.</p>
+</div>
+<div id="exr-c-late" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.3 (The LATE theorem)</strong></span> Prove <a href="#thm-late" class="quarto-xref">Theorem&nbsp;<span>6.1</span></a>. Hint: write <span class="math inline">\(Y_i=Y_{0i}+D_i(Y_{1i}-Y_{0i})\)</span> and use independence to express <span class="math inline">\(\E[Y_i\mid Z_i=1]-\E[Y_i\mid Z_i=0]\)</span> in terms of <span class="math inline">\(D_{1i}-D_{0i}\)</span>.</p>
+</div>
+<div id="exr-c-kappa" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.4 (Normalization and translation invariance)</strong></span> &nbsp;</p>
+<ol type="a">
+<li>Show that <span class="math inline">\(\hat\tau_{a,1}\)</span> equals the ratio of the unnormalized IPW estimators of the effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> and of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span>, <span class="math inline">\(\sum_i(Z_i/\hat q_i-(1-Z_i)/(1-\hat q_i))Y_i\big/\sum_i(Z_i/\hat q_i-(1-Z_i)/(1-\hat q_i))D_i\)</span>.</li>
+<li>Show that replacing <span class="math inline">\(Y_i\)</span> by <span class="math inline">\(Y_i+c\)</span> changes <span class="math inline">\(\hat\tau_a\)</span> by <span class="math inline">\(c\sum_i(\hat\kappa_{1i}-\hat\kappa_{0i})\big/\sum_i\hat\kappa_i\)</span> and explain why this is generally non-zero in finite samples but zero in expectation.</li>
+<li>Show that <span class="math inline">\(\hat\tau_{a,10}\)</span> and <span class="math inline">\(\hat\tau_u\)</span> are translation invariant.</li>
+</ol>
+</div>
+<div id="exr-c-rd" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.5 (RD as a regression)</strong></span> &nbsp;</p>
+<ol type="a">
+<li>Show that the sharp RD local linear estimator with the uniform kernel equals the OLS coefficient on <span class="math inline">\(T_i\)</span> in the regression of <span class="math inline">\(Y_i\)</span> on <span class="math inline">\((1,T_i,X_i-c,T_i(X_i-c))\)</span> using observations with <span class="math inline">\(|X_i-c|\le h\)</span>.</li>
+<li>In a fuzzy design, show that the ratio of the two local linear jumps (in <span class="math inline">\(Y\)</span> and in <span class="math inline">\(D\)</span>), with the same kernel and bandwidth, equals the IV estimator of the coefficient on <span class="math inline">\(D_i\)</span> in <span class="math inline">\(Y_i=\alpha+\tau D_i+\beta_-(X_i-c)+\beta_+T_i(X_i-c)+u_i\)</span> with instruments <span class="math inline">\((1,T_i,X_i-c,T_i(X_i-c))\)</span>, using the same window.</li>
+</ol>
+</div>
+<div id="exr-c-r" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.6 (Computing: ATT estimators)</strong></span> Using <code>cattaneo2.csv</code>, estimate the effect of smoking on the treated by (i) regression adjustment, (ii) normalized IPW with logit propensity score, (iii) one-to-one nearest-neighbour matching on the estimated propensity score with replacement. Plot the distribution of <span class="math inline">\(\hat p\)</span> for smokers and non-smokers and comment on overlap.</p>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-abadie2003" class="csl-entry" role="listitem">
+Abadie, Alberto. 2003. <span>“Semiparametric Instrumental Variable Estimation of Treatment Response Models.”</span> <em>Journal of Econometrics</em> 113 (2): 231–63.
+</div>
+<div id="ref-abadie2006" class="csl-entry" role="listitem">
+Abadie, Alberto, and Guido W. Imbens. 2006. <span>“Large Sample Properties of Matching Estimators for Average Treatment Effects.”</span> <em>Econometrica</em> 74 (1): 235–67.
+</div>
+<div id="ref-abadie2008" class="csl-entry" role="listitem">
+———. 2008. <span>“On the Failure of the Bootstrap for Matching Estimators.”</span> <em>Econometrica</em> 76 (6): 1537–57.
+</div>
+<div id="ref-abadie2011" class="csl-entry" role="listitem">
+———. 2011. <span>“Bias-Corrected Matching Estimators for Average Treatment Effects.”</span> <em>Journal of Business &amp; Economic Statistics</em> 29 (1): 1–11.
+</div>
+<div id="ref-abadie2016" class="csl-entry" role="listitem">
+———. 2016. <span>“Matching on the Estimated Propensity Score.”</span> <em>Econometrica</em> 84 (2): 781–807.
+</div>
+<div id="ref-angrist1995" class="csl-entry" role="listitem">
+Angrist, Joshua D., and Guido W. Imbens. 1995. <span>“Two-Stage Least Squares Estimation of Average Causal Effects in Models with Variable Treatment Intensity.”</span> <em>Journal of the American Statistical Association</em> 90 (430): 431–42.
+</div>
+<div id="ref-angrist1996" class="csl-entry" role="listitem">
+Angrist, Joshua D., Guido W. Imbens, and Donald B. Rubin. 1996. <span>“Identification of Causal Effects Using Instrumental Variables.”</span> <em>Journal of the American Statistical Association</em> 91 (434): 444–55.
+</div>
+<div id="ref-angrist2009" class="csl-entry" role="listitem">
+Angrist, Joshua D., and Jörn-Steffen Pischke. 2009. <em>Mostly Harmless Econometrics: An Empiricist’s Companion</em>. Princeton: Princeton University Press.
+</div>
+<div id="ref-busso2014" class="csl-entry" role="listitem">
+Busso, Matias, John DiNardo, and Justin McCrary. 2014. <span>“New Evidence on the Finite Sample Properties of Propensity Score Reweighting and Matching Estimators.”</span> <em>Review of Economics and Statistics</em> 96 (5): 885–97.
+</div>
+<div id="ref-calonico2014" class="csl-entry" role="listitem">
+Calonico, Sebastian, Matias D. Cattaneo, and Rocío Titiunik. 2014. <span>“Robust Nonparametric Confidence Intervals for Regression-Discontinuity Designs.”</span> <em>Econometrica</em> 82 (6): 2295–2326.
+</div>
+<div id="ref-card2015" class="csl-entry" role="listitem">
+Card, David, David S. Lee, Zhuan Pei, and Andrea Weber. 2015. <span>“Inference on Causal Effects in a Generalized Regression Kink Design.”</span> <em>Econometrica</em> 83 (6): 2453–83.
+</div>
+<div id="ref-cattaneo2010" class="csl-entry" role="listitem">
+Cattaneo, Matias D. 2010. <span>“Efficient Semiparametric Estimation of Multi-Valued Treatment Effects Under Ignorability.”</span> <em>Journal of Econometrics</em> 155 (2): 138–54.
+</div>
+<div id="ref-cattaneo2020" class="csl-entry" role="listitem">
+Cattaneo, Matias D., Nicolás Idrobo, and Rocío Titiunik. 2020. <em>A Practical Introduction to Regression Discontinuity Designs: Foundations</em>. Cambridge Elements: Quantitative and Computational Methods for Social Science. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-cattaneo2020b" class="csl-entry" role="listitem">
+Cattaneo, Matias D., Michael Jansson, and Xinwei Ma. 2020. <span>“Simple Local Polynomial Density Estimators.”</span> <em>Journal of the American Statistical Association</em> 115 (531): 1449–55.
+</div>
+<div id="ref-hahn2001" class="csl-entry" role="listitem">
+Hahn, Jinyong, Petra Todd, and Wilbert Van der Klaauw. 2001. <span>“Identification and Estimation of Treatment Effects with a Regression-Discontinuity Design.”</span> <em>Econometrica</em> 69 (1): 201–9.
+</div>
+<div id="ref-imbens1994" class="csl-entry" role="listitem">
+Imbens, Guido W., and Joshua D. Angrist. 1994. <span>“Identification and Estimation of Local Average Treatment Effects.”</span> <em>Econometrica</em> 62 (2): 467–75.
+</div>
+<div id="ref-imbens2008" class="csl-entry" role="listitem">
+Imbens, Guido W., and Thomas Lemieux. 2008. <span>“Regression Discontinuity Designs: A Guide to Practice.”</span> <em>Journal of Econometrics</em> 142 (2): 615–35.
+</div>
+<div id="ref-imbens2015" class="csl-entry" role="listitem">
+Imbens, Guido W., and Donald B. Rubin. 2015. <em>Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-imbens2009" class="csl-entry" role="listitem">
+Imbens, Guido W., and Jeffrey M. Wooldridge. 2009. <span>“Recent Developments in the Econometrics of Program Evaluation.”</span> <em>Journal of Economic Literature</em> 47 (1): 5–86.
+</div>
+<div id="ref-lee2010" class="csl-entry" role="listitem">
+Lee, David S., and Thomas Lemieux. 2010. <span>“Regression Discontinuity Designs in Economics.”</span> <em>Journal of Economic Literature</em> 48 (2): 281–355.
+</div>
+<div id="ref-mccrary2008" class="csl-entry" role="listitem">
+McCrary, Justin. 2008. <span>“Manipulation of the Running Variable in the Regression Discontinuity Design: A Density Test.”</span> <em>Journal of Econometrics</em> 142 (2): 698–714.
+</div>
+<div id="ref-meyersson2014" class="csl-entry" role="listitem">
+Meyersson, Erik. 2014. <span>“Islamic Rule and the Empowerment of the Poor and Pious.”</span> <em>Econometrica</em> 82 (1): 229–69.
+</div>
+<div id="ref-robins1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66.
+</div>
+<div id="ref-rosenbaum1983" class="csl-entry" role="listitem">
+Rosenbaum, Paul R., and Donald B. Rubin. 1983. <span>“The Central Role of the Propensity Score in Observational Studies for Causal Effects.”</span> <em>Biometrika</em> 70 (1): 41–55.
+</div>
+<div id="ref-sloczynski2022" class="csl-entry" role="listitem">
+Słoczyński, Tymon. 2022. <span>“Interpreting <span>OLS</span> Estimands When Treatment Effects Are Heterogeneous: Smaller Groups Get Larger Weights.”</span> <em>Review of Economics and Statistics</em> 104 (3): 501–9.
+</div>
+<div id="ref-sloczynski2025" class="csl-entry" role="listitem">
+Słoczyński, Tymon, S. Derya Uysal, and Jeffrey M. Wooldridge. 2025. <span>“Abadie’s Kappa and Weighting Estimators of the Local Average Treatment Effect.”</span> <em>Journal of Business &amp; Economic Statistics</em> 43 (1): 164–77.
+</div>
+<div id="ref-tan2006" class="csl-entry" role="listitem">
+Tan, Zhiqiang. 2006. <span>“Regression and Weighting Methods for Causal Inference Using Instrumental Variables.”</span> <em>Journal of the American Statistical Association</em> 101 (476): 1607–18.
+</div>
+<div id="ref-wooldridge2010" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2010. <em>Econometric Analysis of Cross Section and Panel Data</em>. 2nd ed. Cambridge, MA: MIT Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05-statlearning.html" class="pagination-link" aria-label="Introduction to Statistical Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Statistical Learning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

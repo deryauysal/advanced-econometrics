@@ -247,6 +247,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Optional reading</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-causal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Causal Inference</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
@@ -255,13 +272,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendix/a-asymptotics.html" class="sidebar-item-text sidebar-link">
@@ -617,7 +634,7 @@ Y_i=D_iY_{1i}+(1-D_i)Y_{0i},
 \hat\tau_{IPW}=\frac1n\sum_{i=1}^n\Big[\frac{D_iY_i}{\hat p(\bx_i)}-\frac{(1-D_i)Y_i}{1-\hat p(\bx_i)}\Big].
 \]</span> In finite samples the weights <span class="math inline">\(D_i/\hat p(\bx_i)\)</span> need not average to one. The <strong>normalized</strong> version divides by the sum of the weights within each group, <span class="math display">\[
 \hat\tau_{norm}=\frac{\sum_iD_iY_i/\hat p(\bx_i)}{\sum_iD_i/\hat p(\bx_i)}-\frac{\sum_i(1-D_i)Y_i/\big(1-\hat p(\bx_i)\big)}{\sum_i(1-D_i)/\big(1-\hat p(\bx_i)\big)},
-\]</span> and is usually more stable. With limited overlap some <span class="math inline">\(\hat p(\bx_i)\)</span> are close to 0 or 1, a few observations get very large weights, and both estimators become imprecise. Regression adjustment, <span class="math inline">\(\tau=\E[\E(Y_i\mid D_i=1,\bx_i)-\E(Y_i\mid D_i=0,\bx_i)]\)</span>, and doubly robust estimators that combine both models are the main alternatives; <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span> survey them.</p>
+\]</span> and is usually more stable. With limited overlap some <span class="math inline">\(\hat p(\bx_i)\)</span> are close to 0 or 1, a few observations get very large weights, and both estimators become imprecise. Regression adjustment, <span class="math inline">\(\tau=\E[\E(Y_i\mid D_i=1,\bx_i)-\E(Y_i\mid D_i=0,\bx_i)]\)</span>, and doubly robust estimators that combine both models are the main alternatives; <span class="citation" data-cites="imbens2009">Imbens and Wooldridge (<a href="../references.html#ref-imbens2009" role="doc-biblioref">2009</a>)</span> survey them and the optional <a href="06-causal.html" class="quarto-xref"><span>Chapter 6</span></a> discusses them together with matching, instrumental variables and regression discontinuity.</p>
 <p><strong>Why this is a two-step problem.</strong> The propensity score is unknown. In practice it is modelled parametrically, typically as a logit <span class="math inline">\(p(\bx_i;\balpha)=\Lambda(\bx_i'\balpha)\)</span>, and <span class="math inline">\(\balpha\)</span> is estimated by ML in a first step. The ML first-order condition is a moment condition (<a href="#exm-mm-examples" class="quarto-xref">Example&nbsp;<span>2.1</span></a>), so both steps are MM problems: <span class="math display">\[
 \bpsi_1(\bw_i,\balpha)=\big(D_i-\Lambda(\bx_i'\balpha)\big)\bx_i,\qquad
 \psi_2(\bw_i,\balpha,\tau)=\frac{D_iY_i}{\Lambda(\bx_i'\balpha)}-\frac{(1-D_i)Y_i}{1-\Lambda(\bx_i'\balpha)}-\tau .
