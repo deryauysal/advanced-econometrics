@@ -94,7 +94,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-50d8cff582db2d857f28324736e0ca3d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-16a2158a840547308aa1f925b82110c8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -322,12 +322,13 @@ window.Quarto = {
   <li><a href="#the-linear-exponential-family" id="toc-the-linear-exponential-family" class="nav-link" data-scroll-target="#the-linear-exponential-family"><span class="header-section-number">1.6.1</span> The linear exponential family</a></li>
   </ul></li>
   <li><a href="#hypothesis-testing-the-trinity" id="toc-hypothesis-testing-the-trinity" class="nav-link" data-scroll-target="#hypothesis-testing-the-trinity"><span class="header-section-number">1.7</span> Hypothesis testing: the trinity</a></li>
-  <li><a href="#sec-ct1" id="toc-sec-ct1" class="nav-link" data-scroll-target="#sec-ct1"><span class="header-section-number">1.8</span> Computer tutorial 1</a>
+  <li><a href="#sec-winkelmann" id="toc-sec-winkelmann" class="nav-link" data-scroll-target="#sec-winkelmann"><span class="header-section-number">1.8</span> Application: doctor visits and the 1997 health care reform</a></li>
+  <li><a href="#sec-ct1" id="toc-sec-ct1" class="nav-link" data-scroll-target="#sec-ct1"><span class="header-section-number">1.9</span> Computer tutorial 1</a>
   <ul class="collapse">
-  <li><a href="#problem-1-logit-model-for-labour-force-participation" id="toc-problem-1-logit-model-for-labour-force-participation" class="nav-link" data-scroll-target="#problem-1-logit-model-for-labour-force-participation"><span class="header-section-number">1.8.1</span> Problem 1: Logit model for labour force participation</a></li>
-  <li><a href="#problem-2-pml-vs.-ml-a-monte-carlo-study" id="toc-problem-2-pml-vs.-ml-a-monte-carlo-study" class="nav-link" data-scroll-target="#problem-2-pml-vs.-ml-a-monte-carlo-study"><span class="header-section-number">1.8.2</span> Problem 2: PML vs.&nbsp;ML, a Monte Carlo study</a></li>
+  <li><a href="#problem-1-logit-model-for-labour-force-participation" id="toc-problem-1-logit-model-for-labour-force-participation" class="nav-link" data-scroll-target="#problem-1-logit-model-for-labour-force-participation"><span class="header-section-number">1.9.1</span> Problem 1: Logit model for labour force participation</a></li>
+  <li><a href="#problem-2-pml-vs.-ml-a-monte-carlo-study" id="toc-problem-2-pml-vs.-ml-a-monte-carlo-study" class="nav-link" data-scroll-target="#problem-2-pml-vs.-ml-a-monte-carlo-study"><span class="header-section-number">1.9.2</span> Problem 2: PML vs.&nbsp;ML, a Monte Carlo study</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.9</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.10</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -400,7 +401,7 @@ Readings
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7; <span class="citation" data-cites="hansen2022b">Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 10; <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 22, 25 and 26.10. Application discussed in class (exam-relevant): <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>. Optional reading: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p><span class="citation" data-cites="wooldridge2010">Wooldridge (<a href="../references.html#ref-wooldridge2010" role="doc-biblioref">2010</a>)</span>, Ch. 13.1–13.7 and 13.11; <span class="citation" data-cites="cameron2005">Cameron and Trivedi (<a href="../references.html#ref-cameron2005" role="doc-biblioref">2005</a>)</span>, Ch. 5.6–5.7; <span class="citation" data-cites="hansen2022b">Hansen (<a href="../references.html#ref-hansen2022b" role="doc-biblioref">2022b</a>)</span>, Ch. 10; <span class="citation" data-cites="hansen2022">Hansen (<a href="../references.html#ref-hansen2022" role="doc-biblioref">2022a</a>)</span>, Ch. 22, 25 and 26.10. Application discussed in class (exam-relevant, <a href="#sec-winkelmann" class="quarto-xref"><span>Section 1.8</span></a>): <span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span>. Optional reading: <span class="citation" data-cites="smith2009">Smith (<a href="../references.html#ref-smith2009" role="doc-biblioref">2009</a>)</span>.</p>
 </div>
 </div>
 <p>Maximum likelihood (ML) is the workhorse estimator for fully specified parametric models. This chapter introduces the likelihood principle, derives the large-sample properties of the MLE, discusses what happens when the assumed density is wrong, and closes with the classical trinity of tests.</p>
@@ -767,12 +768,30 @@ Figure&nbsp;1.2: The trinity for the exponential model, testing <span class="mat
 <li><strong>Robustness.</strong> Under misspecification, LR and the information-based LM are no longer <span class="math inline">\(\chi^2\)</span>. The Wald test with the sandwich variance remains valid, which is why robust Wald tests dominate applied work.</li>
 </ol>
 </section>
-<section id="sec-ct1" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="sec-ct1"><span class="header-section-number">1.8</span> Computer tutorial 1</h2>
+<section id="sec-winkelmann" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="sec-winkelmann"><span class="header-section-number">1.8</span> Application: doctor visits and the 1997 health care reform</h2>
+<p><span class="citation" data-cites="winkelmann2004">Winkelmann (<a href="../references.html#ref-winkelmann2004" role="doc-biblioref">2004</a>)</span> asks how an increase in copayments affected the demand for health care. In July 1997 the copayments for prescription drugs in Germany were raised substantially. The outcome is the number of doctor visits in the last quarter, observed for the same individuals in the SOEP from 1995 to 1999. The application is discussed in class and is part of the exam; Problem Set 1, Problem 5 works through it.</p>
+<p><strong>Poisson regression as pseudo-ML.</strong> The starting point is <span class="math display">\[
+\E[y_{it}\mid\bx_{it}]=\exp\big(\bx_{it}'\bbeta+\delta_t\big),
+\]</span> with year effects <span class="math inline">\(\delta_t\)</span>. Because the mean is exponential, the year effects shift the expected number of visits by the same <em>percentage</em> for everybody, and the reform effect is summarized by <span class="math display">\[
+\Delta\%=\left[\frac{\E[y_{i,98}\mid\bx]}{\E[y_{i,96}\mid\bx]}-1\right]\times100=\big[\exp(\delta_{98}-\delta_{96})-1\big]\times100 .
+\]</span> Two features of the data violate the Poisson assumptions: doctor visits are overdispersed (the variance exceeds the mean), and the same person is observed in several years, so unobserved health awareness makes her counts correlated. Neither affects consistency. Poisson is a member of the linear exponential family, so by <a href="#sec-pmle" class="quarto-xref"><span>Section 1.6</span></a> the Poisson estimator is consistent whenever the mean is correctly specified. What changes is inference: the information-matrix standard errors are too small, and sandwich standard errors clustered by individual are needed. Winkelmann reports a reduction of about 10% (between 9.9% and 10.4% across Poisson specifications, including random and fixed effects versions).</p>
+<p><strong>The hurdle model.</strong> A single-index Poisson model forces the reform to act in the same way on whether people see a doctor at all and on how often users go. A <em>hurdle model</em> <span class="citation" data-cites="mullahy1986">(<a href="../references.html#ref-mullahy1986" role="doc-biblioref">Mullahy 1986</a>)</span> separates the two decisions: <span class="math display">\[
+\begin{aligned}
+P(y_i&gt;0\mid\bx_i)&amp;=F(\bx_i'\bgamma),\\
+P(y_i=k\mid y_i&gt;0,\bx_i)&amp;=\frac{f_2(k\mid\bx_i)}{1-f_2(0\mid\bx_i)},\quad k\ge1,
+\end{aligned}
+\]</span> where <span class="math inline">\(F\)</span> is a binary-choice model (probit) and <span class="math inline">\(f_2\)</span> a count density (Poisson, negative binomial or Poisson log-normal) truncated at zero. The log-likelihood splits into a binary-choice part for <span class="math inline">\(\bgamma\)</span> and a truncated count part for the remaining parameters, so the two parts can be estimated separately. The mean factorizes, <span class="math display">\[
+\E[y_i\mid\bx_i]=P(y_i&gt;0\mid\bx_i)\cdot\E[y_i\mid y_i&gt;0,\bx_i],
+\]</span> so relative changes in the two factors multiply. Winkelmann finds that the probability of at least one visit fell by 6.7% between 1996 and 1998, whereas the number of visits of users fell by only 2.6%: the reform mainly reduced visits by occasional users, the left tail of the distribution.</p>
+<p><strong>Model comparison.</strong> Some of the models are nested (with a suitable choice of <span class="math inline">\(F\)</span>, the Poisson model is a special case of the Poisson hurdle model), so they can be compared with LR tests (see the trinity above). Others are not, e.g.&nbsp;the hurdle model and a finite mixture of two Poisson distributions. Winkelmann therefore also compares the maximized log-likelihoods penalized for the number of parameters (Schwarz criterion). The preferred specification is a probit hurdle with a Poisson log-normal count part. Its log-likelihood requires integrating over a normal heterogeneity term, which is done by numerical quadrature (<a href="03-simulation.html" class="quarto-xref"><span>Chapter 3</span></a>).</p>
+</section>
+<section id="sec-ct1" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="sec-ct1"><span class="header-section-number">1.9</span> Computer tutorial 1</h2>
 <p><strong>Learning goals.</strong> Write a log-likelihood as an R function and maximise it with <code>optim</code>; compute Hessian, OPG and sandwich variance estimators by hand and check them against <code>glm</code> and <code>sandwich</code>; see in a Monte Carlo study why pseudo-ML needs robust standard errors.</p>
 <p><strong>Packages.</strong> <code>sandwich</code>, <code>lmtest</code>, <code>MASS</code>. <strong>Data.</strong> <code>mroz.csv</code> <span class="citation" data-cites="mroz1987">(<a href="../references.html#ref-mroz1987" role="doc-biblioref">Mroz 1987</a>)</span>, 753 married women in 1975.</p>
-<section id="problem-1-logit-model-for-labour-force-participation" class="level3" data-number="1.8.1">
-<h3 data-number="1.8.1" class="anchored" data-anchor-id="problem-1-logit-model-for-labour-force-participation"><span class="header-section-number">1.8.1</span> Problem 1: Logit model for labour force participation</h3>
+<section id="problem-1-logit-model-for-labour-force-participation" class="level3" data-number="1.9.1">
+<h3 data-number="1.9.1" class="anchored" data-anchor-id="problem-1-logit-model-for-labour-force-participation"><span class="header-section-number">1.9.1</span> Problem 1: Logit model for labour force participation</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -838,8 +857,8 @@ Figure&nbsp;1.2: The trinity for the exponential model, testing <span class="mat
 <li><p>Compute the average partial effects (APEs) of <code>educ</code> and <code>kidslt6</code> from the logit model and compare them with the LPM coefficients.</p></li>
 </ol>
 </section>
-<section id="problem-2-pml-vs.-ml-a-monte-carlo-study" class="level3" data-number="1.8.2">
-<h3 data-number="1.8.2" class="anchored" data-anchor-id="problem-2-pml-vs.-ml-a-monte-carlo-study"><span class="header-section-number">1.8.2</span> Problem 2: PML vs.&nbsp;ML, a Monte Carlo study</h3>
+<section id="problem-2-pml-vs.-ml-a-monte-carlo-study" class="level3" data-number="1.9.2">
+<h3 data-number="1.9.2" class="anchored" data-anchor-id="problem-2-pml-vs.-ml-a-monte-carlo-study"><span class="header-section-number">1.9.2</span> Problem 2: PML vs.&nbsp;ML, a Monte Carlo study</h3>
 <p>The goal is to see how ML behaves when the likelihood is misspecified but the conditional mean is right (see “Misspecification and pseudo-ML” in Chapter 1 of the lecture notes).</p>
 <p><strong>Correct density.</strong></p>
 <ol type="a">
@@ -900,8 +919,8 @@ Figure&nbsp;1.2: The trinity for the exponential model, testing <span class="mat
 </ol>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.9</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.10</span> Exercises</h2>
 <p>Problem Set 1 contains the analytical exercises for this chapter:</p>
 <ul>
 <li><strong>Problem 1</strong>: a regular one-parameter model from start to finish (score, information, bias and the Cramér–Rao bound, asymptotics, invariance) and the three tests, including the non-invariance of the Wald test.</li>
@@ -930,6 +949,9 @@ Huber, Peter J. 1967. <span>“The Behavior of Maximum Likelihood Estimates Unde
 </div>
 <div id="ref-mroz1987" class="csl-entry" role="listitem">
 Mroz, Thomas A. 1987. <span>“The Sensitivity of an Empirical Model of Married Women’s Hours of Work to Economic and Statistical Assumptions.”</span> <em>Econometrica</em> 55 (4): 765–99.
+</div>
+<div id="ref-mullahy1986" class="csl-entry" role="listitem">
+Mullahy, John. 1986. <span>“Specification and Testing of Some Modified Count Data Models.”</span> <em>Journal of Econometrics</em> 33 (3): 341–65.
 </div>
 <div id="ref-smith2009" class="csl-entry" role="listitem">
 Smith, James P. 2009. <span>“The Impact of Childhood Health on Adult Labor Market Outcomes.”</span> <em>Review of Economics and Statistics</em> 91 (3): 478–89. <a href="https://doi.org/10.1162/rest.91.3.478">https://doi.org/10.1162/rest.91.3.478</a>.
